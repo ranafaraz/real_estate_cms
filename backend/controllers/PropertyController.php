@@ -173,7 +173,7 @@ class PropertyController extends Controller
                
                 
                 $model->save();
-                 $ret=Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
+                Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Property",
