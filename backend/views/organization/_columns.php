@@ -21,6 +21,7 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'user_id',
+        'value' => 'user.username',
     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',

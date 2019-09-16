@@ -105,6 +105,22 @@ class PropertyController extends Controller
         $searchModel = new PropertySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if (yii::$app->request->post('hasEditable')) {
+            $property_id = yii::$app->request->post('editableKey');
+            $property = Property::findOne($property_id);
+
+            $out = json::encode(['output' => '', 'message' => '']);
+            $subpost = [];
+            $posted = current($_POST['Property']);
+            $subpost['Property'] = $posted;
+            if ($property->load($subpost)) {
+
+                $property->save();
+                Yii::$app->InsertPlots->insertplots($property->property_id,$model->no_of_plots);
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

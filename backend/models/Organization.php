@@ -34,8 +34,7 @@ class Organization extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'user_id', 'created_at'], 'required'],
-            [['user_id'], 'integer'],
-            [['created_at'], 'safe'],
+            [['created_at','user_id'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -49,7 +48,7 @@ class Organization extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'user_id' => 'User ID',
+            'user_id' => 'Username',
             'created_at' => 'Created At',
         ];
     }

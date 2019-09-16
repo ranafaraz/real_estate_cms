@@ -79,6 +79,25 @@ $property=Property::findone(["property_id"=>$property_id]);
 	</div>
 </div>
 <?php 
+<<<<<<< HEAD
+	$script=<<<JS
+		$('#updaterecord').click(function(e){  
+			e.preventDefault();
+			var length = $('#length').val();
+			if(length == ''){
+				$('.errorlength').html(
+				'<span style="color:red;">Enter length !</span>'
+				);
+				$('#length').focus();
+				return false;
+				}else{
+						$('.errorlength').html("");
+					}
+				var width = $('#width').val(); 
+				if(width == ''){
+					$('.errorwidth').html(
+					'<span style="color:red;">Enter width !</span>'
+=======
 $script=<<<JS
 	$('#updaterecord').click(function(e){  
 		e.preventDefault();
@@ -116,10 +135,52 @@ $script=<<<JS
 				if(permerla == ''){
 					$('.errorpermerla').html(
 					'<span style="color:red;">Enter per merla rate !</span>'
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
 					);
 					$('#width').focus();
 					return false;
 					}else{
+<<<<<<< HEAD
+						$('.errorwidth').html("");
+					}
+					var price = $('#price').val(); 
+					if(price == ''){
+						$('.errorprice').html(
+						'<span style="color:red;">Enter price !</span>'
+						);
+						$('#price').focus();
+						return false;
+						}else{
+						$('.errorprice').html("");
+					}
+					var permerla = $('#permerla').val(); 
+					if(permerla == ''){
+						$('.errorpermerla').html(
+						'<span style="color:red;">Enter per merla rate !</span>'
+						);
+						$('#width').focus();
+						return false;
+						}else{
+						$('.errorpermerla').html("");
+					}
+					var type=$("#type").val();
+					var status=$("#status").val();
+					var propertyid = $('.property').attr('id'); 
+					var plotno = $('#plotno').val();  
+				
+					$.ajax({
+						url : "index.php?r=plot/updaterecord",
+						method:"GET",
+						data:{ length:length, width:width , price:price , permerla:permerla , type:type , status:status,propertyid:propertyid, plotno:plotno },						
+							success:function(data){
+								$('.message_box').html(data);
+									}
+									});
+									}); 
+
+	JS;
+	$this->registerJs($script);
+=======
 					$('.errorpermerla').html("");
 				}
 				var type=$("#type").val();
@@ -139,4 +200,5 @@ $script=<<<JS
 
 JS;
 $this->registerJs($script);
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
 ?>

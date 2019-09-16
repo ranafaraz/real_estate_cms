@@ -61,7 +61,7 @@ class Property extends \yii\db\ActiveRecord
             'property_name' => 'Property Name',
             'area' => 'Area',
             'property_price' => 'Property Price',
-            'location' => 'Location',
+            'location' => 'Address',
             'city' => 'City',
             'district' => 'District',
             'province' => 'Province',

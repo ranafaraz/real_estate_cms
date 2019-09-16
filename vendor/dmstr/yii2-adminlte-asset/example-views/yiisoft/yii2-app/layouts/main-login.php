@@ -16,8 +16,24 @@ dmstr\web\AdminLteAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style type="text/css" >
+    	.login-page{
+    		background:url('bg1.jpg') no-repeat center center fixed; 
+    		background-size: cover;
+    	}
+    	.login-box-body{
+			background-color: #D0E5A2;
+    	}
+    	#loginform-username,#loginform-password{
+    		border-radius: 10px;
+    		background-color: #fff;
+    	}
+    	#loginbtn{
+    		border-radius: 10px;
+    	}
+    </style>
 </head>
-<body class="login-page">
+<body class="login-page pull-left col-sm-offset-1"  style="">
 
 <?php $this->beginBody() ?>
 

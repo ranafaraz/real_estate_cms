@@ -10,7 +10,6 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'property_id',
             'property_name',
             'property_price',
             'location',
@@ -20,7 +19,6 @@ use yii\widgets\DetailView;
             'no_of_plots',
             'created_by',
             'created_at',
-            'organization_id',
         ],
     ]) ?>
 

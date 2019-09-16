@@ -18,8 +18,8 @@ class OrganizationSearch extends Organization
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
-            [['name', 'created_at'], 'safe'],
+            [['id'], 'integer'],
+            [['name','user_id' ,'created_at'], 'safe'],
         ];
     }
 
@@ -48,20 +48,21 @@ class OrganizationSearch extends Organization
         ]);
 
         $this->load($params);
-
+        $query->Joinwith('user');
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+        ->andFilterWhere(['like','user.username' , $this->user_id,]);
 
         return $dataProvider;
     }
