@@ -1,53 +1,176 @@
 <?php
+    use yii\helpers\Html;
+    use backend\models\Property;
+    use backend\models\Plot;
+    use backend\models\User;
+    use backend\models\Customer;
+    use backend\models\InstallmentStatus;
+    use backend\models\ServicesType;
+    use backend\models\ServicesDetails;
+    use backend\models\ProvideServices;
+    use marekpetras\yii2ajaxboxwidget\Box;
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Real Estate Management System';
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+    
+<style type="text/css">
+    .info-box{
+        margin: 20px auto;
+    }
+</style>
+<div class="site-index" >
+   <div class="row">
+        <div class="col-md-4">
+             <?php $users=User::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3><?= $users ?></h3>
 
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                  <p>Users actively Working</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=user" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+        </div>
+        <div class="col-md-4">
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <?php $id=yii::$app->user->identity->organization_id; $property=Property::find(['organization_id'=>$id])->count(); ?>
+            <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><?= $property ?></h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                  <p>Properties Owned</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-product-hunt"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=property" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
+        <div class="col-md-4">
+            <?php $plot=Plot::find()->where(['status'=>"Unsold"])->count(); ?>
+            <div class="small-box bg-orange">
+                <div class="inner">
+                    <h3><?= $plot ?></h3>
 
+                    <p>Unsold Plots in All Properties</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-product-hunt"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=plot" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <?php $customer=Customer::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3><?= $customer ?></h3>
+
+                    <p>Active Customers</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-briefcase"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=customer" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <?php
+                $month = date('m');
+                $year = date('Y');
+                $sdate=$year.'-'.$month.'-'."01";
+                $todate=$year.'-'.$month.'-'."31";
+                $id=yii::$app->user->identity->organization_id;
+                $record=InstallmentStatus::find()
+                ->where(['between', 'paid_date', "$sdate", "$todate" ])->andwhere(['organization_id'=>$id])->SUM("installment_amount");
+             ?>
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3><?php echo $record;   ?></h3>
+
+                    <p>Total Installment Amount this month</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-money"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=installment-status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+             <?php
+                $month = date('m');
+                $year = date('Y');
+                $sdate=$year.'-'.$month.'-'."01";
+                $todate=$year.'-'.$month.'-'."31";
+                $id=yii::$app->user->identity->organization_id;
+                $received=InstallmentStatus::find()
+                ->where(['between', 'paid_date', "$sdate", "$todate" ])->andwhere(['organization_id'=>$id])->andwhere(['status'=>'0'])->SUM("installment_amount");
+             ?>
+            <div class="small-box bg-orange">
+                <div class="inner">
+                    <h3><?= $received ?></h3>
+
+                    <p>Recieved Amount this month</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-money"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=installment-status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php $servicetype=ServicesType::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3><?= $servicetype ?></h3>
+
+                    <p>Active Services You are Providing</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-hand-lizard-o"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=services-type" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php $insdet=ServicesDetails::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3><?= $insdet ?></h3>
+
+                    <p>Employees Providing Services</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user-o"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=services-details" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php $proser=ProvideServices::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <div class="small-box bg-orange">
+                <div class="inner">
+                    <h3><?= $proser ?></h3>
+
+                    <p>Customers Being Served</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-file-code-o"></i>
+                </div>
+                <a href="/rems/backend/web/index.php?r=provide-services" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
     </div>
+
 </div>

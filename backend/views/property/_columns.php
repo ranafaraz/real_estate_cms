@@ -10,10 +10,10 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'property_id',
-    ],
+    //     [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'property_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'property_name',
@@ -22,14 +22,17 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'property_price',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'location',
-    ],
+    
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'city',
     ],
+    [
+        'class' => 'kartik\grid\EditableColumn',
+        'header' => 'No of Plots',
+        'attribute' => 'no_of_plots',
+    ],
+   
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'district',

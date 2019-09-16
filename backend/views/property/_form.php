@@ -11,21 +11,54 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'property_name')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'property_name')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'property_price')->textInput() ?>
+        <div class="col-md-6">
+             <?= $form->field($model, 'property_price')->textInput() ?>
+        </div>
 
-    <?= $form->field($model, 'area')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'area')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'location')->textarea(['rows' => 3]) ?>
+        <div class="col-md-12">
+            <?= $form->field($model, 'location')->textarea(['rows' => 3]) ?>
+        </div>
 
-    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'province')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'province')->textInput(['maxlength' => true]) ?>
+        </div>
 
-  <?= $form->field($model, 'no_of_plots')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'no_of_plots')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+    
+
+   
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?>
 

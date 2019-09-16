@@ -41,6 +41,10 @@ class ComposerStaticInita408910f5ea8cc97a33179937e0bbdef
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'm' => 
+        array (
+            'marekpetras\\yii2ajaxboxwidget\\' => 30,
+        ),
         'k' => 
         array (
             'kartik\\select2\\' => 15,
@@ -56,6 +60,10 @@ class ComposerStaticInita408910f5ea8cc97a33179937e0bbdef
         'j' => 
         array (
             'johnitvn\\ajaxcrud\\' => 18,
+        ),
+        'i' => 
+        array (
+            'insolita\\wgadminlte\\' => 20,
         ),
         'd' => 
         array (
@@ -168,6 +176,10 @@ class ComposerStaticInita408910f5ea8cc97a33179937e0bbdef
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+        'marekpetras\\yii2ajaxboxwidget\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marekpetras/yii2-ajax-box-widget',
+        ),
         'kartik\\select2\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2/src',
@@ -207,6 +219,10 @@ class ComposerStaticInita408910f5ea8cc97a33179937e0bbdef
         'johnitvn\\ajaxcrud\\' => 
         array (
             0 => __DIR__ . '/..' . '/johnitvn/yii2-ajaxcrud/src',
+        ),
+        'insolita\\wgadminlte\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/insolita/yii2-adminlte-widgets',
         ),
         'dosamigos\\datepicker\\' => 
         array (

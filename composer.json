@@ -22,7 +22,10 @@
         "kartik-v/yii2-grid": "@dev",
         "dmstr/yii2-adminlte-asset": "*",
         "kartik-v/yii2-widget-select2": "@dev",
-        "2amigos/yii2-date-picker-widget": "*"
+        "2amigos/yii2-date-picker-widget": "*",
+        "marekpetras/yii2-ajax-box-widget": "^1.0",
+        "insolita/yii2-adminlte-widgets": "~3.1"
+        
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

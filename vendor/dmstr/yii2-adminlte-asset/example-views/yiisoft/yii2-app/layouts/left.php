@@ -1,14 +1,32 @@
-<aside class="main-sidebar">
+<style type="text/css" >
+    .main-sidebar{
+        background-color:#037440 !important;
+    }
+    .sidebar-menu>li.header{
+        background-color:#045a32 !important;
+        color: grey !important;
+    }
+    .sidebar-menu>li :hover{
+        background-color:#045a32 !important;
+        color: #fff !important;
+    }
+    .sidebar-menu .treeview-menu
+    {
+        background-color:#045a32 !important;
+        color: #fff !important;
+    }
+</style>
+<aside class="main-sidebar" >
 
-    <section class="sidebar">
+    <section class="sidebar ">
 
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="<?= $directoryAsset ?>/img/logo.png" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>DEXDEVS</p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -30,9 +48,8 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Menu Real Estate', 'options' => ['class' => 'header']],
+                    ['label' => 'DashBoard', 'icon' => 'file-code-o', 'url' => yii::$app->homeUrl],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Organization', 'icon' => 'hand-o-right', 'url' => ['/organization']],
                     ['label' => 'Property', 'icon' => 'hand-o-right', 'url' => ['/property']],
@@ -59,32 +76,7 @@
                           
                     ],
                 ],
-                    [
-                        'label' => 'Some tools',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
+                   
                 ],
             ]
         ) ?>

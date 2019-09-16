@@ -13,17 +13,36 @@ $config = [
              ],
          ],
     ],
+    'assetManager'=>[
+                 'class'=>'yii\web\AssetManager',
+                 'bundles'=>[
+                 //--------
+                     'insolita\wgadminlte\JsCookieAsset'=>[
+                           'depends'=>[
+                               'yii\web\YiiAsset',
+                               'namespace\for\AdminLteAsset', // for example 'dmstr\web\AdminLteAsset', if we use https://github.com/dmstr/yii2-adminlte-asset
+                          ]
+                     ],
+                      'insolita\wgadminlte\CollapseBoxAsset'=>[
+                            'depends'=>[
+                                'insolita\wgadminlte\JsCookieAsset'
+                            ]
+                      ],
+             ],
+     ]
+    
 
 
     ],
+
 ];
 
 if (!YII_ENV_TEST) {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-    ];
+    // $config['bootstrap'][] = 'debug';
+    // $config['modules']['debug'] = [
+    //     'class' => 'yii\debug\Module',
+    // ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
