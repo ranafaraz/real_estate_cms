@@ -20,9 +20,13 @@ use backend\models\InstallmentStatus;
     <div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Customer Info</h3></div>
     </div>
+    <div class="row"> 
+        <div class="col-md-12">
+           <?= $form->field($model,'Already_Customer')->checkBox(['options' => ['id' => 'checkifcustomer']])->label(false)?>
+        </div>  
+    </div>
     <div class="row">
-            
-        
+
         <div class="col-md-3">
              <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         </div>
@@ -42,6 +46,8 @@ use backend\models\InstallmentStatus;
         <div class="col-md-9">
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
         </div>
+       
+
     </div>
     <div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Property/Plot Info</h3></div>
@@ -55,6 +61,7 @@ use backend\models\InstallmentStatus;
                         'prompt' => 'Select Service Type',
                         'onchange' => '$.post("index.php?r=plot/list&id='.'"+$(this).val(),function(data){
                             $("#plotownerinfo-plot_no").html(data);
+
                         });'
                     ]
 
@@ -69,6 +76,14 @@ use backend\models\InstallmentStatus;
                 'pluginOptions' => [
                     'allowClear' => true
                         ],
+                        'pluginEvents' => [
+                            "select2:select" => 'function() { 
+                            var property_id = $("#plotownerinfo-property_id").val();
+                            $.get("index.php?r=plot/plot&plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
+                                 $("#installment-total_amount").attr("value",data);
+                            });
+                             }',
+                        ]
                     ]) 
                 ?>
         </div>
@@ -106,13 +121,16 @@ use backend\models\InstallmentStatus;
         </div>
     
         <div class="col-md-4">
-            <?= $form->field($installmentinfo, 'remaning_amount')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($installmentinfo, 'advance_amount')->textInput(['maxlength' => true]) ?>
         </div>  
         <div class="col-md-4">
             <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true]) ?>
         </div>  
+         <div class="col-md-9">
+            <?= $form->field($installmentinfo, 'minus_amonut')->hiddenInput(['maxlength' => true])->label(false) ?>
+        </div>
         <div class="col-md-4">
-            <?PHP $data = ['1' => '1','2'=>'2', '3' => '3' , '4' => '4','5'=>'5','6' => '6', '7' => '7' , '8' => '8' , '9' => '9' , '10' => '10'];?>
+            <?PHP $data = ['1' => '1 Year', '1.5' => '1.5 Year','2'=>'2 Year','2.5'=>'2.5 Year', '3' => '3 Year' ,'3.5' => '3.5 Year' , '4' => '4 Year','4.5' => '4.5 Year','5'=>'5 Year','5.5'=>'5.5 Year','6' => '6 Year','6.5' => '6.5 Year','7' => '7 Year' , '7.5' => '7.5 Year' , '8' => '8 Year' , '9' => '9 Year' , '10' => '10 Year'];?>
                 <?= $form->field($installmentinfo, 'no_of_installments')->widget(Select2::classname(), [
                 'data' => $data,
                 'language' => 'en',
@@ -147,28 +165,48 @@ use backend\models\InstallmentStatus;
 $script = <<< JS
 $(document).ready(function()
 {
+        $('#installment-advance_amount').on('change',function()
+        {
+
+                var advance = $('#installment-advance_amount').val();
+                var total = $('#installment-total_amount').val();
+                var remaning_installmented_amount = total - advance;
+                $('#installment-minus_amonut').attr('value',remaning_installmented_amount);
+        })
+
+      
 
         $('#installment-no_of_installments').on('change',function()
-        {
-            $('#installment-remaning_amount').on('input',function()
-            {
-               no_installment = $('#installment-no_of_installments').val();
-               remaning_money = $('#installment-remaning_amount').val();
-                var rem = remaning_money/no_installment;
-                $('#installmentstatus-installment_amount').attr('value',rem);
-            });   
+        {   
+            if($('#installment-installment_type').val() == 'Monthly')
+                {
+                    var pro_amount = $('#installment-no_of_installments').val() * 12;
+                    var remaning_money = $('#installment-minus_amonut').val();
+                    var rem = remaning_money/pro_amount;
+                    $('#installmentstatus-installment_amount').attr('value',rem); 
+                }else if($('#installment-installment_type').val() == '6 Months'){
+                    var pro_amount = ($('#installment-no_of_installments').val() / 6) * 12;
+                    var remaning_money = $('#installment-minus_amonut').val();
+                    var rem = remaning_money/pro_amount;
+                    $('#installmentstatus-installment_amount').attr('value',rem); 
+                }
+                else if($('#installment-installment_type').val() == 'Yearly')
+                {
+                    var pro_amount = (($('#installment-no_of_installments').val() * 12)/12);
+                    var remaning_money = $('#installment-minus_amonut').val();
+                    alert(pro_amount);
+                    var rem = remaning_money/pro_amount;
+                    $('#installmentstatus-installment_amount').attr('value',rem); 
+                }
+             
         });
 
-        $('#installment-remaning_amount').on('input',function()
-            {
-            $('#installment-no_of_installments').on('change',function()
-            {
-               no_installment = $('#installment-no_of_installments').val();
-               remaning_money = $('#installment-remaning_amount').val();
-               var rem = remaning_money/no_installment;
-                $('#installmentstatus-installment_amount').attr('value',rem);
-            });  
-        });
+
+
+        $('#customer-already_customer').on('Change',function()
+        {
+            alert("hello");
+            })
     })
 
 

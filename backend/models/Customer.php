@@ -27,7 +27,7 @@ use Yii;
 class Customer extends \yii\db\ActiveRecord
 {
 
-
+    public $Already_Customer;
     public $no_of_installment;
     public $amount;
     public $first_payment;
@@ -48,7 +48,7 @@ class Customer extends \yii\db\ActiveRecord
         return [
             [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'organization_id', 'created_date'], 'required'],
             [['user_id', 'organization_id'], 'integer'],
-            [['created_date'], 'safe'],
+            [['created_date' , 'Already_Customer'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['father_name', 'cnic_no', 'contact_no', 'email_address', 'sale_purchase_type'], 'string', 'max' => 150],
             [['address'], 'string', 'max' => 250],

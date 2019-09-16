@@ -20,7 +20,9 @@ use Yii;
  */
 class InstallmentStatus extends \yii\db\ActiveRecord
 {
-    
+    public $rema_amount;
+    public $advance_amount;
+
     /**
      * {@inheritdoc}
      */

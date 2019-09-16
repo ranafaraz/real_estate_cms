@@ -133,34 +133,29 @@ class CustomerController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post())  && $installmentstatus->load($request->post()) && $model->save() ){
-
-                
-
+            }else if($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post())  && $installmentstatus->load($request->post())){
+                $model->save(); 
                 Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$model->customer_id);
 
-                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->remaning_amount,$installmentinfo->total_amount,$model->customer_id,$installmentinfo->no_of_installments,$plotinfo->plot_no);
+                if($installmentinfo->installment_type == 'Monthly')
+                {
+                    $installmentinfo->no_of_installments = $installmentinfo->no_of_installments * 12;
+                }else if($installmentinfo->installment_type == '6 Months'){
+                    $installmentinfo->no_of_installments = ($installmentinfo->no_of_installments / 6) * 12;
+                }
+                else if($installmentinfo->installment_type == 'Yearly')
+                {
+                    $installmentinfo->no_of_installments = ceil(($installmentinfo->no_of_installments * 12)/12);
+                }
+                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->advance_amount,$installmentinfo->total_amount,$model->customer_id,$installmentinfo->no_of_installments,$plotinfo->plot_no);
                
                 Yii::$app->MyComponent->sold($plotinfo->property_id,$plotinfo->plot_no);
 
                  $installment_id = Installment::find('installment_id')->orderBy(['installment_id' => SORT_DESC])->One();
 
-                 if($installmentinfo->installment_type == "Monthly")
-                 {
-                    $time = strtotime(date('Y-m-d'));
-                    $final_date = date("Y-m-d", strtotime("+1 month", $time));
-                 }else if($installmentinfo->installment_type == "6 Months")
-                 {
-                    $time = strtotime(date('Y-m-d'));
-                    $final_date = date("Y-m-d", strtotime("+6 month", $time));
+                 
 
-                 }else if($installmentinfo->installment_type == "Yearly")
-                 {
-                    $time = strtotime(date('Y-m-d'));
-                    $final_date = date("Y-m-d", strtotime("+12 month", $time));
-                 }
-
-                Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->remaning_amount,$final_date);
+                Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
 
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -190,8 +185,8 @@ class CustomerController extends Controller
             *   Process for non-ajax request
             */
 
-            if ($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post()) && $installmentstatus->load($request->post()) && $model->save()) {
-                
+            if ($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post()) && $installmentstatus->load($request->post())) {
+                $model->save();
                 Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$model->customer_id);
 
                 Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->remaning_amount,$installmentinfo->total_amount,$model->customer_id,$installmentinfo->no_of_installments,$plotinfo->plot_no);

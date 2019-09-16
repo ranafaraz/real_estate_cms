@@ -41,8 +41,7 @@ CrudAsset::register($this);
 
             'pluginOptions' => [
             'allowClear' => true
-        ],
-])->label(false);
+        ],])->label(false);
     ?>
 
    
@@ -88,16 +87,10 @@ CrudAsset::register($this);
             </table>
         </div>
     
-<?php }}?>
-</div>
-
-      
-    
-    
-   
-      
-
-
+    <?php }
+        }
+    ?>
+    </div>
 </div>
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
@@ -105,21 +98,18 @@ CrudAsset::register($this);
 ])?>    
 <?php Modal::end(); ?>
 
-<?php 
-    $script=<<<JS
-        $("#property-property_id").on('change',function(){
+<?php
+$script=<<<JS
+
+ $("#property-property_id").on('change',function(){
             var property_id=$(this).val();
             $("#selected_id").attr('value',property_id);
             $.get('index.php?r=property/get-property-id',{property_id:property_id},function(heads){
-        var heads = $.parseJSON(heads);
-             $("#no_plots").attr('value',heads.no_of_plots);
-            });
-            
-            });
-
-           
-    JS;
-    $this->registerJs($script);
-
-
-?>
+                var heads = $.parseJSON(heads);
+                $("#no_plots").attr('value',heads.no_of_plots);
+                }
+            );           
+        });
+       
+JS;
+$this->registerJs($script);?>

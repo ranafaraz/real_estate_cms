@@ -19,7 +19,7 @@ class InstallmentPaymentSearch extends InstallmentPayment
     {
         return [
             [['installment_id', 'no_of_installments', 'organization_id'], 'integer'],
-            [['installment_type', 'remaning_amount', 'total_amount'], 'safe'],
+            [['installment_type', 'advance_amount', 'total_amount'], 'safe'],
             [['customer_id', 'property_id'],'string'],
         ];
     }
@@ -64,7 +64,7 @@ class InstallmentPaymentSearch extends InstallmentPayment
         ]);
         $query->joinWith('customer', 'customer.customer_id = installment.customer_id')->joinWith('property', 'property.property_id = installment.property_id');
         $query->andFilterWhere(['like', 'installment_type', $this->installment_type])
-            ->andFilterWhere(['like', 'remaning_amount', $this->remaning_amount])
+            ->andFilterWhere(['like', 'advance_amount', $this->advance_amount])
             ->andFilterWhere(['like', 'total_amount', $this->total_amount])
             ->andFilterWhere(['like', 'name', $this->customer_id])
             ->andFilterWhere(['like', 'property_name', $this->property_id]);

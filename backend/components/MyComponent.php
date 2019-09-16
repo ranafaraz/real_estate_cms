@@ -33,7 +33,7 @@ use backend\models\InstallmentStatus;
                     [
                         'property_id' => $property_id,
                         'installment_type' => $Installment_type,
-                        'remaning_amount' => $Installment_remaning,
+                        'advance_amount' => 0,
                         'total_amount'=>$Installment_total,
                         'no_of_installments' => $no_installments,
                         'customer_id' => $customer_id,
@@ -54,14 +54,26 @@ use backend\models\InstallmentStatus;
 
  	}
 
- 	public function status($installment_id,$noinstallment,$amount,$totalamount,$remaningamount,$submitdate)
+ 	public function status($installment_id,$noinstallment,$amount,$totalamount,$advanceamount,$installment_type)
  	{
  		$connection = Yii::$app->db;
- 		$paid_money = $totalamount-$remaningamount;
- 		if($paid_money == 0)
+ 		
+ 		if($advanceamount == 0)
  		{
+ 			$final_date = strtotime(date('Y-m-d'));
 	 		for($i = 1; $i <= $noinstallment ; $i++)
 	 		{
+	 			if($installment_type == "Monthly")
+				 {
+				    $final_date = date("Y-m-d", strtotime("+1 month", $final_date));
+				 }else if($installment_type == "6 Months")
+				 {
+				    $final_date = date("Y-m-d", strtotime("+6 month", $final_date));
+
+				 }else if($installment_type == "Yearly")
+				 {
+				    $final_date = date("Y-m-d", strtotime("+12 month", $final_date));
+				 }
 	 			$connection->createCommand()->insert('installment_status',
 	                    [
 	                        'installment_id' => $installment_id,
@@ -69,24 +81,49 @@ use backend\models\InstallmentStatus;
 	                        'installment_amount' => $amount,
 	                        'status'=>'1',
 	                        'date' => date('Y-m-d'),
-	                        'paid_date' => $submitdate,
+	                        'paid_date' => $final_date,
 	                        'created_by'=>\Yii::$app->user->identity->id,
 	                    ])->execute();
+	 			 $final_date = strtotime(date($final_date));
 	 		}
 	 	}else
 	 	{
+	 		$final_date = strtotime(date('Y-m-d'));
+	 		if($installment_type == "Monthly")
+			 {
+			    $final_date = date("Y-m-d", strtotime("+1 month", $final_date));
+			 }else if($installment_type == "6 Months")
+			 {
+			    $final_date = date("Y-m-d", strtotime("+6 month", $final_date));
+
+			 }else if($installment_type == "Yearly")
+			 {
+			    $final_date = date("Y-m-d", strtotime("+12 month", $final_date));
+			 }
 	 		$connection->createCommand()->insert('installment_status',
 	                    [
 	                        'installment_id' => $installment_id,
 	                        'installment_no' => '1',
-	                        'installment_amount' => $paid_money,
+	                        'installment_amount' => $advanceamount,
 	                        'status'=>'0',
 	                        'date' => date('Y-m-d'),
-	                        'paid_date' => $submitdate,
+	                        'paid_date' => date('Y-m-d'),
 	                        'created_by'=>\Yii::$app->user->identity->id,
 	                    ])->execute();
 			for($i = 2; $i <= $noinstallment + 1 ; $i++)
 	 		{
+
+	 			if($installment_type == "Monthly")
+				 {
+				    $final_date = date("Y-m-d", strtotime("+1 month", $final_date));
+				 }else if($installment_type == "6 Months")
+				 {
+				    $final_date = date("Y-m-d", strtotime("+6 month", $final_date));
+
+				 }else if($installment_type == "Yearly")
+				 {
+				    $final_date = date("Y-m-d", strtotime("+12 month", $final_date));
+				 }
 	 			$connection->createCommand()->insert('installment_status',
 	                    [
 	                        'installment_id' => $installment_id,
@@ -94,9 +131,10 @@ use backend\models\InstallmentStatus;
 	                        'installment_amount' => $amount,
 	                        'status'=>'1',
 	                        'date' => date('Y-m-d'),
-	                        'paid_date' => $submitdate,
+	                        'paid_date' => $final_date,
 	                        'created_by'=>\Yii::$app->user->identity->id,
 	                    ])->execute();
+	 			$final_date = strtotime(date($final_date));
 	 		}
 
 	 	}
@@ -105,43 +143,88 @@ use backend\models\InstallmentStatus;
 
 	// for paymentsubmittion functions
 
-	public function installmentpaymentinfo($paidamount,$customer_id,$property_id,$plot_no)
+
+	public function installmentstatusupdate($installment_no,$property_id,$customer_id,$plot_no,$paid_amount,$remaning_to_paid,$previous_pay_amount,$installment_amount)
 	{
-		$connection = Yii::$app->db;
 		$rem = Installment::find()->where(['customer_id' => $customer_id,'property_id' => $property_id])->andwhere(['plot_no'=>$plot_no])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
-		$amount = (int)$rem->remaning_amount;
-		if($amount > 0)
+		$connection = Yii::$app->db;
+		$condition = ['property_id' => $property_id,'customer_id'=> $customer_id,'plot_no' => $plot_no];
+		$condition1 = ['installment_id'=>$rem->installment_id,'installment_no' => $installment_no];
+
+
+		if($paid_amount == 0  && $previous_pay_amount>$installment_amount)
 		{
-			$remaning_amount = $amount-(int)$paidamount;
-			$condition = ['property_id' => $property_id , 'plot_no' => $plot_no , 'customer_id' => $customer_id];
-	 		$connection->createCommand()->update('installment',
+			$previous_pay_amount = $previous_pay_amount - $installment_amount;
+
+			$connection->createCommand()->update('installment',
 	                    [
-	                    	'remaning_amount' => $remaning_amount,
-
+	                        'advance_amount' => $previous_pay_amount,
 	                    ],$condition)->execute();
- 		}
-	}
-
-	public function installmentstatusupdate($installment_no,$property_id,$customer_id,$plot_no,$paid_amount)
-	{
-		$connection = Yii::$app->db;
-		$rem = Installment::find()->where(['customer_id' => $customer_id,'property_id' => $property_id])->andwhere(['plot_no'=>$plot_no])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
-		$get_amount = InstallmentStatus::find()->where(['installment_id'=>$rem->installment_id , 'installment_no' => $installment_no])->One();
-		$condition = ['installment_id' => $rem->installment_id , 'installment_no' => $installment_no];
-		if($get_amount)
-		{
-			if($get_amount->installment_amount == $paid_amount){
-				$connection->createCommand()->update('installment_status',
-                    [
-                    	'status' => '0',
-
-                    ],$condition)->execute();
-			}
+			$connection->createCommand()->update('installment_status',
+	                    [
+	                        'status' => '0',
+	                    ],$condition1)->execute();
 		}
 		else
-		{
-			die();
-		}
+			if($paid_amount != 0 && $previous_pay_amount < $installment_amount)
+			{
+				$updated_amount = ($paid_amount + $previous_pay_amount) - $installment_amount;
+				$connection->createCommand()->update('installment',
+	                    [
+	                        'advance_amount' => $updated_amount,
+	                    ],$condition)->execute();
+			$connection->createCommand()->update('installment_status',
+	                    [
+	                        'status' => '0',
+	                    ],$condition1)->execute();
+
+
+			}
+			else
+				if($paid_amount == 0 && $previous_pay_amount == $installment_amount )
+				{
+					$updated_amount = $previous_pay_amount - $installment_amount;
+					$connection->createCommand()->update('installment',
+	                    [
+	                        'advance_amount' => $updated_amount,
+	                    ],$condition)->execute();
+					$connection->createCommand()->update('installment_status',
+	                    [
+	                        'status' => '0',
+	                    ],$condition1)->execute();
+
+				}
+				else
+					if($paid_amount != 0 && $previous_pay_amount == $installment_amount)
+					{
+						$updated_amount = ($paid_amount + $previous_pay_amount) - $installment_amount;
+						$connection->createCommand()->update('installment',
+	                   	 	[
+	                    	    'advance_amount' => $updated_amount,
+	                    	],$condition)->execute();
+						$connection->createCommand()->update('installment_status',
+	                    	[
+	                        	'status' => '0',
+	                    	],$condition1)->execute();
+					}
+					else
+						if($paid_amount != 0 && $previous_pay_amount > $installment_amount)
+						{
+							$updated_amount = ($paid_amount + $previous_pay_amount) - $installment_amount;
+							$connection->createCommand()->update('installment',
+				                [
+				                   	'advance_amount' => $updated_amount,
+				                ],$condition)->execute();
+							$connection->createCommand()->update('installment_status',
+				                [
+				                    'status' => '0',
+				                ],$condition1)->execute();
+						}
+						else
+						{
+							echo "Sorry Soething Went Wrong <br> Or Wrong Information Passed!";
+						}
+		
 	}
 
 

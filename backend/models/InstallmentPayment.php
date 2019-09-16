@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $installment_id
  * @property string $installment_type
- * @property string $remaning_amount
+ * @property string $advance_amount
  * @property string $total_amount
  * @property int $no_of_installments
  * @property int $customer_id
@@ -31,6 +31,9 @@ class InstallmentPayment extends \yii\db\ActiveRecord
     public $plot_no;
     public $installment_amount;
     public $message;
+    public $remaning_amount;
+    public $previous_pay_amount;
+    public $get_amount =0;
 
     /**
      * {@inheritdoc}
@@ -46,10 +49,10 @@ class InstallmentPayment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['installment_type', 'remaning_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','paid','date_to_pay','installment_amount','plot_no','installment_no'], 'required'],
-            [['date_to_pay'],'safe'],
+            [['installment_type', 'advance_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','paid','date_to_pay','installment_amount','plot_no','installment_no'], 'required'],
+            [['date_to_pay','remaning_amount','previous_pay_amount'],'safe'],
             [['no_of_installments', 'customer_id', 'property_id', 'organization_id'], 'integer'],
-            [['installment_type', 'remaning_amount', 'total_amount','paid'], 'string', 'max' => 250],
+            [['installment_type', 'advance_amount', 'total_amount','paid'], 'string', 'max' => 250],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => Property::className(), 'targetAttribute' => ['property_id' => 'property_id']],
             [['organization_id'], 'exist', 'skipOnError' => true, 'targetClass' => Organization::className(), 'targetAttribute' => ['organization_id' => 'id']],
@@ -64,7 +67,7 @@ class InstallmentPayment extends \yii\db\ActiveRecord
         return [
             'installment_id' => 'Installment ID',
             'installment_type' => 'Installment Type',
-            'remaning_amount' => 'Remaning Amount',
+            'advance_amount' => 'Advance Amount',
             'total_amount' => 'Total Amount',
             'no_of_installments' => 'No Of Installments',
             'customer_id' => 'Customer Name',

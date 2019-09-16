@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $installment_id
  * @property string $installment_type
- * @property string $remaning_amount
+ * @property string $advance_amount
  * @property string $total_amount
  * @property int $no_of_installments
  * @property int $customer_id
@@ -23,6 +23,7 @@ use Yii;
  */
 class Installment extends \yii\db\ActiveRecord
 {
+    public $minus_amonut;
     /**
      * {@inheritdoc}
      */
@@ -37,9 +38,9 @@ class Installment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['installment_type', 'remaning_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','plot_no'], 'required'],
+            [['installment_type', 'advance_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','plot_no','minus_amonut'], 'required'],
             [['no_of_installments', 'customer_id', 'property_id', 'organization_id','plot_no'], 'integer'],
-            [['installment_type', 'remaning_amount', 'total_amount'], 'string', 'max' => 250],
+            [['installment_type', 'advance_amount', 'total_amount'], 'string', 'max' => 250],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => Property::className(), 'targetAttribute' => ['property_id' => 'property_id']],
             [['organization_id'], 'exist', 'skipOnError' => true, 'targetClass' => Organization::className(), 'targetAttribute' => ['organization_id' => 'id']],
@@ -55,7 +56,7 @@ class Installment extends \yii\db\ActiveRecord
         return [
             'installment_id' => 'Installment ID',
             'installment_type' => 'Installment Type',
-            'remaning_amount' => 'Remaning Amount',
+            'advance_amount' => 'Advance Amount',
             'total_amount' => 'Total Amount',
             'no_of_installments' => 'No Of Installments',
             'customer_id' => 'Customer ID',
