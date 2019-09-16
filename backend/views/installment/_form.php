@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'installment_type')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'remaning_amount')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'advance_amount')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'total_amount')->textInput(['maxlength' => true]) ?>
 

@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
         'attributes' => [
             'installment_id',
             'installment_type',
-            'remaning_amount',
+            'advance_amount',
             'total_amount',
             'no_of_installments',
             'customer_id',

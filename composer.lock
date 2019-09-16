@@ -1180,6 +1180,7 @@
                 "yii2"
             ],
             "time": "2019-09-02T12:53:16+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "marekpetras/yii2-ajax-box-widget",
@@ -1227,6 +1228,8 @@
                 "yii2"
             ],
             "time": "2018-03-05T22:39:37+00:00"
+=======
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
         },
         {
             "name": "mpdf/mpdf",

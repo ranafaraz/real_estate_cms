@@ -121,8 +121,7 @@ class InstallmentPaymentController extends Controller
                 ];         
             }else if($model->load($request->post())){
 
-                 $numbercheck = Yii::$app->MyComponent->installmentpaymentinfo($model->paid,$model->customer_id,$model->property_id,$model->plot_no);
-                    Yii::$app->MyComponent->installmentstatusupdate($model->installment_no,$model->property_id,$model->customer_id,$model->plot_no,$model->paid);
+                    Yii::$app->MyComponent->installmentstatusupdate($model->installment_no,$model->property_id,$model->customer_id,$model->plot_no,$model->paid,$model->remaning_amount,$model->previous_pay_amount,$model->installment_amount);
                  
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -147,7 +146,8 @@ class InstallmentPaymentController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
+            if ($model->load($request->post())) {
+                Yii::$app->MyComponent->installmentstatusupdate($model->installment_no,$model->property_id,$model->customer_id,$model->plot_no,$model->paid);
                 return $this->redirect(['view', 'id' => $model->installment_id]);
             } else {
                 return $this->render('create', [
@@ -240,6 +240,11 @@ class InstallmentPaymentController extends Controller
             echo "<option></option>";
         }
     }
+    public function actionAdvance($property_id,$plot_no)
+    {
+        $id = InstallmentPayment::find()->where(['property_id' => $property_id])->andWhere(['plot_no' => $plot_no])->One();
+        echo Json::encode($id);
+    }
 
     public function actionPrice($property_id,$plot_no)
     {
@@ -250,22 +255,23 @@ class InstallmentPaymentController extends Controller
         if($count > 0)
         {
             $get_amount = InstallmentStatus::find()->where(['installment_id' => $id->installment_id])->all();
+
             $counting =0;
             foreach ($get_amount as $value) {
                 if($value->status == 1)
                 {
-                    echo Json::encode($value);
-                    break;   
+                        echo Json::encode($value);
+                        break;  
                 }else if($value->status == 0)
                 {
                     $counting = $counting + 1;
                 }
-               
             }
-             if($counting == $count)
-                {
-                    echo "empty";
-                }
+               
+        }
+        if($counting == $count)
+        {
+            echo "empty";
         }
             
     }

@@ -140,6 +140,7 @@ return array (
     ),
   ),
   '2amigos/yii2-date-picker-widget' => 
+<<<<<<< HEAD
   array (
     'name' => '2amigos/yii2-date-picker-widget',
     'version' => '1.0.7.0',
@@ -158,14 +159,26 @@ return array (
     ),
   ),
   'kartik-v/yii2-widget-select2' => 
+=======
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
   array (
-    'name' => 'kartik-v/yii2-widget-select2',
+    'name' => '2amigos/yii2-date-picker-widget',
+    'version' => '1.0.7.0',
+    'alias' => 
+    array (
+      '@dosamigos/datepicker' => $vendorDir . '/2amigos/yii2-date-picker-widget/src',
+    ),
+  ),
+  'kartik-v/yii2-grid' => 
+  array (
+    'name' => 'kartik-v/yii2-grid',
     'version' => '9999999-dev',
     'alias' => 
     array (
-      '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2/src',
+      '@kartik/grid' => $vendorDir . '/kartik-v/yii2-grid/src',
     ),
   ),
+<<<<<<< HEAD
   'marekpetras/yii2-ajax-box-widget' => 
   array (
     'name' => 'marekpetras/yii2-ajax-box-widget',
@@ -182,6 +195,15 @@ return array (
     'alias' => 
     array (
       '@insolita/wgadminlte' => $vendorDir . '/insolita/yii2-adminlte-widgets',
+=======
+  'kartik-v/yii2-widget-select2' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-select2',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2/src',
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
     ),
   ),
 );

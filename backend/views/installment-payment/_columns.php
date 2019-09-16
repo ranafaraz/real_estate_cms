@@ -20,7 +20,7 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'remaning_amount',
+        'attribute'=>'advance_amount',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

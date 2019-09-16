@@ -35,10 +35,19 @@ class PlotController extends Controller
     {
         $countdata = Plot::find()->where(['property_id' => $id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->count();
 
+<<<<<<< HEAD
         $mod = Plot::find()->where(['property_id' => $id,'status' => 'Unsold'])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
         if($countdata > 0)
         {
             foreach ($mod as  $value) {
+=======
+        $mod = Plot::find()->where(['property_id' => $id])->andWhere(['status' => 'Unsold'])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
+        if($countdata > 0)
+        {
+            echo "<option>SELECT A PLOT.</option>";
+            foreach ($mod as  $value) {
+                
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
                 echo "<option value='". $value->plot_no ."'>".$value->plot_no."<option>";
             }
         }else
@@ -47,6 +56,24 @@ class PlotController extends Controller
         }
 
     }
+<<<<<<< HEAD
+=======
+    public function actionPlot($plot_no,$property_id)
+    {
+          $countdata = Plot::find()->where(['plot_no' => $plot_no,'property_id' => $property_id])->andWhere(['status' => 'Unsold'])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->count();
+
+        $mod = Plot::find()->where(['plot_no' => $plot_no,'property_id' => $property_id])->andWhere(['status' => 'Unsold'])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
+        if($countdata > 0)
+        {
+            foreach ($mod as  $value) {
+                echo $value->plot_price;
+            }
+        }else
+        {
+            echo "Nothing Found";
+        }
+    }
+>>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
 
    
     /**

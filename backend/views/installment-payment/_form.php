@@ -83,6 +83,13 @@ use yii\web\JsonParser;
         <div class="col-md-6">
             <?= $form->field($model, 'installment_amount')->textInput(['readonly'=> true]) ?>
         </div>
+        <div class="col-md-6"> 
+            <?= $form->field($model,'remaning_amount')->textInput(['readonly'=> true]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'previous_pay_amount')->textInput(['readonly'=> true]) ?>
+        </div>
+
          <div class="col-md-6">
             <?= $form->field($model, 'date_to_pay')->textInput() ?>
         </div>
@@ -126,14 +133,35 @@ $script = <<< JS
                 }else
                 {
                     data = JSON.parse(data);
+                    console.log(data);
                     $('#installmentpayment-installment_no').attr('value',data.installment_no);
+                    
                     $('#installmentpayment-installment_amount').attr('value',data.installment_amount);
+                    
                     $('#installmentpayment-date_to_pay').attr('value',data.paid_date);
-                     $('#installmentpayment-paid').attr('value',"");
-                }
-                
-            });
-            
+                    $('#installmentpayment-paid').attr('value',"");
+
+                    $.get("index.php?r=installment-payment/advance",{property_id:property_id,plot_no:plot_no},function(data2)
+                    {
+                        var data2=JSON.parse(data2);
+                        console.log(data2);
+                        var get_val = $('#installmentpayment-installment_amount').val();
+                        if(data2.advance_amount < get_val)
+                        {
+                            var minus_amount = get_val - data2.advance_amount;
+                            $('#installmentpayment-previous_pay_amount').attr('value',data2.advance_amount);  
+                            $('#installmentpayment-remaning_amount').attr('value',minus_amount);
+                        }
+                        else
+                        if(data2.advance_amount > get_val)
+                        {
+                            var minus_amount = get_val - data2.advance_amount;
+                            $('#installmentpayment-remaning_amount').attr('value',0);
+                            $('#installmentpayment-previous_pay_amount').attr('value',data2.advance_amount);  
+                        }
+                    });
+                } 
+            }); 
         }) 
     })
 
