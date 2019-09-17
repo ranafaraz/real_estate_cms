@@ -42,7 +42,8 @@ class PlotSearch extends Plot
      */
     public function search($params)
     {
-        $query = Plot::find();
+        $id=yii::$app->user->identity->organization_id;
+        $query = Plot::find()->where(['organization_id'=>$id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -35,7 +35,7 @@ CrudAsset::register($this);
      <?php $form = ActiveForm::begin(); ?>
      <?php
         echo $form->field($propertymodel, 'property_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(Property::find(["organization_id"=>$org_id])->all(), 'property_id', 'property_name'),
+            'data' => ArrayHelper::map(Property::find()->where(["organization_id"=>$org_id])->all(), 'property_id', 'property_name'),
             'language' => 'en',
             'options' => ['placeholder' => 'Select a state ...'],
 

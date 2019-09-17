@@ -41,7 +41,8 @@ class PropertySearch extends Property
      */
     public function search($params)
     {
-        $query = Property::find();
+        $id=yii::$app->user->identity->organization_id;
+        $query = Property::find()->where(['organization_id'=>$id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
