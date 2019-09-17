@@ -22,6 +22,8 @@ $fieldOptions2 = [
 <div class="login-box">
     <div class="login-logo">
         <a href="#" style="color: #000000;font-family: georgea"><b>Real Estate</b></a>
+        <hr style="margin:0px;padding:0px;">
+        <p style="margin:0px;padding:0px;"><small>Powered by </small><a onclick="window.open('www.dexdevs.com')">DEXDEVS</a></p>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
