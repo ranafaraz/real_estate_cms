@@ -48,9 +48,9 @@ CrudAsset::register($this);
      <?php $form = ActiveForm::end(); ?>
      <form method="post" >
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
-         <input type="text" name="selected_id" id="selected_id" />
-         <input type="text" name="no_plots" id="no_plots" />
-         <input type="submit" name="search" value="Search Plots" />
+         <input type="hidden" name="selected_id" id="selected_id" />
+         <input type="hidden" name="no_plots" id="no_plots" />
+         <input type="submit" class="btn btn-success" name="search" value="Search Plots" />
      </form>
      <div class="row">
     <?php 

@@ -35,7 +35,7 @@ use dmstr\widgets\Alert;
         a:focus{
             color: #045a32;
         }
-        #crud-datatable > div > div.kv-panel-after > div.pull-left > a{
+        #crud-datatable > div > div.kv-panel-after > div.pull-left > a,#ajaxCrudModal > div > div > div.modal-footer > a{
             color: white !important;
         }
     </style>

@@ -24,12 +24,19 @@ dmstr\web\AdminLteAsset::register($this);
     	.login-box-body{
 			background-color: #D0E5A2;
     	}
+    	.login-logo{
+    		background-color: #CDE58D;
+    		margin-bottom: 0px;
+    	}
     	#loginform-username,#loginform-password{
     		border-radius: 10px;
     		background-color: #fff;
     	}
     	#loginbtn{
     		border-radius: 10px;
+    	}
+    	.login-box{
+    		margin-top:70px;
     	}
     </style>
 </head>
