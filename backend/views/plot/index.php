@@ -58,10 +58,13 @@ CrudAsset::register($this);
         if(isset($_POST['search'])){
             $selected_id=$_POST['selected_id'];
             $no_plots=$_POST['no_plots'];
-
+            $property=Property::find()->where(['property_id'=>$selected_id])->one();
            $condition=["property_id"=>$selected_id];
             $rows=Plot::find()->where(["property_id"=>$selected_id])->all();
 
+            ?>
+        <h2 style="padding-left: 20px;">Showing Plots For Property: <span class="text-success"> <?= $property->property_name ?></span></h2>
+            <?php
 
          foreach($rows as $plot){
             

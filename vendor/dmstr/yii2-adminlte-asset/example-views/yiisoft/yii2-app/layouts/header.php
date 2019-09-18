@@ -24,13 +24,13 @@ use yii\helpers\Html;
                 <li><h5 style="margin-top: 18px;color:white;"><span id="clock"></span>  <span id="date"></span></h5></li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/logo.png" class="user-image" alt="User Image"/>
+                        <img src="<?= yii::$app->user->identity->image_name ?>" class="user-image" alt="User Image"/>
                         <span class="hidden-xs"><?= yii::$app->user->identity->username; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/logo.png" class="img-circle"
+                            <img src="<?= yii::$app->user->identity->image_name ?>" class="img-circle"
                                  alt="User Image"/>
 
                             <p>
