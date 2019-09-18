@@ -23,10 +23,11 @@ $this->title = 'Real Estate Management System';
         margin: 20px auto;
     }
 </style>
+<?php $orgid=yii::$app->user->identity->organization_id; ?>
 <div class="site-index" >
    <div class="row">
         <div class="col-md-4">
-             <?php $users=User::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+             <?php $users=User::find()->where(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3><?= $users ?></h3>
@@ -42,7 +43,7 @@ $this->title = 'Real Estate Management System';
         </div>
         <div class="col-md-4">
 
-            <?php $id=yii::$app->user->identity->organization_id; $property=Property::find(['organization_id'=>$id])->count(); ?>
+            <?php $property=Property::find()->where(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?= $property ?></h3>
@@ -56,7 +57,7 @@ $this->title = 'Real Estate Management System';
             </div>
         </div>
         <div class="col-md-4">
-            <?php $plot=Plot::find()->where(['status'=>"Unsold"])->count(); ?>
+            <?php $plot=Plot::find()->where(['status'=>"Unsold"])->andwhere(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-orange">
                 <div class="inner">
                     <h3><?= $plot ?></h3>
@@ -71,7 +72,7 @@ $this->title = 'Real Estate Management System';
 
         </div>
         <div class="col-md-4">
-            <?php $customer=Customer::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <?php $customer=Customer::find()->where(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3><?= $customer ?></h3>
@@ -91,13 +92,14 @@ $this->title = 'Real Estate Management System';
                 $year = date('Y');
                 $sdate=$year.'-'.$month.'-'."01";
                 $todate=$year.'-'.$month.'-'."31";
-                $id=yii::$app->user->identity->organization_id;
                 $record=InstallmentStatus::find()
-                ->where(['between', 'paid_date', "$sdate", "$todate" ])->andwhere(['organization_id'=>$id])->SUM("installment_amount");
+                ->where(['between', 'paid_date', "$sdate", "$todate" ])->andwhere(['organization_id'=>$orgid])->SUM("installment_amount");
              ?>
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3><?php echo $record;   ?></h3>
+                    <h3><?php if (empty($record)) {
+                        echo "0";
+                        }else{ echo $record; }  ?></h3>
 
                     <p>Total Installment Amount this month</p>
                 </div>
@@ -113,13 +115,14 @@ $this->title = 'Real Estate Management System';
                 $year = date('Y');
                 $sdate=$year.'-'.$month.'-'."01";
                 $todate=$year.'-'.$month.'-'."31";
-                $id=yii::$app->user->identity->organization_id;
                 $received=InstallmentStatus::find()
-                ->where(['between', 'paid_date', "$sdate", "$todate" ])->andwhere(['organization_id'=>$id])->andwhere(['status'=>'0'])->SUM("installment_amount");
+                ->where(['between', 'paid_date', "$sdate", "$todate" ])->andwhere(['organization_id'=>$orgid])->andwhere(['status'=>'0'])->SUM("installment_amount");
              ?>
             <div class="small-box bg-orange">
                 <div class="inner">
-                    <h3><?= $received ?></h3>
+                    <h3><?php if (empty($received)) {
+                        echo "0";
+                            }else{ echo $received; }?></h3>
 
                     <p>Recieved Amount this month</p>
                 </div>
@@ -130,7 +133,7 @@ $this->title = 'Real Estate Management System';
             </div>
         </div>
         <div class="col-md-4">
-            <?php $servicetype=ServicesType::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <?php $servicetype=ServicesType::find()->where(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3><?= $servicetype ?></h3>
@@ -144,7 +147,7 @@ $this->title = 'Real Estate Management System';
             </div>
         </div>
         <div class="col-md-4">
-            <?php $insdet=ServicesDetails::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <?php $insdet=ServicesDetails::find()->where(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-green">
                 <div class="inner">
                     <h3><?= $insdet ?></h3>

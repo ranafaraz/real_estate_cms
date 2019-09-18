@@ -40,8 +40,9 @@ class UserSearch extends User
      * @return ActiveDataProvider
      */
     public function search($params)
-    {
-        $query = User::find();
+    {   
+        $id=yii::$app->user->identity->organization_id;
+        $query = User::find()->where(['organization_id'=>$id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

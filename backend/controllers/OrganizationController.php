@@ -84,9 +84,10 @@ class OrganizationController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Organization();  
-         $user=User::findOne(["username"=>\Yii::$app->user->identity->username]);
+         $user=new User();
         $model->created_at = date("Y-m-d");
-        $model->user_id = $user->id;
+        $model->user_id = yii:: $app->user->identity->id;
+        
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -103,6 +104,16 @@ class OrganizationController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
+                $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
+                $connection=yii::$app->db;
+                $condition = ['id'=>\Yii::$app->user->identity->id];
+                $connection->createCommand()->Update('user',
+                    [
+                        'organization_id'=>$orgid->id,
+                    ],
+                    $condition
+                )->execute();
+                
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Organization",
@@ -127,6 +138,15 @@ class OrganizationController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
+                 $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
+                $connection=yii::$app->db;
+                $condition = ['id'=>\Yii::$app->user->identity->id];
+                $connection->createCommand()->Update('user',
+                    [
+                        'organization_id'=>$orgid->id,
+                    ],
+                    $condition
+                )->execute();
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [

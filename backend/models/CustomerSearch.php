@@ -44,7 +44,8 @@ class CustomerSearch extends Customer
      */
     public function search($params)
     {
-        $query = Customer::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id]);
+        $id=yii::$app->user->identity->organization_id;
+        $query = Customer::find()->where(['organization_id'=>$id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -25,7 +25,7 @@ use yii\helpers\Html;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= $directoryAsset ?>/img/logo.png" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">DEXDEVS</span>
+                        <span class="hidden-xs"><?= yii::$app->user->identity->username; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -34,7 +34,7 @@ use yii\helpers\Html;
                                  alt="User Image"/>
 
                             <p>
-                                Dexterous Developers
+                                <?= yii::$app->user->identity->email; ?>
                             </p>
                         </li>
                         <!-- Menu Body -->

@@ -42,7 +42,9 @@ class InstallmentStatusSearch extends InstallmentStatus
      */
     public function search($params)
     {
-        $query = InstallmentStatus::find();
+        $id=yii::$app->user->identity->organization_id;
+        $query = InstallmentStatus::find()->where(['organization_id'=>$id]);
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,6 +58,7 @@ class InstallmentStatusSearch extends InstallmentStatus
             return $dataProvider;
         }
 
+        //$query('installment');
         $query->andFilterWhere([
             'id' => $this->id,
             'installment_id' => $this->installment_id,
