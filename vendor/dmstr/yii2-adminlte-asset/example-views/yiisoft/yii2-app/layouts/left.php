@@ -66,7 +66,18 @@
                           
                     ],
                 ],
-                   
+                   [
+                        'label' => 'Accounts',
+                        'icon' => 'share',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Account nature', 'icon' => 'hand-o-right', 'url' => ['/account-nature'],],
+                            ['label' => 'Account Head', 'icon' => 'hand-o-right', 'url' => ['/account-head'],],
+                            ['label' => 'Account Payable', 'icon' => 'hand-o-right', 'url' => ['/account-payable'],],
+                            ['label' => 'Account Receivable', 'icon' => 'hand-o-right', 'url' => ['/account-recievable'],],
+                          
+                    ],
+                ],
                 ],
             ]
         ) ?>
