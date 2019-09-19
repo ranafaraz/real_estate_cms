@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use backend\models\User;
 use backend\models\Organization;
 use yii\helpers\json;
+use backend\models\Plot;
 
 /**
  * PropertyController implements the CRUD actions for Property model.
@@ -114,8 +115,10 @@ class PropertyController extends Controller
             $posted = current($_POST['Property']);
             $subpost['Property'] = $posted;
             if ($property->load($subpost)) {
-
+                // Plot::deleteAll(['property_id'=>$property_id]);
+                // $ret=Yii::$app->InsertPlots->insertplots($property_id,$subpost);
                 $property->save();
+               
             }
             echo $out;
             return;
