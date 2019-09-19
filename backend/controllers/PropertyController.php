@@ -168,11 +168,7 @@ class PropertyController extends Controller
         $model->created_at = date("Y-m-d");
         $model->created_by = \Yii::$app->user->identity->username;
         $user=User::findone(["username"=>\Yii::$app->user->identity->username]);
-<<<<<<< HEAD
-        $model->organization_id=\Yii::$app->user->identity->organization_id;
-=======
         $model->organization_id=yii::$app->user->identity->organization_id;
->>>>>>> 635b4442b4eec32ffbafa241bf74dba195af9751
 
         if($request->isAjax){
             /*

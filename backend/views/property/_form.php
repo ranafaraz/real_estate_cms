@@ -44,21 +44,6 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'no_of_plots')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
-    
-
-   
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?>
 

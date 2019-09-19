@@ -52,7 +52,7 @@ use yii\web\JsonParser;
                         ],
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
-                                 $.get("index.php?r=plot-owner-info/plots&customer_id='.'"+$("#installmentpayment-customer_id").val(),function(data){
+                                 $.get("index.php?r=plot-owner-info/plots&customer_id='.'"+$("#installmentpayment-customer_id").val()+"&property_id='.'"+$(this).val(),function(data){
                                     console.log(data);
                                  $("#installmentpayment-plot_no").html(data);
                             });
