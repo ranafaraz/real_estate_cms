@@ -203,7 +203,7 @@ $(document).ready(function()
              
         });
                 
-                if($("#customer-already_customer").prop('checked'))
+                if($("#customer-already_customer").prop('checked') == true)
                 {
                     alert("hello");
                 }
