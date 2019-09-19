@@ -11,7 +11,7 @@ use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
- *
+ * 
  * @property int $id
  * @property string $first_name
  * @property string $last_name
@@ -35,6 +35,7 @@ class User extends \yii\db\ActiveRecord
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 10;
     const STATUS_ACTIVE = 10;
+    public $image;
     /**
      * {@inheritdoc}
      */
@@ -53,11 +54,13 @@ class User extends \yii\db\ActiveRecord
             [['status', 'organization_id'], 'integer'],
             [['first_name', 'last_name', 'created_at', 'updated_at'], 'string', 'max' => 100],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
+           ['image_name', 'file', 'extensions' => 'jpg, jpeg, gif, png', 'maxFiles' => 1, 'skipOnEmpty' => true,],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
         ];
+       
     }
 
     /**
@@ -70,6 +73,7 @@ class User extends \yii\db\ActiveRecord
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'username' => 'Username',
+            'image'=>'Profile Picture',
             //'auth_key' => 'Auth Key',
             'password_hash' => 'Password',
             //'password_reset_token' => 'Password Reset Token',

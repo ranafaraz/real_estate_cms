@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-
+use yii\web\UploadedFile;
 /**
  * UserController implements the CRUD actions for User model.
  */
@@ -148,7 +148,20 @@ class UserController extends Controller
                 $model->created_at = date('Y-m-d h:m:s');
                 $model->updated_at = date('Y-m-d h:m:s');
                 $model->organization_id = $user->organization_id;
-                $model->save();
+                $model->image_name = UploadedFile::GetInstance($model, 'image_name');   
+                if (!empty($model->image_name)) {
+
+                $im_name = $model->username;
+                
+                $model->image_name->SaveAs('uploads/' . $im_name . '.' . $model->image_name->extension);
+                $model->image_name = 'uploads/' . $im_name . '.' . $model->image_name->extension;
+                 $model->save();
+            }else{
+                 $model->image_name = 'uploads/usr.png';
+                  $model->save();
+            }
+               
+               
 
                 $userid = $model->getPrimaryKey();
                 $authID = AuthAssignment::find()->orderBy(['id'=>SORT_DESC])->One();

@@ -22,12 +22,12 @@ use backend\models\InstallmentStatus;
     </div>
     <div class="row"> 
         <div class="col-md-12">
-           <?= $form->field($model,'Already_Customer')->checkBox(['options' => ['id' => 'checkifcustomer']])->label(false)?>
+           <?= $form->field($model,'Already_Customer')->checkBox(['options' => ['Unchecked']])->label(false)?>
         </div>  
     </div>
     <div class="row">
         <div class="col-md-3">
-            <?= $form->field($model,'cnic',['options' => ['value' => '0']])->textInput()?>
+            <?= $form->field($model,'cnic')->textInput()?>
         </div>
         <div class="col-md-3">
              <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -203,7 +203,7 @@ $(document).ready(function()
              
         });
                 
-                if($("#customer-already_customer").prop('checked', true))
+                if($("#customer-already_customer").prop('checked'))
                 {
                     alert("hello");
                 }
