@@ -83,6 +83,7 @@ use backend\models\InstallmentStatus;
 	                        'date' => date('Y-m-d'),
 	                        'paid_date' => $final_date,
 	                        'created_by'=>\Yii::$app->user->identity->id,
+	                        'organization_id' => \Yii::$app->user->identity->organization_id,
 	                    ])->execute();
 	 			 $final_date = strtotime(date($final_date));
 	 		}
@@ -109,10 +110,11 @@ use backend\models\InstallmentStatus;
 	                        'date' => date('Y-m-d'),
 	                        'paid_date' => date('Y-m-d'),
 	                        'created_by'=>\Yii::$app->user->identity->id,
+	                        'organization_id' => \Yii::$app->user->identity->organization_id,
 	                    ])->execute();
 			for($i = 2; $i <= $noinstallment + 1 ; $i++)
 	 		{
-
+	 			$final_date = strtotime(date($final_date));
 	 			if($installment_type == "Monthly")
 				 {
 				    $final_date = date("Y-m-d", strtotime("+1 month", $final_date));
@@ -133,8 +135,9 @@ use backend\models\InstallmentStatus;
 	                        'date' => date('Y-m-d'),
 	                        'paid_date' => $final_date,
 	                        'created_by'=>\Yii::$app->user->identity->id,
+	                        'organization_id' => \Yii::$app->user->identity->organization_id,p
 	                    ])->execute();
-	 			$final_date = strtotime(date($final_date));
+	 			
 	 		}
 
 	 	}

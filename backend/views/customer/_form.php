@@ -26,7 +26,9 @@ use backend\models\InstallmentStatus;
         </div>  
     </div>
     <div class="row">
-
+        <div class="col-md-3">
+            <?= $form->field($model,'cnic',['options' => ['value' => '0']])->textInput()?>
+        </div>
         <div class="col-md-3">
              <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         </div>
@@ -200,13 +202,11 @@ $(document).ready(function()
                 }
              
         });
-
-
-
-        $('#customer-already_customer').on('Change',function()
-        {
-            alert("hello");
-            })
+                
+                if($("#customer-already_customer").prop('checked', true))
+                {
+                    alert("hello");
+                }
     })
 
 

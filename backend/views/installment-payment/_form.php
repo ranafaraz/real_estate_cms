@@ -24,7 +24,7 @@ use yii\web\JsonParser;
         <div class="col-md-4">
 
              <?= $form->field($model, 'customer_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Customer::find()->all(),'customer_id','name'),
+                'data' => ArrayHelper::map(Customer::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->all(),'customer_id','name'),
                 'language' => 'en',
                 'options' => ['placeholder' => 'Select a state ...'],
                 'pluginOptions' => [
