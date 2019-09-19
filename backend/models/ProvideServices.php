@@ -34,7 +34,7 @@ class ProvideServices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'services_type_id', 'services_id', 'organization_id'], 'required'],
+            [['customer_id', 'services_type_id', 'services_id', 'organization_id','service_details'], 'required'],
             [['customer_id', 'services_type_id', 'services_id', 'organization_id'], 'integer'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
             [['services_id'], 'exist', 'skipOnError' => true, 'targetClass' => ServicesDetails::className(), 'targetAttribute' => ['services_id' => 'services_id']],

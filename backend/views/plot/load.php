@@ -78,11 +78,19 @@ $property=Property::findone(["property_id"=>$property_id]);
 	        </form>
 	</div>
 </div>
+<<<<<<< HEAD
+<?PHP
+
+$script = <<< JS
+
+
+=======
 <?php 
 
 	
 
 $script=<<<JS
+>>>>>>> 635b4442b4eec32ffbafa241bf74dba195af9751
 	$('#updaterecord').click(function(e){  
 		e.preventDefault();
 		var length = $('#length').val();
@@ -156,6 +164,16 @@ $script=<<<JS
 							success:function(data){
 								$('.message_box').html(data);
 									}
+<<<<<<< HEAD
+						});
+	}); 
+
+
+JS;
+$this->registerJs($script);
+
+?>
+=======
 									});
 									}); 
 	JS;
@@ -163,3 +181,4 @@ $script=<<<JS
 
 					
 ?>
+>>>>>>> 635b4442b4eec32ffbafa241bf74dba195af9751

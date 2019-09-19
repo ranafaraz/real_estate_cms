@@ -46,6 +46,7 @@ use backend\models\ServicesType;
             ],
         ]) 
     ?>
+    <?= $form->field($model, 'service_details')->textArea()?>
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

@@ -32,6 +32,7 @@ class Customer extends \yii\db\ActiveRecord
     public $amount;
     public $first_payment;
     public $date_to_paid;
+    public $cnic;
     /**
      * {@inheritdoc}
      */
@@ -48,7 +49,7 @@ class Customer extends \yii\db\ActiveRecord
         return [
             [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'organization_id', 'created_date'], 'required'],
             [['user_id', 'organization_id'], 'integer'],
-            [['created_date' , 'Already_Customer'], 'safe'],
+            [['created_date' , 'Already_Customer','cnic'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['father_name', 'cnic_no', 'contact_no', 'email_address', 'sale_purchase_type'], 'string', 'max' => 150],
             [['address'], 'string', 'max' => 250],
