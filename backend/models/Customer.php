@@ -52,7 +52,7 @@ class Customer extends \yii\db\ActiveRecord
             [['created_date','checkifexist','customerid'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['cnic_no'],'unique'],
-            [['father_name', 'cnic_no', 'contact_no', 'email_address', 'sale_purchase_type'], 'string', 'max' => 150],
+            [['father_name', 'cnic_no', 'contact_no', 'email_address'], 'string', 'max' => 150],
             [['address'], 'string', 'max' => 250],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserLogin::className(), 'targetAttribute' => ['user_id' => 'user_id']],
         ];
@@ -70,7 +70,6 @@ class Customer extends \yii\db\ActiveRecord
             'cnic_no' => 'Cnic No',
             'contact_no' => 'Contact No',
             'email_address' => 'Email Address',
-            'sale_purchase_type' => 'Sale Purchase Type',
             'address' => 'Address',
             'user_id' => 'User ID',
             'organization_id' => 'Organization ID',

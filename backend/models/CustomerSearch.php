@@ -22,7 +22,7 @@ class CustomerSearch extends Customer
     {
         return [
             [['customer_id', 'user_id', 'organization_id'], 'integer'],
-            [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'sale_purchase_type', 'address', 'created_date'], 'safe'],
+            [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
         ];
     }
 
@@ -71,7 +71,6 @@ class CustomerSearch extends Customer
             ->andFilterWhere(['like', 'cnic_no', $this->cnic_no])
             ->andFilterWhere(['like', 'contact_no', $this->contact_no])
             ->andFilterWhere(['like', 'email_address', $this->email_address])
-            ->andFilterWhere(['like', 'sale_purchase_type', $this->sale_purchase_type])
             ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
