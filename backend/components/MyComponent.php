@@ -135,7 +135,7 @@ use backend\models\InstallmentStatus;
 	                        'date' => date('Y-m-d'),
 	                        'paid_date' => $final_date,
 	                        'created_by'=>\Yii::$app->user->identity->id,
-	                        'organization_id' => \Yii::$app->user->identity->organization_id,p
+	                        'organization_id' => \Yii::$app->user->identity->organization_id,
 	                    ])->execute();
 	 			
 	 		}

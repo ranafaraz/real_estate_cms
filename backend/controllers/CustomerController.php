@@ -14,6 +14,7 @@ use backend\models\Property;
 use backend\models\PlotOwnerInfo;
 use backend\models\Installment;
 use backend\models\InstallmentStatus;
+use yii\helpers\Json;
 
 
 /**
@@ -61,8 +62,7 @@ class CustomerController extends Controller
     public function actionView($id)
     {   
 
-        $mod = PlotOwnerInfo::find()->where(['customer_id' => $id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
-        $prop_name = Property::find()->where(['property_id' => $mod->property_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+       
         $request = Yii::$app->request;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -70,8 +70,6 @@ class CustomerController extends Controller
                     'title'=> "Customer #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
-                        'mod' => $mod,
-                        'prop_name' => $prop_name,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -79,8 +77,6 @@ class CustomerController extends Controller
         }else{
             return $this->render('view', [
                 'model' => $this->findModel($id),
-                'mod' => $mod,
-                'prop_name' => $prop_name,
             ]);
         }
     }
@@ -134,8 +130,17 @@ class CustomerController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post())  && $installmentstatus->load($request->post())){
-                $model->save(); 
-                Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$model->customer_id);
+                if($model->checkifexist == '1')
+                {
+                    $customerid = $model->customerid;
+                }
+                else
+                {
+                    $model->save(); 
+                    $customerid=$model->customer_id;
+                }
+                
+                Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$customerid);
 
                 if($installmentinfo->installment_type == 'Monthly')
                 {
@@ -147,7 +152,7 @@ class CustomerController extends Controller
                 {
                     $installmentinfo->no_of_installments = ceil(($installmentinfo->no_of_installments * 12)/12);
                 }
-                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->advance_amount,$installmentinfo->total_amount,$model->customer_id,$installmentinfo->no_of_installments,$plotinfo->plot_no);
+                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->advance_amount,$installmentinfo->total_amount,$customerid,$installmentinfo->no_of_installments,$plotinfo->plot_no);
                
                 Yii::$app->MyComponent->sold($plotinfo->property_id,$plotinfo->plot_no);
 
@@ -187,9 +192,9 @@ class CustomerController extends Controller
 
             if ($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post()) && $installmentstatus->load($request->post())) {
                 $model->save();
-                Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$model->customer_id);
+                Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$customerid);
 
-                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->remaning_amount,$installmentinfo->total_amount,$model->customer_id,$installmentinfo->no_of_installments,$plotinfo->plot_no);
+                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->remaning_amount,$installmentinfo->total_amount,$customerid,$installmentinfo->no_of_installments,$plotinfo->plot_no);
                
                 Yii::$app->MyComponent->sold($plotinfo->property_id,$plotinfo->plot_no);
 
@@ -307,6 +312,26 @@ class CustomerController extends Controller
                 ]);
             }
         }
+    }
+
+
+
+
+    public function actionCheckCustomer($customer_cnic)
+    {
+        $model  = Customer::find()->where(['cnic_no' => $customer_cnic])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+
+        if(empty($model))
+        {
+            $val = "empty";
+            echo Json::encode($val);
+        }
+        else
+        {
+            echo Json::encode($model);
+        }
+
+
     }
 
     /**

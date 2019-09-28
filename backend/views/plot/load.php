@@ -78,10 +78,10 @@ $property=Property::findone(["property_id"=>$property_id]);
 	        </form>
 	</div>
 </div>
-<<<<<<< HEAD
 <?PHP
 
 $script = <<< JS
+<<<<<<< HEAD
 
 
 =======
@@ -90,6 +90,8 @@ $script = <<< JS
 	
 
 $script=<<<JS
+=======
+>>>>>>> d17decc371f818804483faa5e6519150ceac5fb1
 	$('#updaterecord').click(function(e){  
 		e.preventDefault();
 		var length = $('#length').val();
@@ -170,5 +172,9 @@ $script=<<<JS
 JS;
 $this->registerJs($script);
 
+<<<<<<< HEAD
 ?>
 
+=======
+?>
+>>>>>>> d17decc371f818804483faa5e6519150ceac5fb1

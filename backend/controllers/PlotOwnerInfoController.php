@@ -194,13 +194,12 @@ class PlotOwnerInfoController extends Controller
         }
     }
 
-    public function actionPlots($customer_id)
+    public function actionPlots($customer_id,$property_id)
     {
-        $count = PlotOwnerInfo::find()->where(['customer_id'=>$customer_id])->andwhere(["organization_id"=>\Yii::$app->user->identity->organization_id])->count();
-        $row=PlotOwnerInfo::find()->where(['customer_id'=>$customer_id])->andwhere(["organization_id"=>\Yii::$app->user->identity->organization_id])->all();
-        if($count > 0)
-        {
+        $row=PlotOwnerInfo::find()->where(['customer_id'=>$customer_id , 'property_id' => $property_id])->andwhere(["organization_id"=>\Yii::$app->user->identity->organization_id])->all();
             echo "<option></option>";
+        if($row)
+        {
             foreach ($row as $val) {
                 echo "<option value='". $val->plot_no ."'>".$val->plot_no."<option>";
             }

@@ -1,6 +1,8 @@
 <?php
 
 use yii\widgets\DetailView;
+use backend\models\PlotOwnerInfo;
+use backend\models\Property;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
@@ -22,22 +24,32 @@ use yii\widgets\DetailView;
             'created_date',
         ],
     ]) ?>
-    <h4 class="text-danger">Property Detail</h4>
-     <?= DetailView::widget([
-        'model' => $prop_name,
-        'attributes' => [
-           'property_name',
-        ],
-    ]) ?>
-    <h4 class="text-danger">Plot Detail </h4>
-    <?= DetailView::widget([
-        'model' => $mod,
-        'attributes' => [
-           'plot_no',
-        ],
-    ]) ?>
-   
+        
+    <?PHP
+     $mod = PlotOwnerInfo::find()->where(['customer_id' => $model->customer_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
+        foreach ($mod as $value) {
+        $prop_name = Property::find()->where(['property_id' => $value->property_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
 
-
-
+        ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= DetailView::widget([
+                    'model' => $prop_name,
+                    'attributes' => [
+                    'property_name',
+                    ],
+                ]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= DetailView::widget([
+                'model' => $value,
+                'attributes' => [
+                'plot_no',
+                ],
+            ]) ?>
+        </div>
+    </div>
+    <?php
+        }
+    ?>
 </div>

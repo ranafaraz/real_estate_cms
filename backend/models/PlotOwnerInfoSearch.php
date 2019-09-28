@@ -42,7 +42,7 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
     public function search($params)
     {
         $id=yii::$app->user->identity->organization_id;
-        $query = PlotOwnerInfo::find()->where(['installment.organization_id'=>$id]);
+        $query = PlotOwnerInfo::find()->where(['organization_id'=>$id]);
 
 
         $dataProvider = new ActiveDataProvider([

@@ -221,21 +221,14 @@ class InstallmentPaymentController extends Controller
     public function actionProperty($customer_id)
     {
 
-         $countdata = InstallmentPayment::find()->where(['customer_id' => $customer_id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->count();
-
-        $mod = InstallmentPayment::find()->where(['customer_id' => $customer_id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
-        foreach ($mod as  $value) {
-              $property = Property::find()->where(['property_id'=> $value->property_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();  
-            }
-
-        if($countdata > 0)
-        {
+        $mod = InstallmentPayment::find()->select('property_id')->distinct()->where(['customer_id' => $customer_id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
+        if($mod){
             echo "<option>SELECT A VALUE</option>";
-            foreach ($property as  $value1) {
-                echo "<option value='".$value1->property_id . "'>". $value1->property_name ."</option>";
-            }
-
-        }else
+        foreach ($mod as  $value) {
+              $property = Property::find()->where(['property_id'=> $value->property_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();  
+                echo "<option value='".$property->property_id . "'>". $property->property_name ."</option>";
+        }
+    }else
         {
             echo "<option></option>";
         }

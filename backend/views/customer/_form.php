@@ -20,15 +20,14 @@ use backend\models\InstallmentStatus;
     <div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Customer Info</h3></div>
     </div>
-    <div class="row"> 
+    <div class="row">
         <div class="col-md-12">
-           <?= $form->field($model,'Already_Customer')->checkBox(['options' => ['Unchecked']])->label(false)?>
-        </div>  
+            <?= $form->field($model, 'cnic_no')->textInput(['maxlength' => true]) ?>
+        </div>
+        <?= $form->field($model,'checkifexist')->hiddenInput()->label(false)?>
+        <?= $form->field($model,'customerid')->hiddenInput()->label(false)?>
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <?= $form->field($model,'cnic')->textInput()?>
-        </div>
         <div class="col-md-3">
              <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         </div>
@@ -36,16 +35,14 @@ use backend\models\InstallmentStatus;
         <div class="col-md-3">
             <?= $form->field($model, 'father_name')->textInput(['maxlength' => true]) ?>        
         </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'cnic_no')->textInput(['maxlength' => true]) ?>
-        </div>
+       
         <div class="col-md-3">
             <?= $form->field($model, 'contact_no')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-3">
             <?= $form->field($model, 'email_address')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-12">
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
         </div>
        
@@ -185,28 +182,47 @@ $(document).ready(function()
                     var pro_amount = $('#installment-no_of_installments').val() * 12;
                     var remaning_money = $('#installment-minus_amonut').val();
                     var rem = remaning_money/pro_amount;
-                    $('#installmentstatus-installment_amount').attr('value',rem); 
+                    $('#installmentstatus-installment_amount').attr('value',Math.ceil(rem)); 
                 }else if($('#installment-installment_type').val() == '6 Months'){
                     var pro_amount = ($('#installment-no_of_installments').val() / 6) * 12;
                     var remaning_money = $('#installment-minus_amonut').val();
                     var rem = remaning_money/pro_amount;
-                    $('#installmentstatus-installment_amount').attr('value',rem); 
+                    $('#installmentstatus-installment_amount').attr('value',Math.ceil(rem)); 
                 }
                 else if($('#installment-installment_type').val() == 'Yearly')
                 {
-                    var pro_amount = (($('#installment-no_of_installments').val() * 12)/12);
+                    var pro_amount = (($('#installment-no_of_installments').val() / 12)*12);
                     var remaning_money = $('#installment-minus_amonut').val();
                     alert(pro_amount);
                     var rem = remaning_money/pro_amount;
-                    $('#installmentstatus-installment_amount').attr('value',rem); 
+                    $('#installmentstatus-installment_amount').attr('value',Math.ceil(rem)); 
                 }
              
         });
                 
-                if($("#customer-already_customer").prop('checked'))
-                {
-                    alert("hello");
-                }
+        $('#customer-cnic_no').on('change',function()
+        {
+            var customer_cnic = $(this).val();
+              $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic},function(data)
+                    {
+                        data = JSON.parse(data);
+                        if(data == "empty")
+                        {
+                            $('#customer-checkifexist').attr('value','0');
+                        }
+                        else
+                        {
+                            $('#customer-checkifexist').attr('value','1');
+                            $('#customer-customerid').attr('value',data.customer_id);
+                            $('#customer-name').attr('value',data.name);
+                             $('#customer-father_name').attr('value',data.father_name);
+                            $('#customer-contact_no').attr('value',data.contact_no);
+                            $('#customer-email_address').attr('value',data.email_address);
+                             $('#customer-address').attr('value',data.address);
+                        }
+                        });
+            
+            })
     })
 
 
