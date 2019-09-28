@@ -186,9 +186,6 @@ class PropertyController extends Controller
         
                 ];         
             }else if($model->load($request->post()) ){
-
-               
-                
                 $model->save();
                 Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
                 return [

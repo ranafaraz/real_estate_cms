@@ -168,20 +168,14 @@ use dosamigos\datepicker\DatePicker;
         var heads = $.parseJSON(heads);
         if(heads.value=="empty"){
             $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
-            $('#payment-updateid').attr('value',"0");
-           
-        }else{
-            
+            $('#payment-updateid').attr('value',"0"); 
+        }else{ 
             $("#payment-debit_amount").attr('value',heads.amount);
             $('#payment-updateid').attr('value',heads.id);
         }
-
        });
      });
-
-
     });
-
     $('#checkamount'). click(function(){
         if($(this). prop("checked") == true){
            var debit_value=$("#payment-debit_amount").val();
@@ -193,8 +187,6 @@ use dosamigos\datepicker\DatePicker;
             $('#payment-checkstate').attr('value',"0");
         }
     });
-
-
     JS;
     $this->registerJs($script);
 ?>

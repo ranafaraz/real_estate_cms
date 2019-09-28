@@ -47,7 +47,7 @@ class payment extends \yii\db\ActiveRecord
             [['receiver_payer_id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
             [['type', 'narration','transaction_type'], 'string'],
             [['debit_amount','credit_amount'], 'number'],
-            [['date', 'updated_at'], 'safe'],
+            [['date', 'updated_at','updateid','checkstate'], 'safe'],
             [['ref_no'], 'string', 'max' => 50],
             [['created_by', 'updated_by'], 'string', 'max' => 150],
             [['credit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['credit_account' => 'id']],
