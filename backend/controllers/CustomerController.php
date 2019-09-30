@@ -127,12 +127,14 @@ class CustomerController extends Controller
                     echo "Sorry No Account Head With Cash in Hand Found Or Affect</b>Make Sure Cash in Hand Exists in Account Heads...";
                     die();
                 }
-                // $connection->createCommand()->insert('receiver_payer_info',
-                //     [
-                //         'head_id' => $mod->id,
-                //         'payer_receiver_id' => $model->customer_id,
-                //         'choice' => 
-                //     ])->execute();
+                $connection->createCommand()->insert('receiver_payer_info',
+                    [
+                        'head_id' => $mod->id,
+                        'payer_receiver_id' => $model->customer_id,
+                        'choice' => 'Payer',
+                        'created_by' => \Yii::$app->user->identity->id,
+                        
+                    ])->execute();
 
                 $model1 = Transactions::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
                 if($model1 == "")
