@@ -15,7 +15,10 @@ use backend\models\PlotOwnerInfo;
 use backend\models\Installment;
 use backend\models\InstallmentStatus;
 use yii\helpers\Json;
-
+use backend\models\CustomerType;
+use backend\models\Transactions;
+use backend\models\AccountHead;
+use backend\models\ReceiverPayerInfo;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -23,7 +26,7 @@ use yii\helpers\Json;
 class CustomerController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -31,8 +34,7 @@ class CustomerController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -43,7 +45,7 @@ class CustomerController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {    
+    {
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -53,44 +55,27 @@ class CustomerController extends Controller
         ]);
     }
 
-
     /**
      * Displays a single Customer model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {   
-
-       
-        $request = Yii::$app->request;
-        if($request->isAjax){
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return [
-                    'title'=> "Customer #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $this->findModel($id),
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
-        }else{
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-        }
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
      * Creates a new Customer model.
-     * For ajax request will return json object
-     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $request = Yii::$app->request;
-        $model = new Customer();  
+        $model = new Customer();
         $plotinfo = new PlotOwnerInfo(); 
         $installmentinfo = new Installment();
         $installmentstatus = new InstallmentStatus();
@@ -99,38 +84,12 @@ class CustomerController extends Controller
         $model->organization_id = \Yii::$app->user->identity->organization_id;
         $model->created_date = date('Y-m-d'); 
         $plotinfo->start_date = date('Y-m-d'); 
-         $amount = $model->amount;
-                $first_pay = $model->first_payment;
-                $no_of_installment = $model->no_of_installment;
+        $amount = $model->amount;
+        $first_pay = $model->first_payment;
+        $no_of_installment = $model->no_of_installment;
 
-        
-
-
-
-       
-        // $plotinfo->end_date = date('Y-m-d');
-
-        
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Customer",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                        'plotinfo' => $plotinfo,
-                        'installmentinfo' => $installmentinfo,
-                        'installmentstatus' => $installmentstatus,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post())  && $installmentstatus->load($request->post())){
-                if($model->checkifexist == '1')
+        if ($model->load(Yii::$app->request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
+            if($model->checkifexist == '1')
                 {
                     $customerid = $model->customerid;
                 }
@@ -141,8 +100,7 @@ class CustomerController extends Controller
                 }
                 
                 Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$customerid);
-
-                if($installmentinfo->installment_type == 'Monthly')
+            if($installmentinfo->installment_type == 'Monthly')
                 {
                     $installmentinfo->no_of_installments = $installmentinfo->no_of_installments * 12;
                 }else if($installmentinfo->installment_type == '6 Months'){
@@ -162,235 +120,135 @@ class CustomerController extends Controller
 
                 Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
 
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Customer",
-                    'content'=>'<span class="text-success">Create Customer success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote']).
-                            Html::a('Create More',['index.php?r=installment.php'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Customer",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                        'plotinfo' => $plotinfo,
-                        'installmentinfo' => $installmentinfo,
-                        'installmentstatus' => $installmentstatus,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
+                $connection = \Yii::$app->db;
+                $mod = AccountHead::find()->where(['account_name' => 'Cash in Hand'])->One();
+                if(empty($mod))
+                {
+                    echo "Sorry No Account Head With Cash in Hand Found Or Affect</b>Make Sure Cash in Hand Exists in Account Heads...";
+                    die();
+                }
+                // $connection->createCommand()->insert('receiver_payer_info',
+                //     [
+                //         'head_id' => $mod->id,
+                //         'payer_receiver_id' => $model->customer_id,
+                //         'choice' => 
+                //     ])->execute();
 
-            if ($model->load($request->post()) && $plotinfo->load($request->post()) && $installmentinfo->load($request->post()) && $installmentstatus->load($request->post())) {
-                $model->save();
-                Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$customerid);
+                $model1 = Transactions::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
+                if($model1 == "")
+                {
+                    $model1->transaction_id = '1';
+                }
+                else
+                {
+                    (int)$trans = (int)$model1->transaction_id;
+                    $model1->transaction_id = $trans + 1;
+                }
 
-                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->remaning_amount,$installmentinfo->total_amount,$customerid,$installmentinfo->no_of_installments,$plotinfo->plot_no);
+                $acc_receieveable = AccountHead::find()->where(['account_name' => 'Account Receivable'])->One();
+                
                
-                Yii::$app->MyComponent->sold($plotinfo->property_id,$plotinfo->plot_no);
 
-                 $installment_id = Installment::find('installment_id')->orderBy(['installment_id' => SORT_DESC])->One();
+                if(empty($acc_receieveable))
+                {
+                    echo "Sorry No Account Head With Account Receivable Found Or Affect</b>Make Sure Account Receivable Exists in Account Heads...";
+                    die();
+                }
 
-                 if($installmentinfo->installment_type == "Monthly")
-                 {
-                    $time = strtotime(date('Y-m-d'));
-                    $final_date = date("Y-m-d", strtotime("+1 month", $time));
-                 }else if($installmentinfo->installment_type == "6 Months")
-                 {
-                    $time = strtotime(date('Y-m-d'));
-                    $final_date = date("Y-m-d", strtotime("+6 month", $time));
-
-                 }else if($installmentinfo->installment_type == "Yearly")
-                 {
-                    $time = strtotime(date('Y-m-d'));
-                    $final_date = date("Y-m-d", strtotime("+12 month", $time));
-                 }
-
-                Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->remaning_amount,$final_date);
-
+                $receiver_payer_model = ReceiverPayerInfo::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->orderBy(['id'=>SORT_DESC])->One();
+                if(empty($receiver_payer_model))
+                {
+                    echo "Sorry No Receiver Found";
+                }
                 
-                
-                return $this->redirect(['view', 'id' => $model->no_of_installment]);
-                  
+                $connection->createCommand()->insert('transactions',[
+                    'receiver_payer_id' => $receiver_payer_model->id,
+                    'transaction_id' => $model1->transaction_id,
+                    'transaction_type' => 'Reciept',
+                    'narration' => $model->narration,
+                    'debit_account' => $mod->id,
+                    'debit_amount' => $installmentinfo->advance_amount,
+                    'credit_account' => $acc_receieveable->id,
+                    'credit_amount' => $installmentinfo->minus_amonut,
+                    'date' => date('Y-m-d');
+                    'created_by' => \Yii::$app->user->identity->id,
+                ])->execute();
 
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                    'plotinfo' => $plotinfo,
-                    'installmentinfo' => $installmentinfo,
-                    'installmentstatus' => $installmentstatus,
-                ]);
-            }
+            return $this->redirect(['index']);
         }
-       
+
+        return $this->render('create', [
+            'model' => $model,
+            'plotinfo' => $plotinfo,
+            'installmentinfo' => $installmentinfo,
+            'installmentstatus' => $installmentstatus,
+        ]);
     }
-
-
-
-    
 
     /**
      * Updates an existing Customer model.
-     * For ajax request will return json object
-     * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
+     * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $request = Yii::$app->request;
-        $model = $this->findModel($id); 
-        $plotinfo =  PlotOwnerInfo::find()->where(['customer_id' => $model->customer_id]); 
-        $installmentinfo = Installment::findModel($id);
-        $installmentstatus = InstallmentStatus::findModel($id);  
+        $model = $this->findModel($id);
+        // $plotinfo = PlotOwnerInfo::find()->where(['customer_id' => $model->customer_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id] ); 
+        // $installmentinfo = new Installment();
+        // $installmentstatus = new InstallmentStatus();
 
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Update Customer #".$id,
-                    'content'=>$this->renderAjax('update', [
-                        'model' => $model,
-                        'plotinfo' => $plotinfo,
-                    'installmentinfo' => $installmentinfo,
-                    'installmentstatus' => $installmentstatus,
-
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Customer #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $model,
-                        'plotinfo' => $plotinfo,
-                    'installmentinfo' => $installmentinfo,
-                    'installmentstatus' => $installmentstatus,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
-            }else{
-                 return [
-                    'title'=> "Update Customer #".$id,
-                    'content'=>$this->renderAjax('update', [
-                        'model' => $model,
-                        'plotinfo' => $plotinfo,
-                    'installmentinfo' => $installmentinfo,
-                    'installmentstatus' => $installmentstatus,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->customer_id]);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                    'plotinfo' => $plotinfo,
-                    'installmentinfo' => $installmentinfo,
-                    'installmentstatus' => $installmentstatus,
-                ]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post()) && $model->save() && $plotinfo->save() && $installmentinfo->save() && $installmentstatus->save()) {
+            return $this->redirect(['view', 'id' => $model->customer_id]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'plotinfo' => $plotinfo,
+            'installmentinfo' => $installmentinfo,
+            'installmentstatus' => $installmentstatus,
+        ]);
     }
 
 
-
-
-    public function actionCheckCustomer($customer_cnic)
+    public function actionCheckCustomer($customer_cnic,$customer_type)
     {
-        $model  = Customer::find()->where(['cnic_no' => $customer_cnic])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
-
-        if(empty($model))
+        $customer_type = CustomerType::find()->where(['customer_type' => $customer_type])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id ])->One();
+        if(isset($customer_type))
         {
-            $val = "empty";
-            echo Json::encode($val);
+            $model  = Customer::find()->where(['cnic_no' => $customer_cnic , 'customer_type_id' => $customer_type->customer_type_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+
+            if(empty($model))
+            {
+                $val = "empty";
+                echo Json::encode($val);
+            }
+            else
+            {
+                echo Json::encode($model);
+            }
         }
         else
         {
-            echo Json::encode($model);
+             echo  "Empty";
         }
 
 
     }
 
     /**
-     * Delete an existing Customer model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
+     * Deletes an existing Customer model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
-        $request = Yii::$app->request;
         $this->findModel($id)->delete();
 
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            return $this->redirect(['index']);
-        }
-
-
-    }
-
-     /**
-     * Delete multiple existing Customer model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionBulkDelete()
-    {        
-        $request = Yii::$app->request;
-        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
-        foreach ( $pks as $pk ) {
-            $model = $this->findModel($pk);
-            $model->delete();
-        }
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            return $this->redirect(['index']);
-        }
-       
+        return $this->redirect(['index']);
     }
 
     /**
@@ -404,8 +262,8 @@ class CustomerController extends Controller
     {
         if (($model = Customer::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

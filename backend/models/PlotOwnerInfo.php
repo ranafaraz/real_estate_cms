@@ -30,9 +30,9 @@ class PlotOwnerInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['property_id', 'plot_no', 'start_date', 'organization_id'], 'required'],
+            [['property_id', 'plot_no', 'start_date', 'organization_id','status'], 'required'],
             [['property_id', 'plot_no', 'organization_id'], 'integer'],
-            [['start_date', 'end_date'], 'safe'],
+            [['start_date', 'end_date','status'], 'safe'],
         ];
     }
 
@@ -47,6 +47,7 @@ class PlotOwnerInfo extends \yii\db\ActiveRecord
             'plot_no' => 'Plot No',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
+            'status' => "Status",
             'organization_id' => 'Organization ID',
         ];
     }

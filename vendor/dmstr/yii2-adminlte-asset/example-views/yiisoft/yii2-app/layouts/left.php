@@ -44,6 +44,7 @@
                     ['label' => 'Organization', 'icon' => 'hand-o-right', 'url' => ['/organization']],
                     ['label' => 'Property', 'icon' => 'hand-o-right', 'url' => ['/property']],
                     ['label' => 'Plots', 'icon' => 'hand-o-right', 'url' => ['/plot']],
+                    ['label' => 'Buy Plot/Property', 'icon' => 'hand-o-right', 'url' => ['/buy-plot']],
                 
                     [
                         'label' => 'Services',

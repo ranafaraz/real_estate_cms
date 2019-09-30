@@ -16,6 +16,7 @@ use yii\widgets\DetailView;
             'start_date',
             'end_date',
             'organization_id',
+            'status',
         ],
     ]) ?>
 

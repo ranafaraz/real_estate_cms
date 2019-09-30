@@ -10,33 +10,21 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        // [
+        [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'customer_type_id',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'customer_type',
+    ],
+    // [
         // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'id',
+        // 'attribute'=>'created_at',
     // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'property_id',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'plot_no',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'start_date',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'end_date',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'status',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'organization_id',
+        'attribute'=>'created_by',
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

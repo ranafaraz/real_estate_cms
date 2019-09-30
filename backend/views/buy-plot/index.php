@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CustomerSearch */
+/* @var $searchModel backend\models\BuyPlotSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Customers';
+$this->title = 'Buy Plots';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="customer-index">
+<div class="buy-plot-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Customer', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Buy Plot', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,17 +26,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'customer_id',
-            'customer_type_id',
-            'name',
-            'father_name',
-            'cnic_no',
-            //'contact_no',
-            //'email_address:email',
-            //'address',
-            //'user_id',
-            //'organization_id',
-            //'created_date',
+            // 'buy_plot_id',
+            'customerId.name',
+            'property_name',
+            'plot_no',
+            'plot_area',
+            'plot_price',
+            'plot_location:ntext',
+            'city',
+            'district',
+            'province',
+            //'created_at',
+            //'created_by',
+            //'updated_at',
+            //'updated_by',
+            //'plot_status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\PlotOwnerInfo;
+use backend\models\CustomerType;
 
 /**
- * PlotOwnerInfoSearch represents the model behind the search form about `backend\models\PlotOwnerInfo`.
+ * CustomerTypeSearch represents the model behind the search form about `backend\models\CustomerType`.
  */
-class PlotOwnerInfoSearch extends PlotOwnerInfo
+class CustomerTypeSearch extends CustomerType
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
     public function rules()
     {
         return [
-            [['id', 'property_id', 'plot_no', 'organization_id'], 'integer'],
-            [['start_date', 'end_date'], 'safe'],
+            [['customer_type_id', 'created_by'], 'integer'],
+            [['customer_type', 'created_at'], 'safe'],
         ];
     }
 
@@ -41,9 +41,7 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
      */
     public function search($params)
     {
-        $id=yii::$app->user->identity->organization_id;
-        $query = PlotOwnerInfo::find()->where(['organization_id'=>$id]);
-
+        $query = CustomerType::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,14 +56,12 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'property_id' => $this->property_id,
-            'plot_no' => $this->plot_no,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'status' => $this->status,
-            'organization_id' => $this->organization_id,
+            'customer_type_id' => $this->customer_type_id,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
         ]);
+
+        $query->andFilterWhere(['like', 'customer_type', $this->customer_type]);
 
         return $dataProvider;
     }

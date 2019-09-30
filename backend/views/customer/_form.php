@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\models\Property;
@@ -8,6 +9,7 @@ use backend\models\Plot;
 use backend\models\Installment;
 use dosamigos\datepicker\DatePicker;
 use backend\models\InstallmentStatus;
+use backend\models\CustomerType;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
@@ -16,8 +18,8 @@ use backend\models\InstallmentStatus;
 
 <div class="customer-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enableClientValidation' => true]]); ?>
-    <div class="row">
+    <?php $form = ActiveForm::begin(); ?>
+<div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Customer Info</h3></div>
     </div>
     <?= $form->field($model,'checkifexist')->hiddenInput()->label(false)?>
@@ -37,15 +39,19 @@ use backend\models\InstallmentStatus;
         <div class="col-md-3">
             <?= $form->field($model, 'contact_no')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-6">
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <?= $form->field($model, 'customer_type_id')->dropDownList(ArrayHelper::map(CustomerType::find()->where(['customer_type' => 'Buyer'])->all(),'customer_type_id','customer_type'), ['prompt' => 'Select Customer Type']) ?>
+        </div>
+        <div class="col-md-4">
             <?= $form->field($model, 'email_address')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
         </div>
-       
-
     </div>
+       
     <div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Property/Plot Info</h3></div>
     </div>
@@ -123,9 +129,7 @@ use backend\models\InstallmentStatus;
         <div class="col-md-4">
             <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true]) ?>
         </div>  
-         <div class="col-md-9">
             <?= $form->field($installmentinfo, 'minus_amonut')->hiddenInput(['maxlength' => true])->label(false) ?>
-        </div>
         <div class="col-md-4">
             <?PHP $data = ['1' => '1 Year', '1.5' => '1.5 Year','2'=>'2 Year','2.5'=>'2.5 Year', '3' => '3 Year' ,'3.5' => '3.5 Year' , '4' => '4 Year','4.5' => '4.5 Year','5'=>'5 Year'];?>
                 <?= $form->field($installmentinfo, 'no_of_installments')->widget(Select2::classname(), [
@@ -140,29 +144,27 @@ use backend\models\InstallmentStatus;
         </div> 
 
        <!--  -->
-    <div class="col-md-6">
+    <div class="col-md-4">
         <?= $form->field($installmentstatus, 'installment_amount')->textInput() ?>
     </div>
+        <div class="col-md-4">
+        <?= $form->field($model, 'narration')->textInput() ?>
+    </div>
+
 
 
     </div>
-  
-	<?php if (!Yii::$app->request->isAjax){ ?>
-	  	<div class="form-group">
-	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-	    </div>
-	<?php } ?>
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
-    
-</div>
 
+</div>
 <?PHP
 
 $script = <<< JS
-$(document).ready(function()
-{
-    $('#installment-installment_type').on('change',function()
+        $('#installment-installment_type').on('change',function()
     {
         var installment_type = $(this).val();
         
@@ -223,7 +225,7 @@ $(document).ready(function()
     $('#customer-cnic_no').on('change',function()
     {
         var customer_cnic = $(this).val();
-          $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic},function(data)
+          $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
                 {
                     data = JSON.parse(data);
                     if(data == "empty")
@@ -239,17 +241,13 @@ $(document).ready(function()
                         $('#customer-contact_no').attr('value',data.contact_no);
                         $('#customer-email_address').attr('value',data.email_address);
                          $('#customer-address').attr('value',data.address);
+                         $('#customer-customer_type_id').val(data.customer_type_id);
                     }
                     });
         
         })
-})
-
-
-
-
-
 JS;
 $this->registerJs($script);
+
 
 ?>

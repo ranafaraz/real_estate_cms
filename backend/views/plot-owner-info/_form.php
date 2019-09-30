@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use backend\models\PlotOwnerInfo;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\PlotOwnerInfo */
@@ -21,6 +23,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'organization_id')->textInput() ?>
 
+    <?= $form->field($model, 'status')->dropDownList(
+        ['0' => 'Select One', 'Active' => 'Active','Inactive' =>'Inactive']
+    ) ?>
+
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
@@ -31,3 +37,13 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
     
 </div>
+<?PHP
+$script = <<< JS
+    $('#plotownerinfo-status').on('change',function()
+    {
+        alert($(this).val());
+        })
+JS;
+$this->registerJs($script);
+
+?>

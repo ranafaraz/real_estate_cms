@@ -2,32 +2,28 @@
 
 namespace backend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Customer;
-use backend\models\PlotOwnerInfo;
-use backend\models\Property;
-use backend\models\Plot;
 
 /**
- * CustomerSearch represents the model behind the search form about `backend\models\Customer`.
+ * CustomerSearch represents the model behind the search form of `backend\models\Customer`.
  */
 class CustomerSearch extends Customer
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['customer_id', 'user_id', 'organization_id'], 'integer'],
+            [['customer_id', 'customer_type_id', 'user_id', 'organization_id'], 'integer'],
             [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -44,8 +40,10 @@ class CustomerSearch extends Customer
      */
     public function search($params)
     {
-        $id=yii::$app->user->identity->organization_id;
+        $id=\Yii::$app->user->identity->organization_id;
         $query = Customer::find()->where(['organization_id'=>$id]);
+
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,8 +57,10 @@ class CustomerSearch extends Customer
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'customer_id' => $this->customer_id,
+            'customer_type_id' => $this->customer_type_id,
             'user_id' => $this->user_id,
             'organization_id' => $this->organization_id,
             'created_date' => $this->created_date,
