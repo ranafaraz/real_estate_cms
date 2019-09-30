@@ -108,8 +108,8 @@ class PaymentController extends Controller
         ////////////////////////////////////////////////////////////
 
 
-        
-        
+
+
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -127,50 +127,25 @@ class PaymentController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
 
                 ];
-            }else if($model->load($request->post()) ){
+            }else if($model->load($request->post()) &&  $model->save()){
                 if($model->updateid == "0" && $model->checkstate =="0"){
-            $modelap = AccountPayable::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
-            if($modelap == "")
-            {
-                $accountpayable->transaction_id = '1';
-            }
-            else
-            {
-                (int)$transap = (int)$modelap->transaction_id;
-                $accountpayable->transaction_id = $trans + 1;
-            }
-            $accountpayable->recipient_id=$model->receiver_payer_id;
-            $amount= $model->debit_amount-$model->credit_amount;
-            $accountpayable->amount=$amount;
-            $accountpayable->account_payable=$model->debit_account;
-            $accountpayable->due_date=$model->due_date;
-            $accountpayable->updated_by = \Yii::$app->user->identity->username;
-            $accountpayable->updated_at = date('Y-m-d h:m:s');
-            $accountpayable->save();
-       }
-    if($model->updateid != "0" && $model->checkstate =="1"){
+                    $amount=$model->debit_amount-$model->credit_amount;
+                    Yii::$app->SaveRecord->saverecord00($model->due_date,$model->receiver_payer_id,$amount,$model->debit_account,$model->due_date);
+                 }
 
-        // print_r($model->updateid);
-        // die();
-        // exit;
-        // $connection = Yii::$app->db;
-        // $id=$model->updateid;
-        // $command = $connection->createCommand('UPDATE account_payable SET status=1,amount=0 WHERE id={$id}');
-        AccountPayable::update([]);
-       
-            
-       }
-       if($model->updateid != "0" && $model->checkstate =="0"){
-        print_r($model->updateid);
-        $id=$model->updateid;
-        $updateamount= $modelupdate->amount-$model->credit_amount;
-        $connection = Yii::$app->db;
-        $command = $connection->createCommand('UPDATE account_payable SET status=1,amount={$updateamount} WHERE id={$id}');
-        $command->execute();
-            
-            
-       }
-                $model->save();
+                if($model->updateid != "0" && $model->checkstate =="1"){
+                   
+                    Yii::$app->SaveRecord->saverecord11($model->updateid);
+                }
+
+                if($model->updateid != "0" && $model->checkstate =="0"){
+                    
+                    $updateamount= $model->debit_amount-$model->credit_amount;
+                    Yii::$app->SaveRecord->saverecord10($model->updateid,$updateamount);
+                } 
+
+
+               
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Payment",
@@ -195,50 +170,24 @@ class PaymentController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) ) {
+            if ($model->load($request->post()) &&  $model->save()) {
                 if($model->updateid == "0" && $model->checkstate =="0"){
-            $modelap = AccountPayable::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
-            if($modelap == "")
-            {
-                $accountpayable->transaction_id = '1';
-            }
-            else
-            {
-                (int)$transap = (int)$modelap->transaction_id;
-                $accountpayable->transaction_id = $trans + 1;
-            }
-            $accountpayable->recipient_id=$model->receiver_payer_id;
-            $amount= $model->debit_amount-$model->credit_amount;
-            $accountpayable->amount=$amount;
-            $accountpayable->account_payable=$model->debit_account;
-            $accountpayable->due_date=$model->due_date;
-            $accountpayable->updated_by = \Yii::$app->user->identity->username;
-            $accountpayable->updated_at = date('Y-m-d h:m:s');
-            $accountpayable->save();
-       }else if($model->updateid != "0" && $model->checkstate =="1"){
+                    
+                    Yii::$app->SaveRecord->saverecord00($model->due_date,$model->receiver_payer_id,$amount,$model->debit_account,$model->due_date);
+                 }
 
-        // print_r($model->updateid);
-        // die();
-        // exit;
-        // $connection = Yii::$app->db;
-        // $id=$model->updateid;
-        // $command = $connection->createCommand('UPDATE account_payable SET status=1,amount=0 WHERE id={$id}');
-        AccountPayable::update([]);
-       
-            
-       }else if($model->updateid != "0" && $model->checkstate =="0"){
-        print_r($model->updateid);
-        die();
-        exit;
-        $id=$model->updateid;
-        $updateamount= $modelupdate->amount-$model->credit_amount;
-        $connection = Yii::$app->db;
-        $command = $connection->createCommand('UPDATE account_payable SET status=1,amount={$updateamount} WHERE id={$id}');
-        $command->execute();
-            
-            
-       }
-       $model->save();
+                if($model->updateid != "0" && $model->checkstate =="1"){
+                   
+                    Yii::$app->SaveRecord->saverecord11($model->updateid);
+                }
+
+                if($model->updateid != "0" && $model->checkstate =="0"){
+                    
+                    $updateamount= $modelupdate->amount-$model->credit_amount;
+                    Yii::$app->SaveRecord->saverecord10($model->updateid,$updateamount);
+                } 
+
+                
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [

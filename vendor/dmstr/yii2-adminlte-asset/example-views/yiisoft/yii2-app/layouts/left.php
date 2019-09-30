@@ -76,6 +76,8 @@
                             ['label' => 'Account Head', 'icon' => 'hand-o-right', 'url' => ['/account-head'],],
                             ['label' => 'Account Payable', 'icon' => 'hand-o-right', 'url' => ['/account-payable'],],
                             ['label' => 'Account Receivable', 'icon' => 'hand-o-right', 'url' => ['/account-recievable'],],
+                            ['label' => 'Payment', 'icon' => 'hand-o-right', 'url' => ['/payment'],],
+                            ['label' => 'Receive', 'icon' => 'hand-o-right', 'url' => ['/receipt'],],
                           
                     ],
                 ],

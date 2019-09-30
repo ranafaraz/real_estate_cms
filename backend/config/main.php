@@ -24,12 +24,17 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
-         'InsertPlots' => [
+        'InsertPlots' => [
          
             'class' => 'backend\components\InsertPlots',
 
-            ],
-             'MyComponent' => [
+        ],
+        'SaveRecord' => [
+         
+            'class' => 'backend\components\SaveRecord',
+
+        ],
+        'MyComponent' => [
             'class' => 'backend\components\MyComponent',
 
         ],

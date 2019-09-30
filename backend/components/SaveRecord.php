@@ -6,7 +6,7 @@
     /**
      * summary
      */
-    class saverecord Extends Component
+    class SaveRecord Extends Component
     {
         /**
          * summary
@@ -25,53 +25,51 @@
                 (int)$transap = (int)$modelap->transaction_id;
                 $transaction_id = $trans + 1;
             }
-            $connection->createCommand->Insert('account_payable',
+            $connection->createCommand()->Insert('account_payable',
                 [
                     'transaction_id'=>$transaction_id,
                     'recipient_id'=>$receiver_payer_id,
                     'amount'=>$amount,
                     'account_payable'=>$debit_amount,
                     'due_date'=>$due_date,
-                    'updated_at'=>date('Y-m-d h:m:s');,
+                    'updated_at'=>date('Y-m-d h:m:s'),
                     'updated_by'=>\Yii::$app->user->identity->username,
                 ]
-            )->execute();
-           
-        
+            )->execute();        
 
         
        }
+       // update id ==1 and check state =1
        public function saverecord11($update_id)
         {
             $connection=yii::$app->db;
-         
-            $connection->createCommand->Insert('account_payable',
+            $connection->createCommand()->update('account_payable',
                 [
-                    'transaction_id'=>$transaction_id,
-                    'recipient_id'=>$receiver_payer_id,
-                    'amount'=>$amount,
-                    'account_payable'=>$debit_amount,
-                    'due_date'=>$due_date,
-                    'updated_at'=>date('Y-m-d h:m:s');,
+                    
+                    'amount'=>0,
+                    'status'=>0,
+                    'due_date'=>'0000-00-00 00-00-00',
+                    'updated_at'=>date('Y-m-d h:m:s'),
                     'updated_by'=>\Yii::$app->user->identity->username,
-                ]
+                ],['id'=>$update_id]
             )->execute();
-            // print_r($model->updateid);
-            // die();
-            // exit;
-            // $connection = Yii::$app->db;
-            // $id=$model->updateid;
-            // $command = $connection->createCommand('UPDATE account_payable SET status=1,amount=0 WHERE id={$id}');
-            AccountPayable::update([]);
+           
         }
-        public function saverecord10($)
+
+        // update id ==1 and check state =0
+        public function saverecord10($updateid,$amount)
         {
-             print_r($model->updateid);
-            $id=$model->updateid;
-            $updateamount= $modelupdate->amount-$model->credit_amount;
-            $connection = Yii::$app->db;
-            $command = $connection->createCommand('UPDATE account_payable SET status=1,amount={$updateamount} WHERE id={$id}');
-            $command->execute();
+             $connection=yii::$app->db;
+            $connection->createCommand()->update('account_payable',
+                [
+                    
+                    'amount'=>$amount,
+                    'status'=>1,
+                    'updated_at'=>date('Y-m-d h:m:s'),
+                    'updated_by'=>\Yii::$app->user->identity->username,
+                ],['id'=>$updateid]
+            )->execute();
+         
         }
        
       }     
