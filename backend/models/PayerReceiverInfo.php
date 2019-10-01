@@ -34,25 +34,37 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [['head_id', 'id', 'choice', 'created_by', 'created_at'], 'required'],
             [['head_id'], 'string'],
             [['choice'], 'string'],
             [['created_at','head_id'], 'safe'],
             [[ 'created_by'], 'string', 'max' => 150],
+=======
+            [['head_id', 'choice', 'created_by', 'created_at'], 'required'],
+            [['head_id'], 'string'],
+            [['choice'], 'string'],
+            [['created_at','head_id','payer_receiver_id'], 'safe'],
+            [['created_by'], 'string', 'max' => 150],
+>>>>>>> 465501ed7de24d4f7be8e291adeaefc28f54374a
             [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['head_id' => 'id']],
             [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'payer_receiver_id']],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritdoc},
      */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'head_id' => 'Account Name',
+<<<<<<< HEAD
             'payer_receiver_id' => 'Payer/Receiver',
+=======
+            'payer_receiver_id' => 'payer_receiver_id                                                        ',
+>>>>>>> 465501ed7de24d4f7be8e291adeaefc28f54374a
             'choice' => 'Choice',
             'created_by' => 'Created By',
             'created_at' => 'Created At',

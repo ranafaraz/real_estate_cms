@@ -60,7 +60,7 @@ if (Yii::$app->controller->action->id === 'login') {
     </script>
     
     </head>
-    <body class="hold-transition skin-green fixed sidebar-mini " onload="clock()">
+    <body class="hold-transition skin-green sidebar-mini " onload="clock()">
     <?php $this->beginBody() ?>
     <div class="wrapper">
 

@@ -26,7 +26,7 @@ use backend\models\AccountHead;
         ]);
         ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'payer_receiver_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'choice')->dropDownList([ 'Receiver' => 'Receiver', 'Payer' => 'Payer', ], ['prompt' => 'Select a Choice']) ?>
 

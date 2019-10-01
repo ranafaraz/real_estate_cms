@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
         'attributes' => [
             'id',
             'head_id',
-            'name',
+            'payer_receiver_id',
             'choice',
             'created_by',
             'created_at',

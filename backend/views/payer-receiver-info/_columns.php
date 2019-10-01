@@ -21,7 +21,7 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'name',
+        'attribute'=>'payer_receiver_id',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
