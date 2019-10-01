@@ -13650,3 +13650,1905 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1569480101.794
     'REQUEST_TIME' => 1569480101
 ]
+2019-09-30 08:58:21 [::1][-][-][error][ParseError] ParseError: syntax error, unexpected ',' in E:\xampp\htdocs\rems\backend\controllers\CustomerController.php:146
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('backend\\control...')
+#1 [internal function]: spl_autoload_call('backend\\control...')
+#2 E:\xampp\htdocs\rems\vendor\yiisoft\yii2\base\Module.php(637): class_exists('backend\\control...')
+#3 E:\xampp\htdocs\rems\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('customer')
+#4 E:\xampp\htdocs\rems\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('')
+#5 E:\xampp\htdocs\rems\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('customer', Array)
+#6 E:\xampp\htdocs\rems\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 E:\xampp\htdocs\rems\backend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2019-09-30 08:58:21 [::1][-][-][info][application] $_GET = [
+    'r' => 'customer'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => 'a8c5gq5u0dihm7gtp3p34s9m9o'
+    '_csrf-backend' => 'cdac966a79ad9e144e30dd3437d173b6f123c53bb2a4fe645cc17c312190a1f5a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"26YFwuQrJNoKM7osxTWUFIV9f9zUgOo6\";}'
+]
+
+$_SERVER = [
+    'MIBDIRS' => 'E:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'E:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=a8c5gq5u0dihm7gtp3p34s9m9o; _csrf-backend=cdac966a79ad9e144e30dd3437d173b6f123c53bb2a4fe645cc17c312190a1f5a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%2226YFwuQrJNoKM7osxTWUFIV9f9zUgOo6%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\xampp\\php;C:\\composer;C:\\Program Files\\Git\\cmd;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files (x86)\\Yarn\\bin\\;C:\\Users\\Usama Ali\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Usama Ali\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\Usama Ali\\AppData\\Local\\Yarn\\bin'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.3.9 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.3.9'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'E:/xampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/xampp/htdocs'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/xampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '65364'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=customer'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=customer'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569826701.324
+    'REQUEST_TIME' => 1569826701
+]
+2019-09-30 09:42:23 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][error][ParseError] ParseError: syntax error, unexpected end of file in /opt/lampp/htdocs/rems/backend/views/payment/_form.php:193
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, NULL)
+#2 /opt/lampp/htdocs/rems/backend/views/payment/create.php(13): yii\base\View->render('_form', Array)
+#3 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/View.php(212): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Controller.php(49): yii\web\View->renderAjax('create', Array, Object(backend\controllers\PaymentController))
+#7 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(124): yii\web\Controller->renderAjax('create', Array)
+#8 [internal function]: backend\controllers\PaymentController->actionCreate()
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create', Array)
+#12 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/create', Array)
+#13 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#15 {main}
+2019-09-30 09:42:23 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][info][application] $_GET = [
+    'r' => 'payment/create'
+    '_' => '1569829316667'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://127.0.0.1/rems/backend/web/'
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZGx39mTKi8OloGVmYME4wAAAAs'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => 'p_93cKZR7dGEw665xmZu7Tq4V4J7tUzXRyoSuGPx-O_BhwUk82K9_OWT45SvLwe7Q91nwwvBGqI3XWjsC8jVog=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40126'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment%2Fcreate&_=1569829316667'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment%2Fcreate&_=1569829316667'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569829343.442
+    'REQUEST_TIME' => 1569829343
+]
+2019-09-30 09:43:10 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\PayerReceiverInfo::name in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('name')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(209): yii\db\BaseActiveRecord->__get('name')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(580): yii\helpers\BaseArrayHelper::getValue(Object(backend\models\PayerReceiverInfo), 'name')
+#3 /opt/lampp/htdocs/rems/backend/views/payment/_form.php(31): yii\helpers\BaseArrayHelper::map(Array, 'id', 'name')
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, NULL)
+#7 /opt/lampp/htdocs/rems/backend/views/payment/create.php(13): yii\base\View->render('_form', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/View.php(212): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Controller.php(49): yii\web\View->renderAjax('create', Array, Object(backend\controllers\PaymentController))
+#12 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(124): yii\web\Controller->renderAjax('create', Array)
+#13 [internal function]: backend\controllers\PaymentController->actionCreate()
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#15 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#16 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create', Array)
+#17 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/create', Array)
+#18 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#19 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#20 {main}
+2019-09-30 09:43:10 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][info][application] $_GET = [
+    'r' => 'payment/create'
+    '_' => '1569829389268'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://127.0.0.1/rems/backend/web/'
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZGyDg4QpOM9uZCgt-nz-QAAAAo'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => 'l0HMm7ALQjcE7AyJVLeI-JlWrhs9LmnOEEH0yUsJ7xjxOb7P5TgSGmW8QaQ9_uGu4DOeWk1aP7tgNo6dIzDCVQ=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40130'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment%2Fcreate&_=1569829389268'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment%2Fcreate&_=1569829389268'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569829390.223
+    'REQUEST_TIME' => 1569829390
+]
+2019-09-30 09:52:28 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\PayerReceiverInfo::name in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('name')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(209): yii\db\BaseActiveRecord->__get('name')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(580): yii\helpers\BaseArrayHelper::getValue(Object(backend\models\PayerReceiverInfo), 'name')
+#3 /opt/lampp/htdocs/rems/backend/views/payment/_form.php(31): yii\helpers\BaseArrayHelper::map(Array, 'id', 'name')
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, NULL)
+#7 /opt/lampp/htdocs/rems/backend/views/payment/create.php(13): yii\base\View->render('_form', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/View.php(212): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Controller.php(49): yii\web\View->renderAjax('create', Array, Object(backend\controllers\PaymentController))
+#12 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(124): yii\web\Controller->renderAjax('create', Array)
+#13 [internal function]: backend\controllers\PaymentController->actionCreate()
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#15 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#16 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create', Array)
+#17 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/create', Array)
+#18 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#19 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#20 {main}
+2019-09-30 09:52:28 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][info][application] $_GET = [
+    'r' => 'payment/create'
+    '_' => '1569829947519'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://127.0.0.1/rems/backend/web/'
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZG0PP-5ONa6N5k1@BwaIQAAAAk'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => '9jFamrLRzPy_LEStDkZH4wZaJzoeIZ1-ie3FNbEVRoqQSSjO5-Kc0d58CYBnDy61fz8Xe25Vywv5mr9h2Sxrxw=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40180'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment%2Fcreate&_=1569829947519'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment%2Fcreate&_=1569829947519'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569829948.867
+    'REQUEST_TIME' => 1569829948
+]
+2019-09-30 09:53:04 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\PayerReceiverInfo::name in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('name')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(209): yii\db\BaseActiveRecord->__get('name')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(580): yii\helpers\BaseArrayHelper::getValue(Object(backend\models\PayerReceiverInfo), 'name')
+#3 /opt/lampp/htdocs/rems/backend/views/payment/_form.php(31): yii\helpers\BaseArrayHelper::map(Array, 'id', 'name')
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, NULL)
+#7 /opt/lampp/htdocs/rems/backend/views/payment/create.php(13): yii\base\View->render('_form', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/View.php(212): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Controller.php(49): yii\web\View->renderAjax('create', Array, Object(backend\controllers\PaymentController))
+#12 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(124): yii\web\Controller->renderAjax('create', Array)
+#13 [internal function]: backend\controllers\PaymentController->actionCreate()
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#15 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#16 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create', Array)
+#17 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/create', Array)
+#18 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#19 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#20 {main}
+2019-09-30 09:53:04 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][info][application] $_GET = [
+    'r' => 'payment/create'
+    '_' => '1569829983764'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://127.0.0.1/rems/backend/web/'
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZG0YGzUxCbffiJxYXRKsQAAAAU'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => '3xEbKmpbm802_R2gqVbkx29nolWaDqN6HVLjcV4uvZa5aWl-P2jL4FetUI3AH42RFgKSFOp69Q9tJZklNheQ2w=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40188'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment%2Fcreate&_=1569829983764'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment%2Fcreate&_=1569829983764'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569829984.843
+    'REQUEST_TIME' => 1569829984
+]
+2019-09-30 09:53:34 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\PayerReceiverInfo::name in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('name')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(209): yii\db\BaseActiveRecord->__get('name')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(580): yii\helpers\BaseArrayHelper::getValue(Object(backend\models\PayerReceiverInfo), 'name')
+#3 /opt/lampp/htdocs/rems/backend/views/payment/_form.php(31): yii\helpers\BaseArrayHelper::map(Array, 'id', 'name')
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, NULL)
+#7 /opt/lampp/htdocs/rems/backend/views/payment/create.php(13): yii\base\View->render('_form', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/View.php(212): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Controller.php(49): yii\web\View->renderAjax('create', Array, Object(backend\controllers\PaymentController))
+#12 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(124): yii\web\Controller->renderAjax('create', Array)
+#13 [internal function]: backend\controllers\PaymentController->actionCreate()
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#15 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#16 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create', Array)
+#17 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/create', Array)
+#18 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#19 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#20 {main}
+2019-09-30 09:53:34 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][info][application] $_GET = [
+    'r' => 'payment/create'
+    '_' => '1569830013175'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://127.0.0.1/rems/backend/web/'
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZG0fmtEISRGaYvND4oEqQAAAAI'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => '4N6NO06EmaupVLkomswsg-RkZ-6EpXUHSOXdwCJdE_2Gpv9vG7fJhsgE9AXzhUXVnQFXr_TRI3I4kqeUSmQ-sA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40192'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment%2Fcreate&_=1569830013175'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment%2Fcreate&_=1569830013175'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569830014.12
+    'REQUEST_TIME' => 1569830014
+]
+2019-09-30 09:55:58 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\PayerReceiverInfo::name in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('name')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(209): yii\db\BaseActiveRecord->__get('name')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(580): yii\helpers\BaseArrayHelper::getValue(Object(backend\models\PayerReceiverInfo), 'name')
+#3 /opt/lampp/htdocs/rems/backend/views/payment/_form.php(31): yii\helpers\BaseArrayHelper::map(Array, 'id', 'name')
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, NULL)
+#7 /opt/lampp/htdocs/rems/backend/views/payment/create.php(13): yii\base\View->render('_form', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/View.php(212): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Controller.php(49): yii\web\View->renderAjax('create', Array, Object(backend\controllers\PaymentController))
+#12 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(124): yii\web\Controller->renderAjax('create', Array)
+#13 [internal function]: backend\controllers\PaymentController->actionCreate()
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#15 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#16 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create', Array)
+#17 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/create', Array)
+#18 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#19 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#20 {main}
+2019-09-30 09:55:58 [127.0.0.1][74][342c69c7e4120e48362f25172ab9c6a8][info][application] $_GET = [
+    'r' => 'payment/create'
+    '_' => '1569830157832'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://127.0.0.1/rems/backend/web/'
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZG1Dg4QpOM9uZCgt-n0DAAAAAo'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => 'mYyMXsmK-mCtzVTjXPqY5Ps3axIOqYM5HAQ8rOrilL7_9P4KnLmqTcydGc41s_GyglJbU37d1Uxsc0b4gtu58w=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40196'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment%2Fcreate&_=1569830157832'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment%2Fcreate&_=1569830157832'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569830158.756
+    'REQUEST_TIME' => 1569830158
+]
+2019-09-30 10:00:24 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\PayerReceiverInfo::name in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('name')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php(209): yii\db\BaseActiveRecord->__get('name')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/grid/DataColumn.php(227): yii\helpers\BaseArrayHelper::getValue(Object(backend\models\PayerReceiverInfo), 'name')
+#3 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/grid/DataColumn.php(244): yii\grid\DataColumn->getDataCellValue(Object(backend\models\AccountPayable), 1, 0)
+#4 /opt/lampp/htdocs/rems/vendor/kartik-v/yii2-grid/src/DataColumn.php(242): yii\grid\DataColumn->renderDataCellContent(Object(backend\models\AccountPayable), 1, 0)
+#5 /opt/lampp/htdocs/rems/vendor/kartik-v/yii2-grid/src/GridView.php(1304): kartik\grid\DataColumn->renderDataCell(Object(backend\models\AccountPayable), 1, 0)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/grid/GridView.php(494): kartik\grid\GridView->renderTableRow(Object(backend\models\AccountPayable), 1, 0)
+#7 /opt/lampp/htdocs/rems/vendor/kartik-v/yii2-grid/src/GridView.php(1284): yii\grid\GridView->renderTableBody()
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/grid/GridView.php(358): kartik\grid\GridView->renderTableBody()
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/widgets/BaseListView.php(160): yii\grid\GridView->renderItems()
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/grid/GridView.php(326): yii\widgets\BaseListView->renderSection('{items}')
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/widgets/BaseListView.php(135): yii\grid\GridView->renderSection('{items}')
+#12 [internal function]: yii\widgets\BaseListView->yii\widgets\{closure}(Array)
+#13 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/widgets/BaseListView.php(138): preg_replace_callback('/{\\w+}/', Object(Closure), '<div class="pan...')
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/grid/GridView.php(301): yii\widgets\BaseListView->run()
+#15 /opt/lampp/htdocs/rems/vendor/kartik-v/yii2-grid/src/GridView.php(1204): yii\grid\GridView->run()
+#16 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Widget.php(140): kartik\grid\GridView->run()
+#17 /opt/lampp/htdocs/rems/backend/views/account-payable/index.php(58): yii\base\Widget::widget(Array)
+#18 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#19 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#20 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\AccountPayableController))
+#21 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\AccountPayableController))
+#22 /opt/lampp/htdocs/rems/backend/controllers/AccountPayableController.php(48): yii\base\Controller->render('index', Array)
+#23 [internal function]: backend\controllers\AccountPayableController->actionIndex()
+#24 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#25 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#26 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#27 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('account-payable', Array)
+#28 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#29 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#30 {main}
+2019-09-30 10:00:24 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'account-payable'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ddae2cdfb73a745bdd51fa21b808a644'
+    '_csrf-frontend' => 'e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2sdkewMqPWeQkTAkTGpzUPatS_p51zZF\";}'
+    'advanced-backend' => '342c69c7e4120e48362f25172ab9c6a8'
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    '_csrf-backend' => 'eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"fxrTU3P-aPM-iIiVye0AptVupwzTh9-M\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZG2GO8aBbzDt-h-DNed9gAAAAA'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=ddae2cdfb73a745bdd51fa21b808a644; _csrf-frontend=e71c0a2c6d384afe021e7badb2555537171fdfd087e875ab6455bc7ec4d94ac0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222sdkewMqPWeQkTAkTGpzUPatS_p51zZF%22%3B%7D; advanced-backend=342c69c7e4120e48362f25172ab9c6a8; _identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; _csrf-backend=eb226af4ebba96fb8720b16f243fbb4149500c5d7b816832dbb4a6367b7c1c2ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22fxrTU3P-aPM-iIiVye0AptVupwzTh9-M%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '40226'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=account-payable'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=account-payable'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569830424.214
+    'REQUEST_TIME' => 1569830424
+]
+2019-10-01 08:09:15 [127.0.0.1][74][1603cf75930174ad79e576a0b4d1f8c2][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: payment/2Fcreate in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('2Fcreate', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/2Fcreat...', Array)
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#2 {main}
+2019-10-01 08:09:15 [127.0.0.1][74][1603cf75930174ad79e576a0b4d1f8c2][info][application] $_GET = [
+    'r' => 'payment/2Fcreate'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLtiwbid-nbdlH2CWKlQQAAAAA'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36088'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment/2Fcreate'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment/2Fcreate'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569910155.748
+    'REQUEST_TIME' => 1569910155
+]
+2019-10-01 08:09:20 [127.0.0.1][74][1603cf75930174ad79e576a0b4d1f8c2][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: payment/Fcreate in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('Fcreate', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment/Fcreate', Array)
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#2 {main}
+2019-10-01 08:09:20 [127.0.0.1][74][1603cf75930174ad79e576a0b4d1f8c2][info][application] $_GET = [
+    'r' => 'payment/Fcreate'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLtkAbid-nbdlH2CWKlQgAAAAA'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36088'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment/Fcreate'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment/Fcreate'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569910160.485
+    'REQUEST_TIME' => 1569910160
+]
+2019-10-01 08:16:41 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: backend\models\AccountRecievableSearch::account_receivable in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Component.php:154
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('account_receiva...')
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/validators/Validator.php(254): yii\db\BaseActiveRecord->__get('account_receiva...')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Model.php(367): yii\validators\Validator->validateAttributes(Object(backend\models\AccountRecievableSearch), Array)
+#3 /opt/lampp/htdocs/rems/backend/models/AccountRecievableSearch.php(55): yii\base\Model->validate()
+#4 /opt/lampp/htdocs/rems/backend/controllers/AccountRecievableController.php(42): backend\models\AccountRecievableSearch->search(Array)
+#5 [internal function]: backend\controllers\AccountRecievableController->actionIndex()
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('account-recieva...', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#12 {main}
+2019-10-01 08:16:41 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'account-recievable'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLvSe-5@Yyb8v13hy4VfAAAAAM'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment%2Fcreate'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36336'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=account-recievable'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=account-recievable'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569910601.563
+    'REQUEST_TIME' => 1569910601
+]
+2019-10-01 08:17:24 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined offset: 0 in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseUrl.php:99
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseUrl.php(99): yii\base\ErrorHandler->handleError(8, 'Undefined offse...', '/opt/lampp/htdo...', 99, Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseUrl.php(214): yii\helpers\BaseUrl::toRoute(Array, false)
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseHtml.php(412): yii\helpers\BaseUrl::to(Array)
+#3 /opt/lampp/htdocs/rems/backend/views/payment/index.php(30): yii\helpers\BaseHtml::a('<i class="glyph...', Array)
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#8 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#9 [internal function]: backend\controllers\PaymentController->actionIndex()
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#12 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#13 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2019-10-01 08:17:24 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLvdHNgdyPr7rjsyAFUzAAAAAE'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36364'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569910644.717
+    'REQUEST_TIME' => 1569910644
+]
+2019-10-01 08:21:01 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined offset: 0 in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseUrl.php:99
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseUrl.php(99): yii\base\ErrorHandler->handleError(8, 'Undefined offse...', '/opt/lampp/htdo...', 99, Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseUrl.php(214): yii\helpers\BaseUrl::toRoute(Array, false)
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/helpers/BaseHtml.php(412): yii\helpers\BaseUrl::to(Array)
+#3 /opt/lampp/htdocs/rems/backend/views/payment/index.php(30): yii\helpers\BaseHtml::a('<i class="glyph...', Array)
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#8 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#9 [internal function]: backend\controllers\PaymentController->actionIndex()
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#12 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#13 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#14 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2019-10-01 08:21:01 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLwTQbid-nbdlH2CWKlRQAAAAA'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36472'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569910861.095
+    'REQUEST_TIME' => 1569910861
+]
+2019-10-01 08:27:04 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected 'Html' (T_STRING), expecting ']' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:30
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:27:04 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLxuFcn9Av9oaFQM4HIfwAAAAY'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36622'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569911224.022
+    'REQUEST_TIME' => 1569911224
+]
+2019-10-01 08:29:57 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "index.php?r=payment/create". in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('index.php?r=pay...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#2 {main}
+2019-10-01 08:29:57 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'index.php?r=payment/create'
+    '_pjax' => '#crud-datatable-pjax'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLyZQGvzN2zzCiM9TeiIgAAAAQ'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_X_CSRF_TOKEN' => 'fw5fACG-poJAijtr___W-GrBDCmD5QEKRDbWMwQ7gMNLQg1FUY3D9y3zXx7SnILPJaN5fumKcTgoZZ9rQHHigA=='
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded; charset=UTF-8'
+    'HTTP_ACCEPT' => 'text/html, */*; q=0.01'
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_X_PJAX' => 'true'
+    'HTTP_X_PJAX_CONTAINER' => '#crud-datatable-pjax'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36638'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=index.php%3Fr%3Dpayment%2Fcreate&_pjax=%23crud-datatable-pjax'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=index.php%3Fr%3Dpayment%2Fcreate&_pjax=%23crud-datatable-pjax'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569911397.685
+    'REQUEST_TIME' => 1569911397
+]
+2019-10-01 08:29:57 [127.0.0.1][74][1603cf75930174ad79e576a0b4d1f8c2][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "index.php?r=payment/create". in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('index.php?r=pay...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#2 {main}
+2019-10-01 08:29:57 [127.0.0.1][74][1603cf75930174ad79e576a0b4d1f8c2][info][application] $_GET = [
+    'r' => 'index.php?r=payment/create'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 74
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLyZQGvzN2zzCiM9TeiIwAAAAQ'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36638'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=index.php%3Fr%3Dpayment%2Fcreate'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=index.php%3Fr%3Dpayment%2Fcreate'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569911397.761
+    'REQUEST_TIME' => 1569911397
+]
+2019-10-01 08:34:38 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:29
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:34:38 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLzfgbid-nbdlH2CWKlSAAAAAA'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment%2Fcreate'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36654'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569911678.947
+    'REQUEST_TIME' => 1569911678
+]
+2019-10-01 08:35:00 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:29
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:35:00 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLzlHNgdyPr7rjsyAFU0QAAAAE'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment%2Fcreate'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36658'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569911700.509
+    'REQUEST_TIME' => 1569911700
+]
+2019-10-01 08:35:01 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:29
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:35:01 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZLzle-5@Yyb8v13hy4VhAAAAAM'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment%2Fcreate'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36660'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569911701.75
+    'REQUEST_TIME' => 1569911701
+]
+2019-10-01 08:41:03 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected 'echo' (T_ECHO) in /opt/lampp/htdocs/rems/backend/views/payment/index.php:13
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:41:03 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZL0-wGvzN2zzCiM9TeiJgAAAAQ'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36704'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569912063.351
+    'REQUEST_TIME' => 1569912063
+]
+2019-10-01 08:41:44 [127.0.0.1][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /opt/lampp/htdocs/rems/backend/views/payment/index.php:15
+Stack trace:
+#0 /opt/lampp/htdocs/rems/backend/views/payment/index.php(15): yii\base\ErrorHandler->handleError(2, 'Use of undefine...', '/opt/lampp/htdo...', 15, Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#3 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#5 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#6 [internal function]: backend\controllers\PaymentController->actionIndex()
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#13 {main}
+2019-10-01 08:41:44 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZL1KJYn23AbF3YTXgL02wAAAAU'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36718'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569912104.874
+    'REQUEST_TIME' => 1569912104
+]
+2019-10-01 08:42:00 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected '?>' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:13
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:42:00 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZL1OO-5@Yyb8v13hy4VhwAAAAM'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36724'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569912120.537
+    'REQUEST_TIME' => 1569912120
+]
+2019-10-01 08:42:04 [127.0.0.1][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /opt/lampp/htdocs/rems/backend/views/payment/index.php:15
+Stack trace:
+#0 /opt/lampp/htdocs/rems/backend/views/payment/index.php(15): yii\base\ErrorHandler->handleError(2, 'Use of undefine...', '/opt/lampp/htdo...', 15, Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(348): require('/opt/lampp/htdo...')
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#3 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#5 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#6 [internal function]: backend\controllers\PaymentController->actionIndex()
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#10 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#11 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#13 {main}
+2019-10-01 08:42:04 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZL1PAGvzN2zzCiM9TeiKAAAAAQ'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36726'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569912124.643
+    'REQUEST_TIME' => 1569912124
+]
+2019-10-01 08:42:33 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected '?>' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:13
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:42:33 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZL1WQbid-nbdlH2CWKlTAAAAAA'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36734'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569912153.135
+    'REQUEST_TIME' => 1569912153
+]
+2019-10-01 08:42:44 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected '?>' in /opt/lampp/htdocs/rems/backend/views/payment/index.php:13
+Stack trace:
+#0 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/opt/lampp/htdo...', Array)
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/opt/lampp/htdo...', Array, Object(backend\controllers\PaymentController))
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->render('index', Array, Object(backend\controllers\PaymentController))
+#3 /opt/lampp/htdocs/rems/backend/controllers/PaymentController.php(49): yii\base\Controller->render('index', Array)
+#4 [internal function]: backend\controllers\PaymentController->actionIndex()
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#6 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#8 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('payment', Array)
+#9 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2019-10-01 08:42:44 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'payment'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZL1ZHNgdyPr7rjsyAFU1AAAAAE'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=payment/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36740'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=payment'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=payment'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569912164.556
+    'REQUEST_TIME' => 1569912164
+]
+2019-10-01 09:31:56 [127.0.0.1][-][-][error][Error] Error: Class 'backend\models\AccountHeadSearch' not found in /opt/lampp/htdocs/rems/backend/controllers/AccountHeadController.php:41
+Stack trace:
+#0 [internal function]: backend\controllers\AccountHeadController->actionIndex()
+#1 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('', Array)
+#4 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('account-head', Array)
+#5 /opt/lampp/htdocs/rems/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /opt/lampp/htdocs/rems/backend/web/index.php(17): yii\base\Application->run()
+#7 {main}
+2019-10-01 09:31:56 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'account-head'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+    'advanced-backend' => '1603cf75930174ad79e576a0b4d1f8c2'
+    '_csrf-backend' => '2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"4LREp3eumydu-cT7ObuWjop2lSIXDJbC\";}'
+]
+
+$_SERVER = [
+    'UNIQUE_ID' => 'XZMA7HNgdyPr7rjsyAFU2gAAAAE'
+    'HTTP_HOST' => '127.0.0.1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_REFERER' => 'http://127.0.0.1/rems/backend/web/index.php?r=account-nature'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D; advanced-backend=1603cf75930174ad79e576a0b4d1f8c2; _csrf-backend=2d303f0095ebca8982c6c781f3fde79020a5f9f189fb09b28fb91617b87b3f02a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%224LREp3eumydu-cT7ObuWjop2lSIXDJbC%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'LD_LIBRARY_PATH' => '/opt/lampp/lib:/opt/lampp/lib'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.2.22 mod_perl/2.0.8-dev Perl/v5.16.3'
+    'SERVER_NAME' => '127.0.0.1'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/opt/lampp/htdocs'
+    'SERVER_ADMIN' => 'you@example.com'
+    'SCRIPT_FILENAME' => '/opt/lampp/htdocs/rems/backend/web/index.php'
+    'REMOTE_PORT' => '36928'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=account-head'
+    'REQUEST_URI' => '/rems/backend/web/index.php?r=account-head'
+    'SCRIPT_NAME' => '/rems/backend/web/index.php'
+    'PHP_SELF' => '/rems/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1569915116.253
+    'REQUEST_TIME' => 1569915116
+]

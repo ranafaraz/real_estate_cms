@@ -20,7 +20,7 @@ class PayerReceiverInfoSearch extends PayerReceiverInfo
         return [
             [['id'], 'integer'],
             [['head_id'],'string'],
-            [['name', 'choice','head_id', 'created_by', 'created_at'], 'safe'],
+            [['payer_receiver_id', 'choice','head_id', 'created_by', 'created_at'], 'safe'],
         ];
     }
 
@@ -61,7 +61,7 @@ class PayerReceiverInfoSearch extends PayerReceiverInfo
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'payer_receiver_id', $this->payer_receiver_id])
             ->andFilterWhere(['like', 'choice', $this->choice])
             ->andFilterWhere(['like', 'created_by', $this->created_by])
             ->andFilterWhere(['like', 'account_name', $this->head_id]);

@@ -34,24 +34,24 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['head_id', 'name', 'choice', 'created_by', 'created_at'], 'required'],
+            [['head_id', 'choice', 'created_by', 'created_at'], 'required'],
             [['head_id'], 'string'],
             [['choice'], 'string'],
-            [['created_at','head_id'], 'safe'],
-            [['name', 'created_by'], 'string', 'max' => 150],
+            [['created_at','head_id','payer_receiver_id'], 'safe'],
+            [['created_by'], 'string', 'max' => 150],
             [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['head_id' => 'id']],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritdoc},
      */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'head_id' => 'Account Name',
-            'name' => 'Name',
+            'payer_receiver_id' => 'payer_receiver_id                                                        ',
             'choice' => 'Choice',
             'created_by' => 'Created By',
             'created_at' => 'Created At',

@@ -157,13 +157,10 @@ class PaymentController extends Controller
             }else{
                 return [
                     'title'=> "Create new Payment",
-                    'content'=>$this->renderAjax('create', [
+                    'content'=>$this->render('create', [
                         'model' => $model,
                         'accountpayable' => $accountpayable,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-
                 ];
             }
         }else{

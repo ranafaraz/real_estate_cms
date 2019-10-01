@@ -28,7 +28,7 @@ use dosamigos\datepicker\DatePicker;
         </div>
         <div class="col-md-12">
             <?= $form->field($model, 'receiver_payer_id',['options'=>['id'=>'receiver_id']])->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(PayerReceiverInfo::findall(['choice'=>'Receiver']),'id', 'name'),
+                'data' =>ArrayHelper::map(PayerReceiverInfo::findall(['choice'=>'Receiver']),'id', 'payer_receiver_id'),
                 'language' => 'en',
                 'options' => ['placeholder' => 'Select a state ...'],
 
@@ -140,53 +140,53 @@ use dosamigos\datepicker\DatePicker;
 
 </div>
 <?php
-    $script=<<<JS
-    var rec_id;
-    var deb_id;
-    $('#payment-receiver_payer_id').change(function(){
-        $('#payment-debit_account').change(function(){
-            rec_id=$('#payment-receiver_payer_id').val();
-            deb_id= $('#payment-debit_account').val();
-            $.get('index.php?r=account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
-                    var heads = $.parseJSON(heads);
-                    if(heads.value=="empty"){
-                        $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
-                        $('#payment-updateid').attr('value',"0");
-                        
-                    }else{
-                    $("#payment-debit_amount").attr('value',heads.amount);
-                    $('#payment-updateid').attr('value',heads.id);
-                    }
-            });
-        });
-    });
+$script=<<<JS
+var rec_id;
+var deb_id;
+$('#payment-receiver_payer_id').change(function(){
     $('#payment-debit_account').change(function(){
-        $('#payment-receiver_payer_id').change(function(){
         rec_id=$('#payment-receiver_payer_id').val();
         deb_id= $('#payment-debit_account').val();
         $.get('index.php?r=account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
-        var heads = $.parseJSON(heads);
-        if(heads.value=="empty"){
-            $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
-            $('#payment-updateid').attr('value',"0"); 
-        }else{ 
-            $("#payment-debit_amount").attr('value',heads.amount);
-            $('#payment-updateid').attr('value',heads.id);
-        }
-       });
-     });
+                var heads = $.parseJSON(heads);
+                if(heads.value=="empty"){
+                    $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
+                    $('#payment-updateid').attr('value',"0");
+                    
+                }else{
+                $("#payment-debit_amount").attr('value',heads.amount);
+                $('#payment-updateid').attr('value',heads.id);
+                }
+        });
     });
-    $('#checkamount'). click(function(){
-        if($(this). prop("checked") == true){
-           var debit_value=$("#payment-debit_amount").val();
-           $("#payment-credit_amount").attr("value",debit_value);
-            $('#payable_info').css("display","block");
-            $('#payment-checkstate').attr('value',"1");
-        }else if($(this). prop("checked") == false){
-            $('#payable_info').css("display","block");
-            $('#payment-checkstate').attr('value',"0");
-        }
-    });
-    JS;
-    $this->registerJs($script);
+});
+$('#payment-debit_account').change(function(){
+    $('#payment-receiver_payer_id').change(function(){
+    rec_id=$('#payment-receiver_payer_id').val();
+    deb_id= $('#payment-debit_account').val();
+    $.get('index.php?r=account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
+    var heads = $.parseJSON(heads);
+    if(heads.value=="empty"){
+        $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
+        $('#payment-updateid').attr('value',"0"); 
+    }else{ 
+        $("#payment-debit_amount").attr('value',heads.amount);
+        $('#payment-updateid').attr('value',heads.id);
+    }
+   });
+ });
+});
+$('#checkamount'). click(function(){
+    if($(this). prop("checked") == true){
+       var debit_value=$("#payment-debit_amount").val();
+       $("#payment-credit_amount").attr("value",debit_value);
+        $('#payable_info').css("display","block");
+        $('#payment-checkstate').attr('value',"1");
+    }else if($(this). prop("checked") == false){
+        $('#payable_info').css("display","block");
+        $('#payment-checkstate').attr('value',"0");
+    }
+});
+JS;
+$this->registerJs($script);
 ?>
