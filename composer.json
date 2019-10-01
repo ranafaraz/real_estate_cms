@@ -19,20 +19,13 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "johnitvn/yii2-ajaxcrud": "*",
-<<<<<<< HEAD
+
         "kartik-v/yii2-grid": "@dev",
         "dmstr/yii2-adminlte-asset": "*",
         "kartik-v/yii2-widget-select2": "@dev",
         "2amigos/yii2-date-picker-widget": "*",
         "marekpetras/yii2-ajax-box-widget": "^1.0",
         "insolita/yii2-adminlte-widgets": "~3.1"
-        
-=======
-        "kartik-v/yii2-grid": "dev-master",
-        "dmstr/yii2-adminlte-asset": "*",
-        "kartik-v/yii2-widget-select2": "@dev",
-        "2amigos/yii2-date-picker-widget": "*"
->>>>>>> 186654fcc28ef7ccb1073c333dfecd1767fd989a
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

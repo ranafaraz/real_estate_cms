@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\Transactions;
 use backend\models\Customer;
+use backend\models\AccountHead;
 
 /**
  * BuyPlotController implements the CRUD actions for BuyPlot model.
@@ -68,6 +69,7 @@ class BuyPlotController extends Controller
     {
         $model = new BuyPlot();
         $customer_model = new Customer();
+        $transaction_model = new Transactions();
 
 
         $model->created_at = date('Y-m-d');
@@ -97,6 +99,46 @@ class BuyPlotController extends Controller
                         'created_date' => date('Y-m-d'),
                     ]
                 )->execute();
+            }
+                $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
+                $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                print_r($trans_model);
+                if($trans_model == "")
+                {
+                    $transaction_model->transaction_id = '1'; 
+                }
+                else
+                {
+                      $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                }
+
+                if(empty($plot_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Plot'";
+                    die();
+                }
+                if(empty($cash_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Cash'";
+                    die();
+                }
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'narration' => $model->narration,
+                        'debit_account' => $plot_model->id,
+                        'debit_amount' => $model->plot_price,
+                        'credit_account' => $cash_model->id,
+                        'credit_amount' => $model->plot_price,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+
+
 
                 $get_customer_id = Customer::find()->orderBy(['customer_id' => SORT_DESC])->One();
                 if(isset($get_customer_id))
@@ -109,7 +151,6 @@ class BuyPlotController extends Controller
                     echo "somethinf Went Wrong ";
                     return false;
                 }
-            }
             
             return $this->redirect(['view', 'id' => $model->buy_plot_id]);
         }

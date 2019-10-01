@@ -19,6 +19,7 @@ use backend\models\CustomerType;
 use backend\models\Transactions;
 use backend\models\AccountHead;
 use backend\models\ReceiverPayerInfo;
+use backend\models\AccountRecievable;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -79,6 +80,8 @@ class CustomerController extends Controller
         $plotinfo = new PlotOwnerInfo(); 
         $installmentinfo = new Installment();
         $installmentstatus = new InstallmentStatus();
+        $transaction_model = new Transactions();
+        $accounts = new AccountRecievable();
 
 
         $model->organization_id = \Yii::$app->user->identity->organization_id;
@@ -87,6 +90,7 @@ class CustomerController extends Controller
         $amount = $model->amount;
         $first_pay = $model->first_payment;
         $no_of_installment = $model->no_of_installment;
+        $connection = Yii::$app->db;
 
         if ($model->load(Yii::$app->request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
             if($model->checkifexist == '1')
@@ -119,6 +123,70 @@ class CustomerController extends Controller
                  
 
                 Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
+
+                $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
+                $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                if($trans_model == "")
+                {
+                    $transaction_model->transaction_id = '1'; 
+                }
+                else
+                {
+                      $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                }
+
+                if(empty($plot_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Plot'";
+                    die();
+                }
+                if(empty($cash_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Cash'";
+                    die();
+                }
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'narration' => $model->narration,
+                        'debit_account' => $cash_model->id,
+                        'debit_amount' => $installmentinfo->advance_amount,
+                        'credit_account' => $plot_model->id,
+                        'credit_amount' => $installmentinfo->total_amount,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+                if($installmentinfo->advance_amount < $installmentinfo->total_amount)
+                {   
+                    $accounts->is_installment = '1';
+                    $Account_model= AccountRecievable::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    if($Account_model == "")
+                    {
+                        $accounts->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $accounts->transaction_id = $Account_model->transaction_id + 1;  
+                    }
+                    $connection->createCommand()->insert('account_recievable',
+                        [
+                            'transaction_id' => $accounts->transaction_id,
+                            'payer_id' => $customerid,
+                            'amount' => $installmentinfo->minus_amonut,
+                            'property_id' => $plotinfo->property_id,
+                            'plot_no' => $plotinfo->plot_no,
+                            'is_installment' => $accounts->is_installment,
+                            'due_date' => '0000-00-00',
+                            'updated_by' => '0',
+                            'updated_at' => '0',
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ]
+                    )->execute();
+                }
             return $this->redirect(['index']);
         }
 

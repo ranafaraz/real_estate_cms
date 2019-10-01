@@ -16,6 +16,9 @@ use backend\models\Customer;
 use backend\models\InstallmentStatus;
 use yii\helpers\Json;
 use backend\models\PlotOwnerInfo;
+use backend\models\AccountRecievable;
+use backend\models\Transactions;
+use backend\models\AccountHead;
 
 /**
  * InstallmentPaymentController implements the CRUD actions for InstallmentPayment model.
@@ -100,6 +103,10 @@ class InstallmentPaymentController extends Controller
     {
         $request = Yii::$app->request;
         $model = new InstallmentPayment();  
+        $accounts = new AccountRecievable();
+        $transaction_model = new Transactions();
+        $head_model  = new AccountHead();
+        $connection = Yii::$app->db;
        
 
         if($request->isAjax){
@@ -122,6 +129,57 @@ class InstallmentPaymentController extends Controller
             }else if($model->load($request->post())){
 
                     Yii::$app->MyComponent->installmentstatusupdate($model->installment_no,$model->property_id,$model->customer_id,$model->plot_no,$model->paid,$model->remaning_amount,$model->previous_pay_amount,$model->installment_amount);
+                    $condition = ['payer_id' => $model->customer_id , 'property_id' => $model->property_id,'plot_no' => $model->plot_no];
+                    $installmentinfo  = AccountRecievable::find()->where($condition)->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+                    if($installmentinfo == "")
+                    {
+
+                    }
+                    else
+                    {
+                        $accounts->amount = $installmentinfo->amount - $model->paid;
+                    }
+                    $connection->createCommand()->update('account_recievable',
+                        [
+                            'amount' => $accounts->amount,
+                            'updated_by' => \Yii::$app->user->identity->id,
+                            'updated_at' => date('Y-m-d'),
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ],$condition
+                    )->execute();
+
+                    $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    $rec_model = AccountHead::find()->where(['account_name' => 'Account Receivable'])->One();
+                    $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                    if($trans_model == "")
+                    {
+                        $transaction_model->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                    }
+                    if($rec_model == "")
+                    {
+                        die();
+                    }
+                    else
+                    {
+                        $head_model->id = $rec_model->id;
+                    }
+                    $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'debit_account' => $cash_model->id,
+                        'debit_amount' => $model->paid,
+                        'credit_account' => $head_model->id,
+                        'credit_amount' => $model->paid,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
                  
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
