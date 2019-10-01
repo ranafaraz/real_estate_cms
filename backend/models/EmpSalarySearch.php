@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Receipt;
+use backend\models\EmpSalary;
 
 /**
- * ReceiptSearch represents the model behind the search form about `backend\models\Receipt`.
+ * EmpSalarySearch represents the model behind the search form about `backend\models\EmpSalary`.
  */
-class ReceiptSearch extends Receipt
+class EmpSalarySearch extends EmpSalary
 {
     /**
      * @inheritdoc
@@ -18,10 +18,9 @@ class ReceiptSearch extends Receipt
     public function rules()
     {
         return [
-            [['id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
-            
-            [['type', 'narration', 'date', 'ref_no', 'created_by', 'updated_by', 'updated_at'], 'safe'],
-            [['debit_amount', 'credit_amount'], 'number'],
+            [['emp_salary_id', 'created_by', 'updated_by', 'organization_id'], 'integer'],
+            [['date', 'emp_id' ,'salary_month', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['paid_amount', 'remaining'], 'number'],
         ];
     }
 
@@ -43,7 +42,7 @@ class ReceiptSearch extends Receipt
      */
     public function search($params)
     {
-        $query = Receipt::find()->where(['transaction_type'=>'receipt']);
+        $query = EmpSalary::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,23 +55,23 @@ class ReceiptSearch extends Receipt
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->joinWith('emp');
         $query->andFilterWhere([
-            'id' => $this->id,=
-            'transaction_id' => $this->transaction_id,
-            'debit_account' => $this->debit_account,
-            'debit_amount' => $this->debit_amount,
-            'credit_account' => $this->credit_account,
-            'credit_amount' => $this->credit_amount,
+            'emp_salary_id' => $this->emp_salary_id,
             'date' => $this->date,
+            'paid_amount' => $this->paid_amount,
+            'remaining' => $this->remaining,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
+            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'organization_id' => $this->organization_id,
         ]);
 
-        $query->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'narration', $this->narration])
-            ->andFilterWhere(['like', 'ref_no', $this->ref_no])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+        $query->andFilterWhere(['like', 'salary_month', $this->salary_month])
+            ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['like', 'emp_name', $this->emp_id])
+            ->orFilterWhere(['like','emp_cnic',$this->emp_id]);
 
         return $dataProvider;
     }

@@ -18,7 +18,7 @@ class PaymentSearch extends Payment
     public function rules()
     {
         return [
-            [['id', 'receiver_payer_id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
+            [['id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
             [['type', 'narration', 'date', 'ref_no', 'created_by', 'updated_by', 'updated_at'], 'safe'],
             [['debit_amount', 'credit_amount'], 'number'],
         ];
@@ -42,7 +42,7 @@ class PaymentSearch extends Payment
      */
     public function search($params)
     {
-        $query = Payment::find()->where(['transaction_type'=>'payment']);;
+        $query = Payment::find()->where(['transaction_type'=>'payment']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,7 +58,6 @@ class PaymentSearch extends Payment
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'receiver_payer_id' => $this->receiver_payer_id,
             'transaction_id' => $this->transaction_id,
             'debit_account' => $this->debit_account,
             'debit_amount' => $this->debit_amount,

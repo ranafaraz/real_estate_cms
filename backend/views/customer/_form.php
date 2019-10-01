@@ -128,6 +128,10 @@ use backend\models\CustomerType;
         </div>  
         <div class="col-md-4">
             <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true]) ?>
+
+
+
+            
         </div>  
             <?= $form->field($installmentinfo, 'minus_amonut')->hiddenInput(['maxlength' => true])->label(false) ?>
         <div class="col-md-4">

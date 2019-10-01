@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "transactions".
  *
  * @property int $id
- * @property int $receiver_payer_id
  * @property int $transaction_id
  * @property string $type
  * @property string $narration
@@ -30,6 +29,8 @@ class receipt extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $receiver_payer_id;
     public static function tableName()
     {
         return 'transactions';
@@ -41,12 +42,12 @@ class receipt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['receiver_payer_id', 'transaction_id', 'type', 'narration', 'debit_account', 'debit_amount', 'credit_account', 'credit_amount', 'date', 'created_by', 'updated_by', 'updated_at'], 'required'],
-            [['receiver_payer_id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
+            [['transaction_id', 'type', 'narration', 'debit_account', 'debit_amount', 'credit_account', 'credit_amount', 'date', 'created_by', 'updated_by', 'updated_at'], 'required'],
+            [['transaction_id', 'debit_account', 'credit_account'], 'integer'],
             [['type', 'narration'], 'string'],
             [['transaction_type'],'string'],
             [['debit_amount', 'credit_amount'], 'number'],
-            [['date', 'updated_at'], 'safe'],
+            [['date', 'updated_at','receiver_payer_id'], 'safe'],
             [['ref_no'], 'string', 'max' => 50],
             [['created_by', 'updated_by'], 'string', 'max' => 150],
             [['credit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['credit_account' => 'id']],
@@ -61,7 +62,6 @@ class receipt extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'receiver_payer_id' => 'Receiver Payer ID',
             'transaction_id' => 'Transaction ID',
             'type' => 'Type',
             'narration' => 'Narration',

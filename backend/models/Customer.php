@@ -34,6 +34,7 @@ class Customer extends \yii\db\ActiveRecord
     public $checkifexist =0;
     public $customerid =0;
     public $narration;
+    public $status;
     /**
      * {@inheritdoc}
      */
@@ -50,7 +51,7 @@ class Customer extends \yii\db\ActiveRecord
         return [
             [['customer_type_id', 'name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'user_id', 'organization_id', 'created_date'], 'required'],
             [['customer_type_id', 'user_id', 'organization_id'], 'integer'],
-            [['created_date','checkifexist','customerid','no_of_installment','narration'], 'safe'],
+            [['created_date','checkifexist','customerid','no_of_installment','narration','status'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['father_name', 'cnic_no', 'contact_no', 'email_address'], 'string', 'max' => 150],
             [['address'], 'string', 'max' => 250],

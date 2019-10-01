@@ -119,63 +119,6 @@ class CustomerController extends Controller
                  
 
                 Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
-
-                $connection = \Yii::$app->db;
-                $mod = AccountHead::find()->where(['account_name' => 'Cash in Hand'])->One();
-                if(empty($mod))
-                {
-                    echo "Sorry No Account Head With Cash in Hand Found Or Affect</b>Make Sure Cash in Hand Exists in Account Heads...";
-                    die();
-                }
-                $connection->createCommand()->insert('receiver_payer_info',
-                    [
-                        'head_id' => $mod->id,
-                        'payer_receiver_id' => $model->customer_id,
-                        'choice' => 'Payer',
-                        'created_by' => \Yii::$app->user->identity->id,
-                        
-                    ])->execute();
-
-                $model1 = Transactions::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
-                if($model1 == "")
-                {
-                    $model1->transaction_id = '1';
-                }
-                else
-                {
-                    (int)$trans = (int)$model1->transaction_id;
-                    $model1->transaction_id = $trans + 1;
-                }
-
-                $acc_receieveable = AccountHead::find()->where(['account_name' => 'Account Receivable'])->One();
-                
-               
-
-                if(empty($acc_receieveable))
-                {
-                    echo "Sorry No Account Head With Account Receivable Found Or Affect</b>Make Sure Account Receivable Exists in Account Heads...";
-                    die();
-                }
-
-                $receiver_payer_model = ReceiverPayerInfo::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->orderBy(['id'=>SORT_DESC])->One();
-                if(empty($receiver_payer_model))
-                {
-                    echo "Sorry No Receiver Found";
-                }
-                
-                $connection->createCommand()->insert('transactions',[
-                    'receiver_payer_id' => $receiver_payer_model->id,
-                    'transaction_id' => $model1->transaction_id,
-                    'transaction_type' => 'Reciept',
-                    'narration' => $model->narration,
-                    'debit_account' => $mod->id,
-                    'debit_amount' => $installmentinfo->advance_amount,
-                    'credit_account' => $acc_receieveable->id,
-                    'credit_amount' => $installmentinfo->minus_amonut,
-                    'date' => date('Y-m-d');
-                    'created_by' => \Yii::$app->user->identity->id,
-                ])->execute();
-
             return $this->redirect(['index']);
         }
 

@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\PayerReceiverInfo;
+use backend\models\EmployeeTypes;
 
 /**
- * PayerReceiverInfoSearch represents the model behind the search form about `backend\models\PayerReceiverInfo`.
+ * EmployeeTypesSearch represents the model behind the search form about `backend\models\EmployeeTypes`.
  */
-class PayerReceiverInfoSearch extends PayerReceiverInfo
+class EmployeeTypesSearch extends EmployeeTypes
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class PayerReceiverInfoSearch extends PayerReceiverInfo
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['head_id'],'string'],
-            [['payer_receiver_id', 'choice','head_id', 'created_by', 'created_at'], 'safe'],
+            [['emp_type_id', 'created_by', 'updated_by', 'organization_id'], 'integer'],
+            [['emp_type_name', 'description', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class PayerReceiverInfoSearch extends PayerReceiverInfo
      */
     public function search($params)
     {
-        $query = PayerReceiverInfo::find();
+        $query = EmployeeTypes::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,16 +54,18 @@ class PayerReceiverInfoSearch extends PayerReceiverInfo
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->joinWith('head');
+
         $query->andFilterWhere([
-            'id' => $this->id,
+            'emp_type_id' => $this->emp_type_id,
             'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
+            'organization_id' => $this->organization_id,
         ]);
 
-        $query->andFilterWhere(['like', 'payer_receiver_id', $this->payer_receiver_id])
-            ->andFilterWhere(['like', 'choice', $this->choice])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'account_name', $this->head_id]);
+        $query->andFilterWhere(['like', 'emp_type_name', $this->emp_type_name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

@@ -34,12 +34,13 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['head_id', 'name', 'choice', 'created_by', 'created_at'], 'required'],
+            [['head_id', 'id', 'choice', 'created_by', 'created_at'], 'required'],
             [['head_id'], 'string'],
             [['choice'], 'string'],
             [['created_at','head_id'], 'safe'],
-            [['name', 'created_by'], 'string', 'max' => 150],
+            [[ 'created_by'], 'string', 'max' => 150],
             [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['head_id' => 'id']],
+            [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'payer_receiver_id']],
         ];
     }
 
@@ -51,7 +52,7 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'head_id' => 'Account Name',
-            'name' => 'Name',
+            'payer_receiver_id' => 'Payer/Receiver',
             'choice' => 'Choice',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
@@ -81,4 +82,10 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(AccountHead::className(), ['id' => 'head_id']);
     }
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::className(), ['customer_id' => 'payer_receiver_id']);
+    }
+
+    
 }
