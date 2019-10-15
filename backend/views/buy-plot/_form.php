@@ -54,21 +54,39 @@ use backend\models\CustomerType;
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($model, 'property_name')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($model, 'plot_no')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($model, 'plot_area')->textInput(['maxlength' => true]) ?>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($model, 'plot_price')->textInput() ?>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="row"> 
+        <div class="col-md-3">
+             <?= $form->field($model, 'plot_paid_price')->textInput() ?>
+        </div>
+        <div class="col-md-3">
+             <?= $form->field($model, 'remaning_price')->textInput() ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model,'due_date')->widget(
+                    DatePicker::className(), [
+                         'inline' => false, 
+                         // modify template for custom rendering
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-m-dd',
+                            'todayHighlight' => true,
+                        ],
+                ]);?>
+        </div>
+        <div class="col-md-3">
             <?= $form->field($model,'buy_date')->widget(
                     DatePicker::className(), [
                          'inline' => false, 
@@ -80,18 +98,18 @@ use backend\models\CustomerType;
                         ],
                 ]);?>
         </div>
-        <div class="col-md-4">
-           <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
-        </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
+           <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
             <?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($model, 'province')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($model, 'plot_status')->dropDownList([ 'Owned' => 'Owned', 'Self Owned' => 'Self Owned', 'Customer Owned' => 'Customer Owned', ], ['prompt' => '']) ?>
         </div>
     </div>
@@ -119,27 +137,48 @@ $script = <<< JS
     $('#customer-cnic_no').on('change',function()
     {
         var customer_cnic = $(this).val();
-          $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Seller'},function(data)
-                {
-                    data = JSON.parse(data);
-                    if(data == "empty")
-                    {
-                        $('#-customer').attr('value','0');
-                    }
-                    else
-                    {
-                        $('#customer-checkifexist').attr('value','1');
-                        $('#customer-customerid').attr('value',data.customer_id);
-                        $('#customer-name').attr('value',data.name);
-                        $('#customer-father_name').attr('value',data.father_name);
-                        $('#customer-contact_no').attr('value',data.contact_no);
-                        $('#customer-email_address').attr('value',data.email_address);
-                        $('#customer-address').attr('value',data.address);
-                        $('#customer-customer_type_id').val(data.customer_type_id);
-                    }
-                    });
+        $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Seller'},function(data)
+        {
+            data = JSON.parse(data);
+            if(data == "empty")
+            {
+                $('#-customer').attr('value','0');
+            }
+            else
+            {
+                $('#customer-checkifexist').attr('value','1');
+                $('#customer-customerid').attr('value',data.customer_id);
+                $('#customer-name').attr('value',data.name);
+                $('#customer-father_name').attr('value',data.father_name);
+                $('#customer-contact_no').attr('value',data.contact_no);
+                $('#customer-email_address').attr('value',data.email_address);
+                $('#customer-address').attr('value',data.address);
+                $('#customer-customer_type_id').val(data.customer_type_id);
+            }
+        });
         
+    })
+
+    $('#buyplot-plot_price').on('input',function()
+    {
+        $('#buyplot-plot_paid_price').on('input',function()
+        {
+            var plot_total_price = $('#buyplot-plot_price').val();
+            var paid_price = $('#buyplot-plot_paid_price').val();
+            var remaining_price = plot_total_price - paid_price;
+            $('#buyplot-remaning_price').val(remaining_price);
         })
+    })
+    $('#buyplot-plot_paid_price').on('input',function()
+    {
+        $('#buyplot-plot_price').on('input',function()
+        {
+            var plot_total_price = $('#buyplot-plot_price').val();
+            var paid_price = $('#buyplot-plot_paid_price').val();
+            var remaining_price = plot_total_price - paid_price;
+            $('#buyplot-remaning_price').val(remaining_price);
+        })
+    })
 JS;
 $this->registerJs($script);
 ?>

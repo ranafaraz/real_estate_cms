@@ -20,9 +20,9 @@ class AccountRecievableSearch extends AccountRecievable
         return [
             [['id', 'transaction_id'], 'integer'],
             [['amount'], 'number'],
-            [['payer_id','account_receivable','due_date'],'string'],
+            [['payer_id','due_date'],'string'],
             [['due_date'],'safe'],
-            [['updated_by', 'updated_at'], 'safe'],
+            [['updated_by','account_receivable', 'updated_at'], 'safe'],
         ];
     }
 
@@ -57,7 +57,7 @@ class AccountRecievableSearch extends AccountRecievable
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->joinWith('accountReceivable');
+        // $query->joinWith('accountReceivable');
         $query->andFilterWhere([
             'id' => $this->id,
             'transaction_id' => $this->transaction_id,
@@ -66,9 +66,9 @@ class AccountRecievableSearch extends AccountRecievable
         ]);
 
         $query->andFilterWhere(['like', 'due_date', $this->due_date])
-              ->andFilterWhere(['like', 'name', $this->payer_id])
-              ->andFilterWhere(['like', 'account_head.account_name', $this->account_receivable])
-              ->andFilterWhere(['like', 'account_recievable.updated_by', $this->updated_by]);
+              ->andFilterWhere(['like', 'name', $this->payer_id]);
+              // ->andFilterWhere(['like', 'account_name', $this->account_receivable])
+              // ->andFilterWhere(['like', 'account_recievable.updated_by', $this->updated_by]);
 
         return $dataProvider;
     }

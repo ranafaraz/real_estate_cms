@@ -185,7 +185,7 @@ class PropertyController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) ){
+            }else if($model->load($request->post()) && $model->validate()){
                 $model->save();
                 Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
                 return [

@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use backend\models\Transactions;
+use backend\models\AccountHead;
+use backend\models\AccountPayable;
 
 /**
  * EmpSalaryController implements the CRUD actions for EmpSalary model.
@@ -127,6 +130,54 @@ class EmpSalaryController extends Controller
                         'updated_by' => 0,
                         'updated_at'=> 0,
                     ])->execute();
+                    $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    $payable_model= AccountPayable::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    if($trans_model == "")
+                    {
+                        $trans_model->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $trans_model->transaction_id = $trans_model->transaction_id + 1;  
+                    }
+                    if($payable_model == "")
+                    {
+                        $payable_model->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $payable_model->transaction_id = $payable_model->transaction_id + 1;  
+                    }
+                    $acc_model =AccountHead::find()->where(['account_name' => 'Salary'])->One();
+                    if(empty($acc_model))
+                    {
+                        die();
+                    }
+                    $acc_model1 =AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                    $payable = AccountHead::find()->where(['account_name' => 'Account Payable'])->One();
+                    if(empty($payable))
+                    {
+                        die();
+                    }
+                    if(empty($acc_model1))
+                    {
+                        die();
+                    }
+                    $model->remaining = $model->salary-$model->paid_amount;
+                    $connection->createCommand()->insert('transactions',
+                        [
+                            'transaction_id' => $trans_model->transaction_id,
+                            'type' => 'cash Payment',
+                            'narration' => $model->narration,
+                            'debit_account' => $acc_model->id,
+                            'debit_amount' => $model->paid_amount,
+                            'credit_account' => $acc_model1->id,
+                            'credit_amount' => $model->paid_amount,
+                            'date' => date('Y-m-d'),
+                            'created_by' => \Yii::$app->user->identity->id,
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ]
+                    )->execute();
                 }
                 
                 else if($model->remaining > $model->paid_amount)
@@ -146,6 +197,56 @@ class EmpSalaryController extends Controller
                         'updated_by' => 0,
                         'updated_at'=> 0,
                     ])->execute();
+                    $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    $pay = new AccountPayable();
+                    $payable_model= AccountPayable::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+
+                    if($trans_model == "")
+                    {
+                        $trans_model->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $trans_model->transaction_id = $trans_model->transaction_id + 1;  
+                    }
+                    if($payable_model == "")
+                    {
+                        $pay->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $pay->transaction_id = $payable_model->transaction_id + 1;  
+                    }
+                    $acc_model =AccountHead::find()->where(['account_name' => 'Salaries'])->One();
+                    
+                    $acc_model1 =AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                    $payable = AccountHead::find()->where(['account_name' => 'Account Payable'])->One();
+                    if(empty($acc_model))
+                    {
+                        die();
+                    }
+                    if(empty($payable))
+                    {
+                        die();
+                    }
+                    if(empty($acc_model1))
+                    {
+                        die();
+                    }
+                    $connection->createCommand()->insert('transactions',
+                        [
+                            'transaction_id' => $pay->transaction_id,
+                            'type' => 'cash Payment',
+                            'narration' => $model->narration,
+                            'debit_account' => $acc_model->id,
+                            'debit_amount' => $model->paid_amount,
+                            'credit_account' => $acc_model1->id,
+                            'credit_amount' => $model->paid_amount,
+                            'date' => date('Y-m-d'),
+                            'created_by' => \Yii::$app->user->identity->id,
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ]
+                    )->execute();
                 }
                 
                 else if($model->remaining == $model->paid_amount)
@@ -165,6 +266,39 @@ class EmpSalaryController extends Controller
                         'updated_by' => 0,
                         'updated_at'=> 0,
                     ])->execute();
+                    $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    if($trans_model == "")
+                    {
+                        $trans_model->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $trans_model->transaction_id = $trans_model->transaction_id + 1;  
+                    }
+                    $acc_model1 =AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                    if(empty($acc_model1))
+                    {
+                        die();
+                    }
+                    $acc_model =AccountHead::find()->where(['account_name' => 'Salaries'])->One();
+                    if(empty($acc_model))
+                    {
+                        die();
+                    }
+                    $connection->createCommand()->insert('transactions',
+                        [
+                            'transaction_id' => $trans_model->transaction_id,
+                            'type' => 'cash Payment',
+                            'narration' => $model->narration,
+                            'debit_account' => $acc_model->id,
+                            'debit_amount' => $model->paid_amount,
+                            'credit_account' => $acc_model1->id,
+                            'credit_amount' => $model->paid_amount,
+                            'date' => date('Y-m-d'),
+                            'created_by' => \Yii::$app->user->identity->id,
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ]
+                    )->execute();
                 }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',

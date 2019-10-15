@@ -70,6 +70,11 @@ use dosamigos\datepicker\DatePicker;
             <?= $form->field($model, 'status')->dropDownList([ 'Paid' => 'Paid', 'Unpaid' => 'Unpaid', 'Partially Paid' => 'Partially Paid','Advance paid' ], ['prompt' => 'Select Status']) ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?= $form->field($model, 'narration')->textArea() ?>
+        </div>
+    </div>
 
  <!--    <?= $form->field($model, 'salary_month')->textInput(['maxlength' => true]) ?>
 

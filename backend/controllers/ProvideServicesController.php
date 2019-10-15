@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\ProvideServices;
 use backend\models\ProvideServicesSearch;
+use backend\models\ServicesDetails;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -147,8 +148,7 @@ class ProvideServicesController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
-
+        $model = $this->findModel($id); 
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -159,6 +159,7 @@ class ProvideServicesController extends Controller
                     'title'=> "Update ProvideServices #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
+                        'services_detail_id' => $services_detail_id,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -169,6 +170,7 @@ class ProvideServicesController extends Controller
                     'title'=> "ProvideServices #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
+                        'services_detail_id' => $services_detail_id,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -178,7 +180,7 @@ class ProvideServicesController extends Controller
                     'title'=> "Update ProvideServices #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
-                    ]),
+                        'services_detail_id' => $services_detail_id,                    ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];        

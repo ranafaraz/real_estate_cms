@@ -71,7 +71,7 @@ CrudAsset::register($this);
             
         ?>
         <div class="col-md-3">
-            <table class="table table-stripped bg-primary" onclick="window.open('index.php?r=plot/load&plotid=<?php echo $plot->plot_no; ?>&property_id=<?php echo $selected_id;  ?>')"   style="border-radius: 15px;text-align: center;">
+            <table class="table table-stripped <?PHP if($plot->status == 'Sold'){echo 'bg-danger'; }else{echo 'bg-primary';} ?>" onclick="window.open('index.php?r=plot/load&plotid=<?php echo $plot->plot_no; ?>&property_id=<?php echo $selected_id;  ?>')"   style="border-radius: 15px;text-align: center;">
                 <tr>
                     <td >Plot No.</td><td><?php echo $plot->plot_no; ?></td>
                 </tr>
@@ -97,6 +97,7 @@ CrudAsset::register($this);
 </div>
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
+    "size" => "modal-lg",
     "footer"=>"",// always need it for jquery plugin
 ])?>    
 <?php Modal::end(); ?>

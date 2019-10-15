@@ -72,8 +72,6 @@ class receipt extends \yii\db\ActiveRecord
             'date' => 'Date',
             'ref_no' => 'Ref No',
             'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'updated_at' => 'Updated At',
         ];
     }
 

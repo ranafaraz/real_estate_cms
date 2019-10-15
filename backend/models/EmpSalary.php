@@ -28,6 +28,7 @@ class EmpSalary extends \yii\db\ActiveRecord
 
     public $emp_cnic;
     public $salary;
+    public $narration;
     /**
      * {@inheritdoc}
      */
@@ -44,7 +45,7 @@ class EmpSalary extends \yii\db\ActiveRecord
         return [
             [['emp_id', 'date', 'salary_month', 'paid_amount', 'remaining', 'status', 'created_by', 'created_at', 'organization_id'], 'required'],
             [['emp_id', 'created_by', 'updated_by', 'organization_id'], 'integer'],
-            [['date', 'created_at', 'updated_at'], 'safe'],
+            [['date', 'created_at', 'updated_at','narration'], 'safe'],
             [['paid_amount', 'remaining'], 'number'],
             [['status'], 'string'],
             [['salary_month'], 'string', 'max' => 11],

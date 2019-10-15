@@ -11,7 +11,7 @@ use yii\widgets\DetailView;
         'model' => $model,
         'attributes' => [
             'id',
-            'receiver_payer_id',
+            //'receiver_payer_id',
             'transaction_id',
             'type',
             'narration:ntext',
@@ -22,8 +22,8 @@ use yii\widgets\DetailView;
             'date',
             'ref_no',
             'created_by',
-            'updated_by',
-            'updated_at',
+            // 'updated_by',
+            // 'updated_at',
         ],
     ]) ?>
 

@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\AccountRecievable;
 use backend\models\AccountRecievableSearch;
+use backend\models\AccountHead;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

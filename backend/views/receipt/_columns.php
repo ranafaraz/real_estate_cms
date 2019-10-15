@@ -14,10 +14,10 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'id',
     // ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'receiver_payer_id',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'receiver_payer_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'transaction_id',

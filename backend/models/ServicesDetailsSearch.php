@@ -18,8 +18,8 @@ class ServicesDetailsSearch extends ServicesDetails
     public function rules()
     {
         return [
-            [['services_id', 'services_type_id', 'organization_id'], 'integer'],
-            [['provide_name', 'contact_no', 'address'], 'safe'],
+            [['services_id', 'organization_id'], 'integer'],
+            [['provide_name','services_type_id', 'contact_no', 'address'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ServicesDetailsSearch extends ServicesDetails
      */
     public function search($params)
     {
-        $query = ServicesDetails::find()->where(['organization_id'=>\Yii::$app->user->identity->organization_id]);
+        $query = ServicesDetails::find()->where(['services_details.organization_id'=>\Yii::$app->user->identity->organization_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,16 +54,17 @@ class ServicesDetailsSearch extends ServicesDetails
             // $query->where('0=1');
             return $dataProvider;
         }
+        $query->joinWith('servicesType');
 
         $query->andFilterWhere([
             'services_id' => $this->services_id,
-            'services_type_id' => $this->services_type_id,
             'organization_id' => $this->organization_id,
         ]);
 
         $query->andFilterWhere(['like', 'provide_name', $this->provide_name])
             ->andFilterWhere(['like', 'contact_no', $this->contact_no])
-            ->andFilterWhere(['like', 'address', $this->address]);
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'services_type', $this->services_type_id]);
 
         return $dataProvider;
     }

@@ -22,17 +22,17 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'payer_id',
-        'value' => 'payer.name',
+        'value' => 'payer.choice',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'amount',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'account_receivable',
-        'value' => 'accountReceivable.account_name',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'account_receivable',
+    //     'value' => 'accountReceivable.account_name',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'due_date',

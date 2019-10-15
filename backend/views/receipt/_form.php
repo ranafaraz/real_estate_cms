@@ -24,7 +24,7 @@ use backend\models\AccountNature;
         </div>
         <div class="col-md-12">
             <?= $form->field($model, 'receiver_payer_id')->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(PayerReceiverInfo::findall(['choice'=>'Payer']),'id', 'name'),
+                'data' =>ArrayHelper::map(PayerReceiverInfo::findall(['choice'=>'Payer']),'id', 'choice'),
                 'language' => 'en',
                 'options' => ['placeholder' => 'Select a state ...'],
 

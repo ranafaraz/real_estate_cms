@@ -18,7 +18,7 @@ use Yii;
  * @property string $date
  * @property string $ref_no
  * @property string $created_by
- * @property string $updated_by
+ * @property stri
  * @property string $updated_at
  *
  * @property AccountHead $creditAccount
@@ -43,13 +43,13 @@ class payment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'transaction_id', 'type', 'narration', 'debit_account', 'debit_amount', 'credit_account', 'date', 'created_by', 'updated_by', 'updated_at'], 'required'],
+            [[ 'transaction_id', 'type', 'narration', 'debit_account', 'debit_amount', 'credit_account', 'date', 'created_by'], 'required'],
             [['transaction_id', 'debit_account', 'credit_account'], 'integer'],
-            [['type', 'narration','transaction_type'], 'string'],
+            [['type', 'narration'], 'string'],
             [['debit_amount','credit_amount'], 'number'],
-            [['date', 'updated_at','updateid','checkstate','receiver_payer_id'], 'safe'],
+            [['date','updateid','checkstate','receiver_payer_id'], 'safe'],
             [['ref_no'], 'string', 'max' => 50],
-            [['created_by', 'updated_by'], 'string', 'max' => 150],
+            [['created_by'], 'string', 'max' => 150],
             [['credit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['credit_account' => 'id']],
             [['debit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['debit_account' => 'id']],
         ];
@@ -72,8 +72,7 @@ class payment extends \yii\db\ActiveRecord
             'date' => 'Date',
             'ref_no' => 'Ref No',
             'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'updated_at' => 'Updated At',
+
         ];
     }
 

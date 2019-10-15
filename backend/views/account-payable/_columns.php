@@ -22,7 +22,7 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'recipient_id',
-        'value' => 'recipient.name',
+        'value' => 'recipient.choice',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

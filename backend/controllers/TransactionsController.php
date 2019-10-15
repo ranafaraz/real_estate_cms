@@ -10,7 +10,10 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-
+use backend\models\AccountRecievable;
+use backend\models\AccountPayable;
+use backend\models\AccountHead;
+use yii\helpers\Json;
 /**
  * TransactionsController implements the CRUD actions for Transactions model.
  */
@@ -191,6 +194,67 @@ class TransactionsController extends Controller
                     'model' => $model,
                 ]);
             }
+        }
+    }
+
+
+    // public function actionGetDailyData()
+    // {
+    //     $model_transactions = new Transactions();
+    //     $model_accountpayable = new AccountPayable();
+    //     $model_accountrecieveable = new AccountRecievable(); 
+    //     $model_account_head = new AccountHead();
+    //     $head_query = AccountHead::find()->all();
+    //     if(isset($head_query))
+    //     {
+    //         echo Json::encode($head_query);
+    //     }
+    // }
+
+    public function actionGetDebit($date,$id)
+    {
+        $debit_transactions = Transactions::find()->where(['debit_account' => $id])->all();
+        
+        $credit_transactions = Transactions::find()->where(['credit_account' => $id])->all();
+        
+        
+        if($debit_transactions_count > 0 || $credit_transactions_count)
+        {
+           $val = ['debit_count' => $debit_transactions_count,'credit_count' => $credit_transactions_count];
+           echo Json::encode($val);
+        }
+        // if(isset($debit_transactions))
+        // {
+        //     foreach ($debit_transactions as $value) {
+        //         $head_model = AccountHead::find()->where(['id' => $value->debit_account])->One();
+        //         if(isset($head_model))
+        //         {
+        //             //$val = ['account_name' => $head_model->account_name, 'debit_amount' => $value->debit_amount];
+        //             echo $head_model->account_name;
+                    
+        //             // echo '<tr>
+        //             //         <td>'.$head_model->account_name.'</td>
+        //             //         <td>'.$value->debit_amount.'</td>
+        //             //     </tr>';
+        //         }
+        //         else
+        //         {
+        //             echo "empty";
+        //         }
+                
+        //     }
+
+            
+        // }
+
+    }
+
+    public function actionGetCredit($date,$id)
+    {
+        $credit_transactions = Transactions::find()->where(['credit_account' => $id])->all();
+        if(isset($credit_transactions))
+        {
+            echo Json::encode($credit_transactions);
         }
     }
 

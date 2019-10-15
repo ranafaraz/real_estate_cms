@@ -12,6 +12,7 @@ use \yii\web\Response;
 use yii\helpers\Html;
 use backend\models\AccountPayable;
 use yii\helpers\json;
+use backend\models\Transactions;
 
 /**
  * PaymentController implements the CRUD actions for Payment model.
@@ -30,6 +31,7 @@ class PaymentController extends Controller
                 'actions' => [
                     'delete' => ['post'],
                     'bulk-delete' => ['post'],
+
                 ],
             ],
         ];
@@ -76,6 +78,11 @@ class PaymentController extends Controller
         }
     }
 
+    public function beforeAction($action) 
+{ 
+    $this->enableCsrfValidation = false; 
+    return parent::beforeAction($action); 
+}
 
     /**
      * Creates a new Payment model.
@@ -91,10 +98,10 @@ class PaymentController extends Controller
 
         ///////////////////////////////////////////////////////////
         $model->created_by = \Yii::$app->user->identity->username;
-        $model->updated_by = \Yii::$app->user->identity->username;
-        $model->updated_at = date('Y-m-d h:m:s');
+        // $model->updated_by = \Yii::$app->user->identity->username;
+        // $model->updated_at = date('Y-m-d h:m:s');
         $model->date = date('Y-m-d h:m:s');
-        $model->transaction_type='payment';
+        // $model->transaction_type='payment';
         $model1 = Payment::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
         if($model1 == "")
         {
@@ -196,7 +203,20 @@ class PaymentController extends Controller
 
     }
 
-
+    public function actionDailyReport()
+    {
+        $model = new Transactions();
+        return $this->render('daily-report',[
+            'model' => $model,
+        ]);
+    }
+    public function actionMonthlyReport()
+    {
+        $model = new Transactions();
+        return $this->render('monthly-report',[
+            'model' => $model,
+        ]);
+    }
 
     /**
      * Updates an existing Payment model.

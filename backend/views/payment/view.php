@@ -22,8 +22,6 @@ use yii\widgets\DetailView;
             'date',
             'ref_no',
             'created_by',
-            'updated_by',
-            'updated_at',
         ],
     ]) ?>
 

@@ -24,10 +24,6 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'area')->textInput(['maxlength' => true]) ?>
         </div>
 
-        <div class="col-md-12">
-            <?= $form->field($model, 'location')->textarea(['rows' => 3]) ?>
-        </div>
-
         <div class="col-md-6">
             <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
         </div>
@@ -42,6 +38,9 @@ use yii\widgets\ActiveForm;
 
         <div class="col-md-6">
             <?= $form->field($model, 'no_of_plots')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-12">
+            <?= $form->field($model, 'location')->textarea(['rows' => 3]) ?>
         </div>
     </div>
 

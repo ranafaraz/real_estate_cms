@@ -17,8 +17,8 @@ class CustomerSearch extends Customer
     public function rules()
     {
         return [
-            [['customer_id', 'customer_type_id', 'user_id', 'organization_id'], 'integer'],
-            [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
+            [['customer_id', 'user_id', 'organization_id'], 'integer'],
+            [['name', 'customer_type_id','father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CustomerSearch extends Customer
     public function search($params)
     {
         $id=\Yii::$app->user->identity->organization_id;
-        $query = Customer::find()->where(['organization_id'=>$id]);
+        $query = Customer::find()->where(['customer.organization_id'=>$id]);
 
         // add conditions that should always apply here
 
@@ -56,11 +56,11 @@ class CustomerSearch extends Customer
             // $query->where('0=1');
             return $dataProvider;
         }
+        $query->joinWith('customerType');
 
         // grid filtering conditions
         $query->andFilterWhere([
             'customer_id' => $this->customer_id,
-            'customer_type_id' => $this->customer_type_id,
             'user_id' => $this->user_id,
             'organization_id' => $this->organization_id,
             'created_date' => $this->created_date,
@@ -71,7 +71,8 @@ class CustomerSearch extends Customer
             ->andFilterWhere(['like', 'cnic_no', $this->cnic_no])
             ->andFilterWhere(['like', 'contact_no', $this->contact_no])
             ->andFilterWhere(['like', 'email_address', $this->email_address])
-            ->andFilterWhere(['like', 'address', $this->address]);
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'customer_type', $this->customer_type_id]);
 
         return $dataProvider;
     }

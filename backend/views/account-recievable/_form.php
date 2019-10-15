@@ -20,7 +20,7 @@ use dosamigos\datepicker\DatePicker;
 
    <!--  <?= $form->field($model, 'payer_id')->textInput() ?> -->
    <?= $form->field($model, 'payer_id')->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(PayerReceiverInfo::find()->all(),'id','name'),
+                'data' =>ArrayHelper::map(PayerReceiverInfo::find()->all(),'id','choice'),
                 'language' => 'en',
                 'options' => ['placeholder' => 'Select a state ...'],
         
@@ -31,8 +31,6 @@ use dosamigos\datepicker\DatePicker;
         ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>
-
-  <!--   <?= $form->field($model, 'account_receivable')->textInput() ?> -->
   <?PHP
         $dat = AccountNature::find()->where(['name' => 'Current Assets'])->One();
         if($dat == "")
@@ -45,16 +43,7 @@ use dosamigos\datepicker\DatePicker;
         }
         
         ?> 
-        <?= $form->field($model, 'account_receivable')->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(AccountHead::find()->where(['nature_id' => $nature_id ])->all(),'id','account_name'),
-                'language' => 'en',
-                'options' => ['placeholder' => 'Select a state ...'],
-        
-                'pluginOptions' => [
-                'allowClear' => true
-            ],
-        ]);
-        ?>
+
 
      <?= $form->field($model,'due_date')->widget(
             DatePicker::className(), [

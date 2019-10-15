@@ -43,7 +43,7 @@ class ReceiptSearch extends Receipt
      */
     public function search($params)
     {
-        $query = Receipt::find()->where(['transaction_type'=>'receipt']);
+        $query = Receipt::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,21 +58,19 @@ class ReceiptSearch extends Receipt
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,=
+            'id' => $this->id,
             'transaction_id' => $this->transaction_id,
             'debit_account' => $this->debit_account,
             'debit_amount' => $this->debit_amount,
             'credit_account' => $this->credit_account,
             'credit_amount' => $this->credit_amount,
             'date' => $this->date,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'narration', $this->narration])
             ->andFilterWhere(['like', 'ref_no', $this->ref_no])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+            ->andFilterWhere(['like', 'created_by', $this->created_by]);
 
         return $dataProvider;
     }

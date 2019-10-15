@@ -84,10 +84,7 @@ class ReceiptController extends Controller
         $request = Yii::$app->request;
         $model = new Receipt();  
         $model->created_by = \Yii::$app->user->identity->username;
-        $model->updated_by = \Yii::$app->user->identity->username;
-        $model->updated_at = date('Y-m-d h:m:s');
         $model->date = date('Y-m-d h:m:s');
-        $model->transaction_type='receipt';
         $model1 = new Receipt();
         $model1 = Receipt::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
         if($model1 == "")

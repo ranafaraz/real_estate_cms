@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use backend\models\Transactions;
 use backend\models\Customer;
 use backend\models\AccountHead;
-
+use backend\models\AccountPayable;
 /**
  * BuyPlotController implements the CRUD actions for BuyPlot model.
  */
@@ -70,6 +70,7 @@ class BuyPlotController extends Controller
         $model = new BuyPlot();
         $customer_model = new Customer();
         $transaction_model = new Transactions();
+        $acc_pay = new AccountPayable();
 
 
         $model->created_at = date('Y-m-d');
@@ -78,6 +79,8 @@ class BuyPlotController extends Controller
         $connection = Yii::$app->db;
 
         if ($model->load(Yii::$app->request->post()) && $customer_model->load(Yii::$app->request->post())) {
+        if($model->remaning_price == 0)
+        {
             if($customer_model->checkifexist == '1')
             {
                 $model->customer_id = $customer_model->customerid;
@@ -137,22 +140,100 @@ class BuyPlotController extends Controller
                         'organization_id' => \Yii::$app->user->identity->organization_id,
                     ]
                 )->execute();
-
-
-
-                $get_customer_id = Customer::find()->orderBy(['customer_id' => SORT_DESC])->One();
-                if(isset($get_customer_id))
+        }
+        else
+        {
+            if($customer_model->checkifexist == '1')
+            {
+                $model->customer_id = $customer_model->customerid;
+                $model->save();
+            }
+            else
+            {
+                $connection->createCommand()->insert('customer',
+                    [
+                        'customer_type_id' => $customer_model->customer_type_id,
+                        'name' => $customer_model->name,
+                        'father_name' => $customer_model->father_name,
+                        'cnic_no' => $customer_model->cnic_no,
+                        'contact_no' => $customer_model->contact_no,
+                        'email_address' => $customer_model->email_address,
+                        'address' => $customer_model->address,
+                        'user_id' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                        'created_date' => date('Y-m-d'),
+                    ]
+                )->execute();
+            }
+                $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
+                $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                if($trans_model == "")
                 {
-
-                    $model->customer_id = $get_customer_id->customer_id;
-                    $model->save();
-                }else
-                {
-                    echo "somethinf Went Wrong ";
-                    return false;
+                    $transaction_model->transaction_id = '1'; 
                 }
+                else
+                {
+                      $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                }
+
+                if(empty($plot_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Plot'";
+                    die();
+                }
+                if(empty($cash_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Cash'";
+                    die();
+                }
+                $account_payable_id = AccountHead::find()->where(['account_name' => 'Plot'])->One();
+                $acc_trans_model = AccountPayable::find()->orderBy(['transaction_id' => SORT_DESC])->andwhere(['organization_id' =>  \Yii::$app->user->identity->organization_id])->One();
+                if(empty($account_payable_id))
+                {
+                    die();
+                }
+                if($acc_trans_model == "")
+                {
+                    $acc_pay->transaction_id = '1';
+                }
+                else
+                {
+                    $acc_pay->transaction_id = (int)$acc_trans_model->transaction_id + 1;
+                }
+                $connection->createCommand()->insert('account_payable',
+                    [
+                        'transaction_id' => $acc_pay->transaction_id,
+                        'recipient_id' => $customer_model->customerid,
+                        'amount' => $model->remaning_price,
+                        'account_payable' => $account_payable_id->id,
+                        'property_name' => $model->property_name,
+                        'plot_no' => $model->plot_no,
+                        'due_date' => $model->due_date,
+                        'created_at' => date('Y-m-d'),
+                        'updated_at' => '',
+                        'updated_by' => '',
+                        'status' => 'Active',
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'narration' => $model->narration,
+                        'debit_account' => $plot_model->id,
+                        'debit_amount' => $model->plot_price,
+                        'credit_account' => $cash_model->id,
+                        'credit_amount' => $model->plot_paid_price,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+        }
             
-            return $this->redirect(['view', 'id' => $model->buy_plot_id]);
+        return $this->redirect(['view', 'id' => $model->buy_plot_id]);
         }
 
         return $this->render('create', [

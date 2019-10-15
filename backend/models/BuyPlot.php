@@ -29,6 +29,8 @@ use Yii;
 class BuyPlot extends \yii\db\ActiveRecord
 {
     public $narration;
+    public $remaning_price;
+    public $due_date;
     /**
      * {@inheritdoc}
      */
@@ -43,10 +45,10 @@ class BuyPlot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['property_name', 'plot_no', 'plot_area', 'plot_price', 'plot_location', 'city', 'district', 'province', 'created_at', 'created_by', 'plot_status'], 'required'],
-            [['plot_price'], 'number'],
+            [['property_name', 'plot_no', 'plot_area', 'plot_price', 'plot_location', 'city', 'district', 'province', 'created_at', 'created_by', 'plot_status','plot_paid_price','remaning_price','due_date'], 'required'],
+            [['plot_price','plot_paid_price'], 'number'],
             [['plot_location','plot_status'], 'string'],
-            [['created_at', 'updated_at','narration'], 'safe'],
+            [['created_at', 'updated_at','narration','paid_price','remaning_price','due_date'], 'safe'],
             [['created_by', 'updated_by'], 'integer'],
             [['property_name'], 'string', 'max' => 255],
             [['plot_no', 'plot_area','city', 'district', 'province'], 'string', 'max' => 50],

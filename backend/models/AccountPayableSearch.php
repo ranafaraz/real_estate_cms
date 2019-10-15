@@ -66,7 +66,7 @@ class AccountPayableSearch extends AccountPayable
             'updated_at' => $this->updated_at,
         ]);
         $query->andFilterWhere(['like', 'account_payable.updated_by', $this->updated_by])
-            ->andFilterWhere(['like', 'name', $this->recipient_id])
+            ->andFilterWhere(['like', 'choice', $this->recipient_id])
             ->andFilterWhere(['like', 'due_date', $this->due_date])
             ->andFilterWhere(['like', 'account_name', $this->account_payable]);
 

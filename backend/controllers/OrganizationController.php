@@ -167,7 +167,7 @@ class OrganizationController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);   
 
         if($request->isAjax){
             /*

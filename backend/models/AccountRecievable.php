@@ -35,12 +35,12 @@ class AccountRecievable extends \yii\db\ActiveRecord
     {
         return [
             [['transaction_id', 'payer_id', 'amount', 'account_receivable','due_date' ,'updated_by', 'updated_at'], 'required'],
-            [['transaction_id', 'payer_id', 'account_receivable'], 'integer'],
+            [['transaction_id', 'payer_id'], 'integer'],
             [['amount'], 'number'],
             [['updated_at'], 'safe'],
             [['updated_by'], 'string', 'max' => 150],
             [['payer_id'], 'exist', 'skipOnError' => true, 'targetClass' => PayerReceiverInfo::className(), 'targetAttribute' => ['payer_id' => 'id']],
-            [['account_receivable'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['account_receivable' => 'id']],
+            // [['account_receivable'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['account_receivable' => 'id']],
         ];
     }
 
@@ -54,7 +54,7 @@ class AccountRecievable extends \yii\db\ActiveRecord
             'transaction_id' => 'Transaction ID',
             'payer_id' => 'Payer ID',
             'amount' => 'Amount',
-            'account_receivable' => 'Account Receivable',
+            // 'account_receivable' => 'Account Receivable',
             'due_date' => 'Due Date',
             'updated_by' => 'Updated By',
             'updated_at' => 'Updated At',
@@ -69,11 +69,12 @@ class AccountRecievable extends \yii\db\ActiveRecord
         return $this->hasOne(PayerReceiverInfo::className(), ['id' => 'payer_id']);
     }
 
+    // public function getaccountHead()
+    // {
+    //     return $this->hasOne(AccountHead::className(), ['id' => 'account_receivable']);
+    // }
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAccountReceivable()
-    {
-        return $this->hasOne(AccountHead::className(), ['id' => 'account_receivable']);
-    }
 }

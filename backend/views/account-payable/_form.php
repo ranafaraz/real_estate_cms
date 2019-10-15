@@ -21,7 +21,7 @@ use dosamigos\datepicker\DatePicker;
 
  <!--    <?= $form->field($model, 'recipient_id')->textInput() ?> -->
     <?= $form->field($model, 'recipient_id')->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(PayerReceiverInfo::find()->all(),'id','name'),
+                'data' =>ArrayHelper::map(PayerReceiverInfo::find()->all(),'id','choice'),
                 'language' => 'en',
                 'options' => ['placeholder' => 'Select a state ...'],
         

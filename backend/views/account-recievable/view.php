@@ -12,9 +12,9 @@ use yii\widgets\DetailView;
         'attributes' => [
             'id',
             'transaction_id',
-            'payer.name',
+            'payer.choice',
             'amount',
-            'accountReceivable.account_name',
+            // 'accountReceivable.account_name',
             'due_date',
             'updated_by',
             'updated_at',
