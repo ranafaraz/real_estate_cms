@@ -225,6 +225,24 @@ class AccountPayableController extends Controller
             }
         }
     }
+    public function actionGetPrevious($type,$id)
+    {
+        $payable_model = AccountPayable::find()->where(['recipient_id' => $id ])->andwhere(['identifier' => $type])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
+        $payable_count = AccountPayable::find()->where(['recipient_id'=>$id,'identifier'=>$type])->count();
+        if($payable_count > 0)
+        {
+            $sum=0;
+            foreach ($payable_model as $value) {
+                 $sum = $sum + $value->amount; 
+            }
+            $val = ['sum' => $sum,'id' => $value->id];
+            echo Json::encode($val);
+        }
+        else
+        {
+            echo "empty";
+        }
+    }
 
     /**
      * Delete an existing AccountPayable model.

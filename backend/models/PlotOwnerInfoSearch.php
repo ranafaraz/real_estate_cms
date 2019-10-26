@@ -19,7 +19,7 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
     {
         return [
             [['id', 'property_id', 'plot_no', 'organization_id'], 'integer'],
-            [['start_date', 'end_date'], 'safe'],
+            [['start_date', 'end_date', 'status' ,'customer_id'], 'safe'],
         ];
     }
 
@@ -41,15 +41,14 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
      */
     public function search($params)
     {
-        $id=yii::$app->user->identity->organization_id;
-        $query = PlotOwnerInfo::find()->where(['organization_id'=>$id]);
-
+        $query = PlotOwnerInfo::find()->where(['plot_owner_info.organization_id' => \Yii::$app->user->identity->organization_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $this->load($params);
+        $query->joinWith('customer');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -63,9 +62,11 @@ class PlotOwnerInfoSearch extends PlotOwnerInfo
             'plot_no' => $this->plot_no,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            'status' => $this->status,
             'organization_id' => $this->organization_id,
         ]);
+
+        $query->andFilterWhere(['like', 'status', $this->status])
+        ->andFilterWhere(['like', 'customer.name', $this->customer_id]);
 
         return $dataProvider;
     }

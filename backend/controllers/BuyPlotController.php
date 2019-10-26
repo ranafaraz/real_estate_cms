@@ -210,6 +210,7 @@ class BuyPlotController extends Controller
                         'property_name' => $model->property_name,
                         'plot_no' => $model->plot_no,
                         'due_date' => $model->due_date,
+                        'identifier' => 'Customer',
                         'created_at' => date('Y-m-d'),
                         'updated_at' => '',
                         'updated_by' => '',
@@ -217,9 +218,24 @@ class BuyPlotController extends Controller
                         'organization_id' => \Yii::$app->user->identity->organization_id,
                     ]
                 )->execute();
+                $account_payable_id = AccountHead::find()->where(['account_name' => 'Account Payable'])->One();
                 $connection->createCommand()->insert('transactions',
                     [
                         'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'narration' => $model->narration,
+                        'debit_account' => $plot_model->id,
+                        'debit_amount' => $model->remaning_price,
+                        'credit_account' => $account_payable_id->id,
+                        'credit_amount' => $model->remaning_price,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id + 1,
                         'type' => 'cash Payment',
                         'narration' => $model->narration,
                         'debit_account' => $plot_model->id,

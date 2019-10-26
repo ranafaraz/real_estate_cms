@@ -84,7 +84,7 @@ class ReceiptController extends Controller
         $request = Yii::$app->request;
         $model = new Receipt();  
         $model->created_by = \Yii::$app->user->identity->username;
-        $model->date = date('Y-m-d h:m:s');
+
         $model1 = new Receipt();
         $model1 = Receipt::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
         if($model1 == "")
@@ -113,7 +113,10 @@ class ReceiptController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post())){
+                $model->debit_amount = $model->credit_amount;
+                $model->date = date('Y-m-d');
+                $model->save();
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Receipt",
@@ -137,7 +140,10 @@ class ReceiptController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
+            if ($model->load($request->post())) {
+                $model->debit_amount = $model->credit_amount;
+                $model->date = date('Y-m-d');
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [

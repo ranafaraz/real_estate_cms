@@ -29,6 +29,7 @@ class payment extends \yii\db\ActiveRecord
     public $checkstate;
     public $updateid;
     public $receiver_payer_id;
+    public $prev_remaning;
     /**
      * {@inheritdoc}
      */
@@ -47,7 +48,7 @@ class payment extends \yii\db\ActiveRecord
             [['transaction_id', 'debit_account', 'credit_account'], 'integer'],
             [['type', 'narration'], 'string'],
             [['debit_amount','credit_amount'], 'number'],
-            [['date','updateid','checkstate','receiver_payer_id'], 'safe'],
+            [['date','updateid','checkstate','receiver_payer_id','prev_remaning'], 'safe'],
             [['ref_no'], 'string', 'max' => 50],
             [['created_by'], 'string', 'max' => 150],
             [['credit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['credit_account' => 'id']],

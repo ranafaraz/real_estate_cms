@@ -63,18 +63,10 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAccountPayables()
-    {
-        return $this->hasMany(AccountPayable::className(), ['recipient_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAccountRecievables()
-    {
-        return $this->hasMany(AccountRecievable::className(), ['payer_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -82,10 +74,6 @@ class PayerReceiverInfo extends \yii\db\ActiveRecord
     public function getHead()
     {
         return $this->hasOne(AccountHead::className(), ['id' => 'head_id']);
-    }
-    public function getCustomer()
-    {
-        return $this->hasOne(Customer::className(), ['customer_id' => 'payer_receiver_id']);
     }
 
     

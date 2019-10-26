@@ -41,6 +41,14 @@ use yii\widgets\DetailView;
         ?>
         <div class="col-md-6">
             <h5 class="text-info" style="font-weight: bolder;">Install No. <u><i><?PHP echo $value->installment_no;?></i></u> Details:</h5>
+            <?php if($value->status == '0')
+            {
+                $value->status = 'Paid';
+            }
+            else
+            {
+                $value->status = 'Unpaid';
+            }?>
              <?= DetailView::widget([
                 'model' => $value,
                 'attributes' => [

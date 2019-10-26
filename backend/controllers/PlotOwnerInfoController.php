@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use backend\models\Plot;
 
 /**
  * PlotOwnerInfoController implements the CRUD actions for PlotOwnerInfo model.
@@ -196,19 +198,20 @@ class PlotOwnerInfoController extends Controller
 
     public function actionPlots($customer_id,$property_id)
     {
-        $row=PlotOwnerInfo::find()->where(['customer_id'=>$customer_id , 'property_id' => $property_id])->andwhere(["organization_id"=>\Yii::$app->user->identity->organization_id])->all();
-            echo "<option></option>";
-        if($row)
+        $plot_model = PlotOwnerInfo::find()->where(['customer_id' => $customer_id,'property_id' => $property_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
+        if(empty($plot_model))
         {
-            foreach ($row as $val) {
-                echo "<option value='". $val->plot_no ."'>".$val->plot_no."<option>";
-            }
-        }else
-        {
-            echo "<option></option>";
+            echo "Empty";
         }
-        
+        else
+        {
+                echo '<option selected>... SELECT A PLOT ...</option>' ;
+            foreach ($plot_model as $value) {
+                echo '<option value="'.$value->plot_no.'">' . $value->plot_no . '</option>';
+            }
+        }
     }
+
     /**
      * Delete an existing PlotOwnerInfo model.
      * For ajax request will return json object

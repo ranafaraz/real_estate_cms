@@ -67,14 +67,13 @@ $id = null;
 							$date = $_POST['date'];
 							$debit_transactions = Transactions::find()->where(['debit_account' => $id])->andwhere(['date' => $date])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
 							$credit_transactions = Transactions::find()->where(['credit_account' => $id])->andwhere(['date' => $date])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
-
 							foreach($debit_transactions as $val1)
 							{
 								$head_model_credit = AccountHead::find()->where(['id' => $val1->credit_account])->One();
-								$sum_debit = $sum_debit + $val1->debit_amount;
+								$sum_debit = $sum_debit + $val1->credit_amount;
 							?>
 								<tr>
-									<td><h5 class="text-left"><?PHP echo $head_model_credit->account_name;?></h5><h5 class="text-right"><?PHP echo number_format($val1->debit_amount);?></h5></td>
+									<td><h5 class="text-left"><?PHP echo $head_model_credit->account_name;?></h5><h5 class="text-right"><?PHP echo number_format($val1->credit_amount);?></h5></td>
 								</tr>
 							<?PHP
 							}
@@ -85,21 +84,7 @@ $id = null;
 							<?PHP
 
 							$amount_cradit=0;
-							if($val->account_name == 'Account Payable')
-                           	{  
-                            $account_payable_query = AccountPayable::find()->where(['created_at' => $date])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->All();
-	                           if(isset($account_payable_query))
-	                           {
-	                           foreach ($account_payable_query as $val3) {
-	                           $sum_credit = $sum_credit + $val3->amount;
-	                           $head_model = AccountHead::find()->where(['id' => $val3->account_payable])->One();
-	                            ?>
-	                              <td><h5 class="text-left"><?PHP echo $head_model->account_name;?></h5><h5 class="text-right"><?PHP echo number_format($val3->amount);?></h5></td>
-	                                   <?PHP
-	                                      }
-	                              }
-                                               
-                           }
+							
 							foreach ($credit_transactions as  $val2) {
 
 								$head_model_debit = AccountHead::find()->where(['id' => $val2->debit_account])->One();
@@ -122,7 +107,11 @@ $id = null;
 
 							if(empty($sum_credit) && empty($sum_debit))
 							{
-								$i=$i-1;
+								$balance_caried_down = (int)$sum_debit - (int)$sum_credit;
+								$arr[$i] = ['Account Name' => $account_name , 'nature' => 'Credit' , 'amount' => $balance_caried_down];
+								?>
+								<tr class="" style="font-weight: bold;background-color: crimson !important;color: white !important;"><td><h5>Balance Caried Down : <?PHP echo number_format($balance_caried_down);?></h5></td></tr>
+								<?PHP
 							}else
 							if($sum_credit > $sum_debit)
 							{
@@ -133,6 +122,14 @@ $id = null;
 								<?PHP
 							}
 							elseif($sum_debit > $sum_credit)
+							{
+								$balance_caried_down = (int)$sum_debit - (int)$sum_credit;
+								$arr[$i] = ['Account Name' => $account_name , 'nature' => 'Credit' , 'amount' => $balance_caried_down];
+								?>
+								<tr class="" style="font-weight: bold;background-color: crimson !important;color: white !important;"><td><h5>Credit Caried Down : <?PHP echo number_format($balance_caried_down);?></h5></td></tr>
+								<?PHP
+							}
+							elseif($sum_debit == $sum_credit)
 							{
 								$balance_caried_down = (int)$sum_debit - (int)$sum_credit;
 								$arr[$i] = ['Account Name' => $account_name , 'nature' => 'Credit' , 'amount' => $balance_caried_down];
@@ -174,6 +171,7 @@ $id = null;
 				$sum=0;
 				$sum1=0;
 					for($j=0;$j<$i;$j++) {
+						// echo mysqli_error();
 						?>
 						<tr>
 							<td><?PHP echo $arr[$j]['Account Name'];?></td>

@@ -65,8 +65,7 @@ use yii\web\JsonParser;
 
 
         <div class="col-md-4">
-            <?= $form->field($model, 'plot_no')->widget(Select2::classname(), [
-                    
+            <?= $form->field($model, 'plot_no')->widget(Select2::classname(), [      
                     'language' => 'en',
                     'options' => ['placeholder' => 'Select a state ...'],
                     'pluginOptions' => [

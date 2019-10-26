@@ -87,6 +87,7 @@ class EmpSalaryController extends Controller
     {
         $request = Yii::$app->request;
         $model = new EmpSalary();  
+        $trans = new Transactions();
 
         $model->created_at = date('Y-m-d');
         $model->created_by = \Yii::$app->user->identity->id;
@@ -134,7 +135,7 @@ class EmpSalaryController extends Controller
                     $payable_model= AccountPayable::find()->orderBy(['transaction_id' => SORT_DESC])->One();
                     if($trans_model == "")
                     {
-                        $trans_model->transaction_id = '1'; 
+                        $trans->transaction_id = '1'; 
                     }
                     else
                     {
@@ -203,7 +204,7 @@ class EmpSalaryController extends Controller
 
                     if($trans_model == "")
                     {
-                        $trans_model->transaction_id = '1'; 
+                        $trans->transaction_id = '1'; 
                     }
                     else
                     {
@@ -269,7 +270,7 @@ class EmpSalaryController extends Controller
                     $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
                     if($trans_model == "")
                     {
-                        $trans_model->transaction_id = '1'; 
+                        $trans->transaction_id = '1'; 
                     }
                     else
                     {

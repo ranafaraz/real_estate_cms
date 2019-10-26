@@ -12,6 +12,8 @@ use dosamigos\datepicker\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Payment */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Payment';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="payment-form">
@@ -26,18 +28,6 @@ use dosamigos\datepicker\DatePicker;
         <div class="col-md-5">
             <?= $form->field($model, 'type')->dropDownList([ 'Cash Payment' => 'Cash Payment', 'Bank Payment' => 'Bank Payment', ], ['prompt' => 'Select payment Type']) ?>
         </div>
-        <div class="col-md-12">
-            <?= $form->field($model, 'receiver_payer_id',['options'=>['id'=>'receiver_id']])->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(PayerReceiverInfo::findall(['choice'=>'Receiver']),'id', 'payer_receiver_id'),
-                'language' => 'en',
-                'options' => ['placeholder' => 'Select a state ...'],
-
-                'pluginOptions' => [
-                'allowClear' => true
-            ],
-            ]);
-        ?>
-        </div>
     </div>
     <div class="row" style="margin: 20px 0px;">
         <div class="col-12 my-auto" style="border-top:2px dashed skyblue;border-bottom:2px dashed skyblue;">
@@ -45,17 +35,14 @@ use dosamigos\datepicker\DatePicker;
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <?php
-                $nature=AccountNature::findOne(['name'=>'Liabilities']);
-                $nature_id=$nature->id;
                 $natureex=AccountNature::findOne(['name'=>'Expense']);
                 $nature_idex=$natureex->id;
-                $data1=ArrayHelper::map(AccountHead::findAll(['nature_id'=>$nature_id]),'id', 'account_name');
-                $data2=ArrayHelper::map(AccountHead::findAll(['nature_id'=>$nature_idex]),'id', 'account_name');
+                $data1=ArrayHelper::map(AccountHead::findAll(['nature_id'=>$nature_idex]),'id', 'account_name');
             ?>
             <?= $form->field($model, 'debit_account',['options'=>['id'=>'debit_id']])->widget(Select2::classname(), [
-                'data' =>$data1+$data2,
+                'data' =>$data1,
                 'language' => 'en',
                 'options' => ['placeholder' => 'Select a state ...'],
 
@@ -65,10 +52,16 @@ use dosamigos\datepicker\DatePicker;
             ]);
         ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <?= $form->field($model, 'prev_remaning')->textInput(['readonly' => true]) ?>
+        </div>
+        <div class="col-md-3">
 
-            <?= $form->field($model, 'debit_amount')->textInput() ?>
+            <?= $form->field($model, 'debit_amount')->textInput()->label("Total amount") ?>
 
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'credit_amount')->textInput()->label("Paid amount") ?>
         </div>
         <div class="col-12">
             <div id="debitnoamaountmsg" class="text-danger font-weight-bold mx-auto text-center"></div>
@@ -83,7 +76,7 @@ use dosamigos\datepicker\DatePicker;
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <?php
                 $natureca=AccountNature::findOne(['name'=>'Current Assets']);
                 $nature_idca=$natureca->id;
@@ -100,16 +93,11 @@ use dosamigos\datepicker\DatePicker;
             ]);
         ?>
         </div>
-        <div class="col-md-6 align-content-center align-middle"  >
+ <!--        <div class="col-md-6 align-content-center align-middle"  >
             <label for="checkamount" style="margin-top: 30px;font-size: 16px"><input type="checkbox" name="checkamount" style="height: 16px;width: 16px;" id="checkamount"  />  Debit amount is same as Credit Amount</label>
-        </div>
-        
-    </div>
-    <div class="row" id="payable_info">
-            <div class="col-md-6">
-                <?= $form->field($model, 'credit_amount')->textInput() ?>
-            </div>
-            <div class="col-md-6">
+        </div> -->
+
+            <div class="col-md-4">
                <?= $form->field($accountpayable,'due_date')->widget(
             DatePicker::className(), [
                 // inline too, not bad
@@ -123,12 +111,14 @@ use dosamigos\datepicker\DatePicker;
         ]);
     ?>
             </div>
-
+            <div class="col-md-4">
+                <?= $form->field($model, 'ref_no')->textInput(['maxlength' => true,'placeholder'=>'Optional']) ?>
+            </div>
         </div>
 
-    <?= $form->field($model, 'ref_no')->textInput(['maxlength' => true,'placeholder'=>'Optional']) ?>
+    
     <?= $form->field($model, 'updateid')->textInput() ?>
-    <?= $form->field($model, 'checkstate')->textInput()?>
+<!--     <?= $form->field($model, 'checkstate')->textInput()?> -->
 
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
@@ -187,6 +177,31 @@ $('#checkamount'). click(function(){
         $('#payment-checkstate').attr('value',"0");
     }
 });
+
+$('#payment-debit_account').on('change',function()
+{ 
+    var id = $(this).val();
+    $.get("index.php?r=account-payable/get-previous",{type:'Expense',id:id},function(data)
+    {
+        if(data == "empty")
+        {
+            $('#payment-prev_remaning').attr('value','0');
+        }
+        else
+        {
+            data = JSON.parse(data);
+            $('#payment-prev_remaning').attr('value',data.sum);
+            $('#payment-updateid').attr('value',data.id);
+        }
+    })
+})
+// $('#payment-debit_amount').on('input',function()
+// {
+//     var remaning = $('#payment-remaning').val();
+//     var paid = $('#payment-debit_amount').val();
+//     var sum = parseInt(remaning) + parseInt(paid);
+//     $('#payment-credit_amount').val(sum);
+//     })
 JS;
 $this->registerJs($script);
 ?>

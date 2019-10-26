@@ -12,7 +12,7 @@
          * summary
          */
         
-     public function saverecord00($receiver_payer_id,$amount,$debit_account,$due_date)
+     public function saverecord00($credit_account,$amount,$debit_account,$due_date,$transaction_id)
     {
         $connection=yii::$app->db;
          $modelap = AccountPayable::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
@@ -28,16 +28,18 @@
             $connection->createCommand()->Insert('account_payable',
                 [
                     'transaction_id'=>$transaction_id,
-                    'recipient_id'=>$receiver_payer_id,
+                    'recipient_id'=>$debit_account,
                     'amount'=>$amount,
-                    'account_payable'=>$debit_amount,
+                    'account_payable'=>$credit_account,
                     'due_date'=>$due_date,
-                    'updated_at'=>date('Y-m-d h:m:s'),
+                    'updated_at'=>date('Y-m-d'),
+                    'identifier' => 'Expense',
+                    'created_at' => date('Y-m-d'),
                     'updated_by'=>\Yii::$app->user->identity->username,
+                    'status' => 'Active',
+                    'organization_id' => \Yii::$app->user->identity->organization_id,
                 ]
-            )->execute();        
-
-        
+            )->execute();       
        }
        // update id ==1 and check state =1
        public function saverecord11($update_id)
@@ -48,7 +50,7 @@
                     
                     'amount'=>0,
                     'status'=>0,
-                    'due_date'=>'0000-00-00 00-00-00',
+                    'due_date'=>'0000-00-00',
                     'updated_at'=>date('Y-m-d h:m:s'),
                     'updated_by'=>\Yii::$app->user->identity->username,
                 ],['id'=>$update_id]
@@ -65,7 +67,7 @@
                     
                     'amount'=>$amount,
                     'status'=>1,
-                    'updated_at'=>date('Y-m-d h:m:s'),
+                    'updated_at'=>date('Y-m-d'),
                     'updated_by'=>\Yii::$app->user->identity->username,
                 ],['id'=>$updateid]
             )->execute();

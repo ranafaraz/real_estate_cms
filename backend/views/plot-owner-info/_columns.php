@@ -16,6 +16,11 @@ return [
     // ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'customer_id',
+        'value' => 'customer.name',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'property_id',
     ],
     [
@@ -30,13 +35,13 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'end_date',
     ],
+    // [
+        // 'class'=>'\kartik\grid\DataColumn',
+        // 'attribute'=>'organization_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'status',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'organization_id',
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

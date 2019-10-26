@@ -30,7 +30,7 @@ class receipt extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
 
-    public $receiver_payer_id;
+    public $prev_remaning;
     public static function tableName()
     {
         return 'transactions';
@@ -42,14 +42,13 @@ class receipt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['transaction_id', 'type', 'narration', 'debit_account', 'debit_amount', 'credit_account', 'credit_amount', 'date', 'created_by', 'updated_by', 'updated_at'], 'required'],
+            [['transaction_id', 'type', 'narration', 'debit_account', 'debit_amount', 'credit_account', 'credit_amount', 'date', 'created_by'], 'required'],
             [['transaction_id', 'debit_account', 'credit_account'], 'integer'],
             [['type', 'narration'], 'string'],
-            [['transaction_type'],'string'],
             [['debit_amount', 'credit_amount'], 'number'],
-            [['date', 'updated_at','receiver_payer_id'], 'safe'],
+            [['date','prev_remaning'], 'safe'],
             [['ref_no'], 'string', 'max' => 50],
-            [['created_by', 'updated_by'], 'string', 'max' => 150],
+            [['created_by'], 'string', 'max' => 150],
             [['credit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['credit_account' => 'id']],
             [['debit_account'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHead::className(), 'targetAttribute' => ['debit_account' => 'id']],
         ];

@@ -91,8 +91,8 @@ class CustomerController extends Controller
         $first_pay = $model->first_payment;
         $no_of_installment = $model->no_of_installment;
         $connection = Yii::$app->db;
-
         if ($model->load(Yii::$app->request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
+
             if($model->checkifexist == '1')
             {
                 $customerid = $model->customerid;
@@ -113,6 +113,10 @@ class CustomerController extends Controller
                         'created_date' => date('Y-m-d'),
                     ]
                 )->execute(); 
+                if($model->only_create_customer == '1')
+                {
+                    return $this->redirect(['index']);
+                }
                 $model_id = Customer::find()->orderBy(['customer_id' => SORT_DESC])->One();
                 $customerid=$model_id->customer_id;
             }
@@ -138,6 +142,7 @@ class CustomerController extends Controller
             Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
 
             $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+
             $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
             $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
             if($trans_model == "")
@@ -148,6 +153,7 @@ class CustomerController extends Controller
             {
                   $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
             }
+
 
             if(empty($plot_model))
             {
@@ -173,6 +179,32 @@ class CustomerController extends Controller
                     'organization_id' => \Yii::$app->user->identity->organization_id,
                 ]
             )->execute();
+
+            $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+            if($trans_model == "")
+            {
+                $transaction_model->transaction_id = '1'; 
+            }
+            else
+            {
+                  $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+            }
+            
+            $connection->createCommand()->insert('transactions',
+                [
+                    'transaction_id' => $transaction_model->transaction_id,
+                    'type' => 'cash Payment',
+                    'narration' => $model->narration,
+                    'debit_account' => $cash_model->id,
+                    'debit_amount' => $installmentinfo->advance_amount,
+                    'credit_account' => $plot_model->id,
+                    'credit_amount' => $installmentinfo->advance_amount,
+                    'date' => date('Y-m-d'),
+                    'created_by' => \Yii::$app->user->identity->id,
+                    'organization_id' => \Yii::$app->user->identity->organization_id,
+                ]
+            )->execute();
+
             if($installmentinfo->advance_amount < $installmentinfo->total_amount)
             {   
                 $accounts->is_installment = '1';
@@ -249,19 +281,14 @@ class CustomerController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $plotinfo = PlotOwnerInfo::find()->where(['customer_id' => $model->customer_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id] ); 
-        $installmentinfo = new Installment();
-        $installmentstatus = new InstallmentStatus();
 
-        if ($model->load(Yii::$app->request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post()) && $model->save() && $plotinfo->save() && $installmentinfo->save() && $installmentstatus->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->customer_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'plotinfo' => $plotinfo,
-            'installmentinfo' => $installmentinfo,
-            'installmentstatus' => $installmentstatus,
+
         ]);
     }
 

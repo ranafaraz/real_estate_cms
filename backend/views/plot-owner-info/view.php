@@ -11,7 +11,8 @@ use yii\widgets\DetailView;
         'model' => $model,
         'attributes' => [
             'id',
-            'property_id',
+            'customer.name',
+            'property.property_name',
             'plot_no',
             'start_date',
             'end_date',

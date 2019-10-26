@@ -20,7 +20,7 @@ class ReceiptSearch extends Receipt
         return [
             [['id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
             
-            [['type', 'narration', 'date', 'ref_no', 'created_by', 'updated_by', 'updated_at'], 'safe'],
+            [['type', 'narration', 'date', 'ref_no', 'created_by'], 'safe'],
             [['debit_amount', 'credit_amount'], 'number'],
         ];
     }

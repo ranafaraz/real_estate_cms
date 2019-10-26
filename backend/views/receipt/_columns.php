@@ -58,14 +58,6 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'created_by',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'updated_by',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'updated_at',
-    // ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,

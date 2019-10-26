@@ -20,7 +20,9 @@ use backend\models\CustomerType;
 
     <?php $form = ActiveForm::begin(); ?>
 <div class="row">
-        <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Customer Info</h3></div>
+        <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Customer Info</h3>
+            <?= $form->field($model, 'only_create_customer')->checkbox(); ?>
+        </div>
     </div>
     <?= $form->field($model,'checkifexist')->hiddenInput()->label(false)?>
         <?= $form->field($model,'customerid')->hiddenInput()->label(false)?>
@@ -51,7 +53,7 @@ use backend\models\CustomerType;
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
-       
+<div class="property_installment">
     <div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Property/Plot Info</h3></div>
     </div>
@@ -154,7 +156,7 @@ use backend\models\CustomerType;
         <div class="col-md-4">
         <?= $form->field($model, 'narration')->textInput() ?>
     </div>
-
+</div>
 
 
     </div>
@@ -250,6 +252,17 @@ $script = <<< JS
                     });
         
         })
+$('#customer-only_create_customer'). click(function(){
+    if($(this). is(":checked")){
+        $('.property_installment').css('display','none');
+        $(this).val('1');
+    }
+    else 
+    if($(this). is(":not(:checked)")){
+        $('.property_installment').css('display','block');
+        $(this).val('0');
+}
+});
 JS;
 $this->registerJs($script);
 
