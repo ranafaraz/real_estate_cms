@@ -41,7 +41,6 @@
                     ['label' => 'Menu Real Estate', 'options' => ['class' => 'header']],
                     ['label' => 'DashBoard', 'icon' => 'file-code-o', 'url' => yii::$app->homeUrl],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Organization', 'icon' => 'hand-o-right', 'url' => ['/organization']],
                     ['label' => 'Property', 'icon' => 'hand-o-right', 'url' => ['/property']],
                     ['label' => 'Plots', 'icon' => 'hand-o-right', 'url' => ['/plot']],
                     ['label' => 'Buy Plot/Property', 'icon' => 'hand-o-right', 'url' => ['/buy-plot']],
