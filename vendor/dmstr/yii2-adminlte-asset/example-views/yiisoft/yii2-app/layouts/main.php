@@ -35,7 +35,7 @@ if (Yii::$app->controller->action->id === 'login') {
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-        <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="uploads/favicon.ico" type="image/x-icon" />
         <script>
     var nameOfDay = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
     var nameOfMonth = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember');
@@ -60,7 +60,7 @@ if (Yii::$app->controller->action->id === 'login') {
     </script>
     
     </head>
-    <body class="hold-transition skin-green sidebar-mini " onload="clock()">
+    <body class="hold-transition skin-green sidebar-mini" onload="clock()">
     <?php $this->beginBody() ?>
     <div class="wrapper">
 

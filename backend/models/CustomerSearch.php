@@ -2,28 +2,29 @@
 
 namespace backend\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Customer;
 
 /**
- * CustomerSearch represents the model behind the search form of `backend\models\Customer`.
+ * CustomerSearch represents the model behind the search form about `backend\models\Customer`.
  */
 class CustomerSearch extends Customer
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['customer_id', 'user_id', 'organization_id'], 'integer'],
-            [['name', 'customer_type_id','father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
+            [['customer_id', 'customer_type_id', 'user_id', 'organization_id'], 'integer'],
+            [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -40,10 +41,7 @@ class CustomerSearch extends Customer
      */
     public function search($params)
     {
-        $id=\Yii::$app->user->identity->organization_id;
-        $query = Customer::find()->where(['customer.organization_id'=>$id]);
-
-        // add conditions that should always apply here
+        $query = Customer::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,11 +54,10 @@ class CustomerSearch extends Customer
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->joinWith('customerType');
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'customer_id' => $this->customer_id,
+            'customer_type_id' => $this->customer_type_id,
             'user_id' => $this->user_id,
             'organization_id' => $this->organization_id,
             'created_date' => $this->created_date,
@@ -71,8 +68,7 @@ class CustomerSearch extends Customer
             ->andFilterWhere(['like', 'cnic_no', $this->cnic_no])
             ->andFilterWhere(['like', 'contact_no', $this->contact_no])
             ->andFilterWhere(['like', 'email_address', $this->email_address])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'customer_type', $this->customer_type_id]);
+            ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
     }

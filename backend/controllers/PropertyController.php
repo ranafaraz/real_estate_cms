@@ -177,7 +177,7 @@ class PropertyController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Property",
+                    'title'=> "",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -190,7 +190,7 @@ class PropertyController extends Controller
                 Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Property",
+                    'title'=> "",
                     'content'=>'<span class="text-success">Create Property success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -198,7 +198,7 @@ class PropertyController extends Controller
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Property",
+                    'title'=> "",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),

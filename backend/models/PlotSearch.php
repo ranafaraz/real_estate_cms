@@ -19,7 +19,7 @@ class PlotSearch extends Plot
     {
         return [
             [['id', 'property_id', 'plot_no', 'organization_id'], 'integer'],
-            [['plot_length', 'plot_width', 'plot_type', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'safe'],
+            [['plot_length', 'plot_width', 'plot_type', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at','area'], 'safe'],
             [['plot_price', 'per_merla_rate'], 'number'],
         ];
     }

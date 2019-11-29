@@ -11,6 +11,7 @@
 			$plotno=$_GET['plotno'];
 			$length=$_GET['length'];
 			$width=$_GET['width'];
+			$area=$_GET['areaa'];
 			$price=$_GET['price'];
 			$permerla=$_GET['permerla'];
 			$type=$_GET['type'];
@@ -19,6 +20,7 @@
 				[
 					'plot_length'=>$length,
 					'plot_width'=>$width,
+					'area'=>$area,
 					'plot_price'=>$price,
 					'per_merla_rate'=>$permerla,
 					'plot_type'=>$type,

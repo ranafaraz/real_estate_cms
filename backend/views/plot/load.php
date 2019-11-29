@@ -31,22 +31,6 @@ $property=Property::findone(["property_id"=>$property_id]);
 	        		</div>
 		    	</div>
 		    	<div class="col-md-4">
-		    		 <div class="form-group">
-	        			<label for="length">Plot length</label>
-	        			<input type="text" name="length"  value="<?php echo $row->plot_length; ?>" class="form-control" id="length"  />
-	        		<div class="errorlength" style="margin:10px 0px;"></div>
-	        		</div>
-		    	</div>
-		    </div>
-		    <div class="row">
-		    	<div class="col-md-4">
-		    	    <div class="form-group">
-			        	<label for="width">Plot width</label>
-			        	<input type="text" name="width"  value="<?php echo $row->plot_width; ?>" class="form-control" id="width" />
-			        	<div class="errorwidth" style="margin:10px 0px;"></div>
-			        </div>
-		    	</div>
-		    	<div class="col-md-4">
 		    		<div class="form-group">
 			        	<label for="type">Plot Type</label>
 			        	<select name="plot_type" class="form-control" id="type">
@@ -59,6 +43,34 @@ $property=Property::findone(["property_id"=>$property_id]);
 			        	</select>	        	
 	        		</div>
 		    	</div>
+		    	
+		    </div>
+		    <div class="row">
+		    	<div class="col-md-4">
+		    		 <div class="form-group">
+	        			<label for="length">Plot length</label>
+	        			<input type="text" name="length"  value="<?php echo $row->plot_length; ?>" class="form-control" id="length"  />
+	        		<div class="errorlength" style="margin:10px 0px;"></div>
+	        		</div>
+		    	</div>
+		    	<div class="col-md-4">
+		    	    <div class="form-group">
+			        	<label for="width">Plot width</label>
+			        	<input type="text" name="width"  value="<?php echo $row->plot_width; ?>" class="form-control" id="width" />
+			        	<div class="errorwidth" style="margin:10px 0px;"></div>
+			        </div>
+		    	</div>
+		    	<div class="col-md-4">
+		    	    <div class="form-group">
+			        	<label for="width">Plot Area</label>
+			        	<input type="text" name="area" readonly="readonly"  value="<?php echo $row->area; ?>" class="form-control" id="area" />
+			        	<div class="errorarea" style="margin:10px 0px;"></div>
+			        </div>
+		    	</div>
+		    	
+		    	
+		    </div>
+		    <div class="row">
 		    	<div class="col-md-4">
 		    		<div class="form-group">
 			        	<label for="price">Plot Price</label>
@@ -66,8 +78,6 @@ $property=Property::findone(["property_id"=>$property_id]);
 			        	<div class="errorprice" style="margin:10px 0px;"></div>
 			        </div>
 		    	</div>
-		    </div>
-		    <div class="row">
 		    	<div class="col-md-4">
 		    		<div class="form-group">
 			        	<label for="permerla">Per Marla rate</label>
@@ -100,6 +110,14 @@ $property=Property::findone(["property_id"=>$property_id]);
 <?PHP
 
 $script = <<< JS
+	$('#width').on('blur' , function(){
+
+		var length = $('#length').val();
+		var width = $('#width').val(); 
+		var area = (length * width)/272;
+		area=area.toFixed(3);
+		$("#area").attr('value',area);
+	});
 	$('#updaterecord').click(function(e){  
 		e.preventDefault();
 		var length = $('#length').val();
@@ -137,7 +155,7 @@ $script = <<< JS
 					$('.errorpermerla').html(
 					'<span style="color:red;">Enter per merla rate !</span>'
 					);
-					$('#width').focus();
+					$('#permerla').focus();
 					return false;
 					}else{
 						$('.errorwidth').html("");
@@ -162,14 +180,15 @@ $script = <<< JS
 						}else{
 						$('.errorpermerla').html("");
 					}
+					var areaa=$('#area').val();
 					var type=$("#type").val();
 					var status=$("#status").val();
 					var propertyid = $('.property').attr('id'); 
 					var plotno = $('#plotno').val();  
 					$.ajax({
-						url : "index.php?r=plot/updaterecord",
+						url : "./plot/updaterecord",
 						method:"GET",
-						data:{ length:length, width:width , price:price , permerla:permerla , type:type , status:status,propertyid:propertyid, plotno:plotno },						
+						data:{ length:length, width:width,areaa:areaa , price:price , permerla:permerla , type:type , status:status,propertyid:propertyid, plotno:plotno },						
 							success:function(data){
 								$('.message_box').html(data);
 									}

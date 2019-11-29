@@ -28,8 +28,7 @@ return [
         'attribute'=>'city',
     ],
     [
-        'class' => 'kartik\grid\EditableColumn',
-        'header' => 'No of Plots',
+        'class' => '\kartik\grid\DataColumn',
         'attribute' => 'no_of_plots',
     ],
    

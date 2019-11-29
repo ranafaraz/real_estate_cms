@@ -23,6 +23,9 @@ return [
     ],
     'components' => [
         'request' => [
+            'class' => 'common\components\Request',
+            'web'=> '/backend/web',
+            'adminUrl' => '/admin',
             'csrfParam' => '_csrf-backend',
         ],
         'InsertPlots' => [
@@ -57,17 +60,59 @@ return [
                 ],
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                
+                'admin'  => 'admin',
+                'user'   => 'admin/user/index',
+                'login'  => 'site/login',
+                'logout' => 'site/login',
+                'home' => 'site/index',
+                'passwords'      => 'site/passwords',
+                'user-profile'   => 'site/user-profile',
+                'update-profile' => 'site/update-profile',
+                // organiozation
+                'organization'   => 'organization/index',
+                // user
+                'user'         => 'user/index',
+                //property
+                'property'      =>  'property/index',
+                //plot
+                'plot'      =>  'plot/index',
+                'update-plot'      =>  'plot/load',
+                //buy plot
+                'buy-plot'      =>  'buy-plot/index',
+                'create-buy-plot' => 'buy-plot/create',
+                'update-buy-plot' => 'buy-plot/update',
+                // services
+                'services-type'      =>  'services-type/index',
+                'services-details'      =>  'services-details/index',
+                'provide-services'      =>  'provide-services/index',
+                //customer  and installment
+                'customer'      =>  'customer/index',
+                'create-customer' => 'customer/create',
+                'update-customer' => 'customer/update',
+                'installment-payment'      =>  'installment-payment/index',
+                'installment-status'      =>  'installment-status/index',
+                // accounts
+                'account-nature'      =>  'account-nature/index',
+                'account-head'      =>  'account-head/index',
+                'account-payable'      =>  'account-payable/index',
+                'account-recievable'      =>  'account-recievable/index',
+                'payment'      =>  'payment/index',
+                'receipt'      =>  'receipt/index',
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];

@@ -42,7 +42,7 @@ class Plot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['property_id', 'plot_no', 'plot_length', 'plot_width', 'plot_type', 'plot_price', 'per_merla_rate', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at', 'organization_id'], 'safe'],
+            [['property_id', 'plot_no', 'plot_length', 'plot_width', 'plot_type', 'plot_price', 'per_merla_rate', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at', 'organization_id','area'], 'safe'],
             [['property_id', 'plot_no', 'organization_id'], 'integer'],
             [['plot_type', 'status'], 'string'],
             [['plot_price', 'per_merla_rate'], 'number'],
@@ -69,6 +69,7 @@ class Plot extends \yii\db\ActiveRecord
             'plot_price' => 'Plot Price',
             'per_merla_rate' => 'Per Merla Rate',
             'status' => 'Status',
+            'area' => 'Area (Marla)',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

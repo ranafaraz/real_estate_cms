@@ -20,14 +20,14 @@ use backend\models\Transactions;
 use backend\models\AccountHead;
 use backend\models\ReceiverPayerInfo;
 use backend\models\AccountRecievable;
-
 /**
  * CustomerController implements the CRUD actions for Customer model.
  */
 class CustomerController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * 
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -35,7 +35,8 @@ class CustomerController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
+                    'bulk-delete' => ['post'],
                 ],
             ],
         ];
@@ -46,7 +47,7 @@ class CustomerController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    {    
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -56,27 +57,42 @@ class CustomerController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single Customer model.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+    {   
+        $request = Yii::$app->request;
+        if($request->isAjax){
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                    'title'=> "Customer #".$id,
+                    'content'=>$this->renderAjax('view', [
+                        'model' => $this->findModel($id),
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                ];    
+        }else{
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
      * Creates a new Customer model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * For ajax request will return json object
+     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Customer();
+        $request = Yii::$app->request;
+        $model = new Customer();  
         $plotinfo = new PlotOwnerInfo(); 
         $installmentinfo = new Installment();
         $installmentstatus = new InstallmentStatus();
@@ -84,16 +100,19 @@ class CustomerController extends Controller
         $accounts = new AccountRecievable();
 
 
-        $model->organization_id = \Yii::$app->user->identity->organization_id;
-        $model->created_date = date('Y-m-d'); 
-        $plotinfo->start_date = date('Y-m-d'); 
-        $amount = $model->amount;
-        $first_pay = $model->first_payment;
-        $no_of_installment = $model->no_of_installment;
-        $connection = Yii::$app->db;
-        if ($model->load(Yii::$app->request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
-
-            if($model->checkifexist == '1')
+        
+            /*
+            *   Process for non-ajax request
+            */
+           $model->organization_id = \Yii::$app->user->identity->organization_id;
+            $model->created_date = date('Y-m-d'); 
+            $plotinfo->start_date = date('Y-m-d'); 
+            $amount = $model->amount;
+            $first_pay = $model->first_payment;
+            $no_of_installment = $model->no_of_installment;
+            $connection = Yii::$app->db;
+            if ($model->load($request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
+                if($model->checkifexist == '1')
             {
                 $customerid = $model->customerid;
             }
@@ -260,76 +279,136 @@ class CustomerController extends Controller
                     ]
                 )->execute();
             }
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-            'plotinfo' => $plotinfo,
-            'installmentinfo' => $installmentinfo,
-            'installmentstatus' => $installmentstatus,
-        ]);
+                return $this->redirect(['view', 'id' => $model->customer_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'plotinfo' => $plotinfo,
+                    'installmentinfo' => $installmentinfo,
+                    'installmentstatus' => $installmentstatus,
+                ]);
+            }
+        
+       
     }
 
     /**
      * Updates an existing Customer model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * For ajax request will return json object
+     * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $request = Yii::$app->request;
+        $model = $this->findModel($id);       
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->customer_id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-
-        ]);
-    }
-
-
-    public function actionCheckCustomer($customer_cnic,$customer_type)
-    {
-        $customer_type = CustomerType::find()->where(['customer_type' => $customer_type])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id ])->One();
-        if(isset($customer_type))
-        {
-            $model  = Customer::find()->where(['cnic_no' => $customer_cnic , 'customer_type_id' => $customer_type->customer_type_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
-
-            if(empty($model))
-            {
-                $val = "empty";
-                echo Json::encode($val);
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Update Customer #".$id,
+                    'content'=>$this->renderAjax('update', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                ];         
+            }else if($model->load($request->post()) && $model->save()){
+                return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Customer #".$id,
+                    'content'=>$this->renderAjax('view', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                ];    
+            }else{
+                 return [
+                    'title'=> "Update Customer #".$id,
+                    'content'=>$this->renderAjax('update', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                ];        
             }
-            else
-            {
-                echo Json::encode($model);
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->customer_id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
             }
         }
-        else
-        {
-             echo  "Empty";
-        }
-
-
     }
 
     /**
-     * Deletes an existing Customer model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Delete an existing Customer model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
+        $request = Yii::$app->request;
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+
+
+    }
+
+     /**
+     * Delete multiple existing Customer model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionBulkDelete()
+    {        
+        $request = Yii::$app->request;
+        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
+        foreach ( $pks as $pk ) {
+            $model = $this->findModel($pk);
+            $model->delete();
+        }
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+       
     }
 
     /**
@@ -343,8 +422,8 @@ class CustomerController extends Controller
     {
         if (($model = Customer::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

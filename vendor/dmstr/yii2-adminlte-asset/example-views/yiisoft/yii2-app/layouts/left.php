@@ -16,9 +16,9 @@
         color: #fff !important;
     }
 </style>
-<aside class="main-sidebar" >
+<aside class="main-sidebar fix" >
 
-    <section class="sidebar ">
+    <section class="sidebar">
 
         <!-- Sidebar user panel -->
         <div class="user-panel">

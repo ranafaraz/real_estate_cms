@@ -58,6 +58,11 @@ class SiteController extends Controller
      *
      * @return string
      */
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    } 
+    
     public function actionIndex()
     {
         return $this->render('index');
@@ -76,10 +81,20 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+             if (\Yii::$app->user->can('login')){
+                // yes he is Admin, so redirect page 
+               
+                return $this->goBack();
+            }
+            else { // if he is not an Admin then what :P
+                   // put him out :P Automatically logout. 
+                //Yii::$app->user->logout();
+                // set error on login page. 
+                
+                //redirect again page to login form.
+                return $this->redirect(['login']);
+                }  
         } else {
-            $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);

@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\models\Property;
@@ -14,6 +13,8 @@ use backend\models\CustomerType;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Create Customers';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="customer-form">
@@ -59,7 +60,7 @@ use backend\models\CustomerType;
                     ArrayHelper::map(Property::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->all(),'property_id','property_name'),
                     [
                         'prompt' => 'Select Service Type',
-                        'onchange' => '$.post("index.php?r=plot/list&id='.'"+$(this).val(),function(data){
+                        'onchange' => '$.post("./plot/list&id='.'"+$(this).val(),function(data){
                             $("#plotownerinfo-plot_no").html(data);
 
                         });'
@@ -79,7 +80,7 @@ use backend\models\CustomerType;
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
                             var property_id = $("#plotownerinfo-property_id").val();
-                            $.get("index.php?r=plot/plot&plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
+                            $.get("./plot/plot&plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
                                  $("#installment-total_amount").attr("value",data);
                             });
                              }',
@@ -182,13 +183,20 @@ $script = <<< JS
         else
         if(installment_type == 'Monthly' || installment_type == '6 Months')
         {
-                 if($(this).val() != '1.5' || $(this).val() !=  '2.5' || $(this).val() != '3.5' || $(this).val() != '4.5')
-                {
+                if($(this).val() != '1.5'){
                     $("#installment-no_of_installments option").eq(2).before($("<option></option>").val("1.5").text("1.5 Year"));
+                } 
+                if($(this).val() !=  '2.5'){
                     $("#installment-no_of_installments option").eq(4).before($("<option></option>").val("2.5").text("2.5 Year"));
+                }
+                if($(this).val() != '3.5'){
                     $("#installment-no_of_installments option").eq(6).before($("<option></option>").val("3.5").text("3.5 Year"));
+                }
+                if($(this).val() != '4.5')
+                {
                     $("#installment-no_of_installments option").eq(8).before($("<option></option>").val("4.5").text("4.5 Year"));
                 }
+            
         }
     })
     $('#installment-advance_amount').on('change',function()
@@ -226,7 +234,7 @@ $script = <<< JS
     $('#customer-cnic_no').on('change',function()
     {
         var customer_cnic = $(this).val();
-          $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
+          $.get("./customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
                 {
                     data = JSON.parse(data);
                     if(data == "empty")

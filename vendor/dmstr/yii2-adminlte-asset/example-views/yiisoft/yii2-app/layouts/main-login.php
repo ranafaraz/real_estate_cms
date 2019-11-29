@@ -18,7 +18,7 @@ dmstr\web\AdminLteAsset::register($this);
     <?php $this->head() ?>
     <style type="text/css" >
     	.login-page{
-    		background:url('bg1.jpg') no-repeat center center fixed; 
+    		background:url('uploads/bg1.jpg') no-repeat center center fixed; 
     		background-size: cover;
     	}
     	.login-box-body{

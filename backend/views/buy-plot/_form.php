@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
@@ -10,6 +9,8 @@ use backend\models\CustomerType;
 /* @var $this yii\web\View */
 /* @var $model backend\models\BuyPlot */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Create Buy Plots';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="buy-plot-form">
@@ -137,7 +138,7 @@ $script = <<< JS
     $('#customer-cnic_no').on('change',function()
     {
         var customer_cnic = $(this).val();
-        $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Seller'},function(data)
+        $.get("./customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Seller'},function(data)
         {
             data = JSON.parse(data);
             if(data == "empty")

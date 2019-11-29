@@ -33,7 +33,7 @@ use yii\web\JsonParser;
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
                                 $("#installmentpayment-custm_id").attr("value",$(this).val());
-                             $.get("index.php?r=installment-payment/property&customer_id='.'"+$(this).val(),function(data){
+                             $.get("./installment-payment/property&customer_id='.'"+$(this).val(),function(data){
                                 console.log(data);
                                  $("#installmentpayment-property_id").html(data);
                             });
@@ -52,7 +52,7 @@ use yii\web\JsonParser;
                         ],
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
-                                 $.get("index.php?r=plot-owner-info/plots&customer_id='.'"+$("#installmentpayment-customer_id").val()+"&property_id='.'"+$(this).val(),function(data){
+                                 $.get("./plot-owner-info/plots&customer_id='.'"+$("#installmentpayment-customer_id").val()+"&property_id='.'"+$(this).val(),function(data){
                                     console.log(data);
                                  $("#installmentpayment-plot_no").html(data);
                             });
@@ -121,7 +121,7 @@ $script = <<< JS
        {
             var property_id = $('#installmentpayment-property_id').val();
             var plot_no = $('#installmentpayment-plot_no').val();
-            $.get("index.php?r=installment-payment/price",{property_id:property_id,plot_no:plot_no},function(data)
+            $.get("./installment-payment/price",{property_id:property_id,plot_no:plot_no},function(data)
             {
                 if(data == "empty")
                 {
@@ -140,7 +140,7 @@ $script = <<< JS
                     $('#installmentpayment-date_to_pay').attr('value',data.paid_date);
                     $('#installmentpayment-paid').attr('value',"");
 
-                    $.get("index.php?r=installment-payment/advance",{property_id:property_id,plot_no:plot_no},function(data2)
+                    $.get("./installment-payment/advance",{property_id:property_id,plot_no:plot_no},function(data2)
                     {
                         var data2=JSON.parse(data2);
                         console.log(data2);

@@ -8,17 +8,21 @@ use backend\models\BuyPlotSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
 use backend\models\Transactions;
 use backend\models\Customer;
 use backend\models\AccountHead;
 use backend\models\AccountPayable;
+use yii\web\ArrayHelper;
+
 /**
  * BuyPlotController implements the CRUD actions for BuyPlot model.
  */
 class BuyPlotController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -26,7 +30,8 @@ class BuyPlotController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
+                    'bulk-delete' => ['post'],
                 ],
             ],
         ];
@@ -37,7 +42,7 @@ class BuyPlotController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    {    
         $searchModel = new BuyPlotSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -47,39 +52,56 @@ class BuyPlotController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single BuyPlot model.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+    {   
+        $request = Yii::$app->request;
+        if($request->isAjax){
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                    'title'=> "BuyPlot #".$id,
+                    'content'=>$this->renderAjax('view', [
+                        'model' => $this->findModel($id),
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                ];    
+        }else{
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
      * Creates a new BuyPlot model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * For ajax request will return json object
+     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new BuyPlot();
+        $request = Yii::$app->request;
+        $model = new BuyPlot();  
         $customer_model = new Customer();
         $transaction_model = new Transactions();
         $acc_pay = new AccountPayable();
 
-
+ 
         $model->created_at = date('Y-m-d');
         $model->created_by = \Yii::$app->user->identity->id;
         $model->organization_id = \Yii::$app->user->identity->organization_id;
         $connection = Yii::$app->db;
-
-        if ($model->load(Yii::$app->request->post()) && $customer_model->load(Yii::$app->request->post())) {
-        if($model->remaning_price == 0)
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $customer_model->load(Yii::$app->request->post()) ) {
+                if($model->remaning_price == 0)
         {
             if($customer_model->checkifexist == '1')
             {
@@ -248,52 +270,102 @@ class BuyPlotController extends Controller
                     ]
                 )->execute();
         }
-            
-        return $this->redirect(['view', 'id' => $model->buy_plot_id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-            'customer_model' => $customer_model,
-        ]);
+                return $this->redirect(['view', 'id' => $model->buy_plot_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'customer_model' => $customer_model,
+                ]);
+            }
+        
+       
     }
 
     /**
      * Updates an existing BuyPlot model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * For ajax request will return json object
+     * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $request = Yii::$app->request;
+        $model = $this->findModel($id);      
         $customer_model = Customer::find()->where(['customer_id' => $model->customer_id])->One();
+ 
 
-        if ($model->load(Yii::$app->request->post()) && $customer_model->load(Yii::$app->request->post()) && $model->save() && $customer_model->save()) {
-            
-
-            return $this->redirect(['view', 'id' => $model->buy_plot_id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-            'customer_model' => $customer_model,
-        ]);
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post())  && $customer_model->load(Yii::$app->request->post()) && $model->save() && $customer_model->save()) {
+                return $this->redirect(['view', 'id' => $model->buy_plot_id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                    'customer_model' => $customer_model,
+                ]);
+            }
+        
     }
 
     /**
-     * Deletes an existing BuyPlot model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Delete an existing BuyPlot model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
+        $request = Yii::$app->request;
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+
+
+    }
+
+     /**
+     * Delete multiple existing BuyPlot model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionBulkDelete()
+    {        
+        $request = Yii::$app->request;
+        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
+        foreach ( $pks as $pk ) {
+            $model = $this->findModel($pk);
+            $model->delete();
+        }
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+       
     }
 
     /**
@@ -307,8 +379,8 @@ class BuyPlotController extends Controller
     {
         if (($model = BuyPlot::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

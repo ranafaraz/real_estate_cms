@@ -2,29 +2,30 @@
 
 namespace backend\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\BuyPlot;
 
 /**
- * BuyPlotSearch represents the model behind the search form of `backend\models\BuyPlot`.
+ * BuyPlotSearch represents the model behind the search form about `backend\models\BuyPlot`.
  */
 class BuyPlotSearch extends BuyPlot
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['buy_plot_id', 'created_by', 'updated_by'], 'integer'],
-            [['property_name', 'plot_no', 'plot_area', 'plot_location','city', 'district', 'province', 'created_at', 'updated_at', 'plot_status'], 'safe'],
-            [['plot_price'], 'number'],
+            [['buy_plot_id', 'customer_id', 'created_by', 'updated_by', 'organization_id'], 'integer'],
+            [['property_name', 'plot_no', 'plot_area', 'plot_location', 'city', 'district', 'province', 'buy_date', 'created_at', 'updated_at', 'plot_status'], 'safe'],
+            [['plot_price', 'plot_paid_price'], 'number'],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -43,8 +44,6 @@ class BuyPlotSearch extends BuyPlot
     {
         $query = BuyPlot::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -56,16 +55,18 @@ class BuyPlotSearch extends BuyPlot
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->joinWith('customerId');
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'buy_plot_id' => $this->buy_plot_id,
+            'customer_id' => $this->customer_id,
             'plot_price' => $this->plot_price,
+            'plot_paid_price' => $this->plot_paid_price,
+            'buy_date' => $this->buy_date,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
+            'organization_id' => $this->organization_id,
         ]);
 
         $query->andFilterWhere(['like', 'property_name', $this->property_name])
@@ -75,8 +76,7 @@ class BuyPlotSearch extends BuyPlot
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'district', $this->district])
             ->andFilterWhere(['like', 'province', $this->province])
-            ->andFilterWhere(['like', 'plot_status', $this->plot_status])
-            ->andFilterWhere(['like','name' , $this->customer_id]);
+            ->andFilterWhere(['like', 'plot_status', $this->plot_status]);
 
         return $dataProvider;
     }

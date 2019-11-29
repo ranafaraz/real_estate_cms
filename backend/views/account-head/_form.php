@@ -48,10 +48,10 @@ use backend\models\AccountNature;
 {
     var nature_id=$(this).val();
 
-        $.get('index.php?r=account-nature/get-nature-id',{nature_id:nature_id},function(data){
+        $.get('./account-nature/get-nature-id',{nature_id:nature_id},function(data){
         var data = $.parseJSON(data);
         var headid=data.id;
-         $.get('index.php?r=account-head/get-head-id',{headid:headid},function(heads){
+         $.get('./account-head/get-head-id',{headid:headid},function(heads){
         var heads = $.parseJSON(heads);
 
         if(heads.value=="empty"){

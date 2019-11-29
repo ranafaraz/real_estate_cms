@@ -137,7 +137,7 @@ $('#payment-receiver_payer_id').change(function(){
     $('#payment-debit_account').change(function(){
         rec_id=$('#payment-receiver_payer_id').val();
         deb_id= $('#payment-debit_account').val();
-        $.get('index.php?r=account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
+        $.get('./account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
                 var heads = $.parseJSON(heads);
                 if(heads.value=="empty"){
                     $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
@@ -154,7 +154,7 @@ $('#payment-debit_account').change(function(){
     $('#payment-receiver_payer_id').change(function(){
     rec_id=$('#payment-receiver_payer_id').val();
     deb_id= $('#payment-debit_account').val();
-    $.get('index.php?r=account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
+    $.get('./account-payable/get-receiver-id',{rec_id:rec_id,deb_id:deb_id},function(heads){
     var heads = $.parseJSON(heads);
     if(heads.value=="empty"){
         $("#debitnoamaountmsg").html("Do not have any <b>PAYABLE</b> record againt this account , Make new transaction");
@@ -181,7 +181,7 @@ $('#checkamount'). click(function(){
 $('#payment-debit_account').on('change',function()
 { 
     var id = $(this).val();
-    $.get("index.php?r=account-payable/get-previous",{type:'Expense',id:id},function(data)
+    $.get("./account-payable/get-previous",{type:'Expense',id:id},function(data)
     {
         if(data == "empty")
         {

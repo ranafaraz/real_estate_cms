@@ -11,7 +11,7 @@ use johnitvn\ajaxcrud\BulkButtonWidget;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Payments';?>
-<a href="index.php?r=payment/create" class="btn btn-success" style="color:white !important" title=""> <i class="glyphicon glyphicon-plus"></i> Create Payment</a>
+<a href="./payment/create" class="btn btn-success" style="color:white !important" title=""> <i class="glyphicon glyphicon-plus"></i> Create Payment</a>
 <br/><br>
 <?php
 $this->params['breadcrumbs'][] = $this->title;

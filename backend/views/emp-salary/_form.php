@@ -29,7 +29,7 @@ use dosamigos\datepicker\DatePicker;
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
                             var property_id = $("#plotownerinfo-property_id").val();
-                            $.get("index.php?r=plot/plot&plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
+                            $.get("./plot/plot&plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
                                  $("#installment-total_amount").attr("value",data);
                             });
                              }',
@@ -102,7 +102,7 @@ $(document).ready(function()
     $('#empsalary-emp_id').on('change',function()
     {
         var emp_id = $(this).val();
-        $.get("index.php?r=employee/get-employee",{emp_id:emp_id},function(data)
+        $.get("./employee/get-employee",{emp_id:emp_id},function(data)
              {
                 if(data == "empty")
                 {
@@ -148,7 +148,7 @@ $(document).ready(function()
         var salary_month = $(this).val();
         var emp_id = $('#empsalary-emp_id').val();
         $('#empsalary-salary_month').val(salary_month);
-        $.get("index.php?r=emp-salary/get-data-date",{emp_id:emp_id,month:salary_month},function(data)
+        $.get("./emp-salary/get-data-date",{emp_id:emp_id,month:salary_month},function(data)
         {
             if(data == "empty")
             {

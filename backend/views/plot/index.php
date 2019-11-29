@@ -71,7 +71,7 @@ CrudAsset::register($this);
             
         ?>
         <div class="col-md-3">
-            <table class="table table-stripped <?PHP if($plot->status == 'Sold'){echo 'bg-danger'; }else{echo 'bg-primary';} ?>" onclick="window.open('index.php?r=plot/load&plotid=<?php echo $plot->plot_no; ?>&property_id=<?php echo $selected_id;  ?>')"   style="border-radius: 15px;text-align: center;">
+            <table class="table table-stripped <?PHP if($plot->status == 'Sold'){echo 'bg-danger'; }else{echo 'bg-primary';} ?>" onclick="window.open('./update-plot?plotid=<?php echo $plot->plot_no; ?>&property_id=<?php echo $selected_id;  ?>')"   style="border-radius: 15px;text-align: center;">
                 <tr>
                     <td >Plot No.</td><td><?php echo $plot->plot_no; ?></td>
                 </tr>
@@ -108,7 +108,7 @@ $script=<<<JS
  $("#property-property_id").on('change',function(){
             var property_id=$(this).val();
             $("#selected_id").attr('value',property_id);
-            $.get('index.php?r=property/get-property-id',{property_id:property_id},function(heads){
+            $.get('./property/get-property-id',{property_id:property_id},function(heads){
                 var heads = $.parseJSON(heads);
                 $("#no_plots").attr('value',heads.no_of_plots);
                 }

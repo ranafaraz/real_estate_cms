@@ -28,7 +28,7 @@ $fieldOptions2 = [
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="row">
-            <img src="realestatelogo.png" class="img-responsive "alt="">
+            <img src="uploads/realestatelogo.png" class="img-responsive "alt="">
         </div>
         <p class="login-box-msg">Sign in to start your session</p>
 

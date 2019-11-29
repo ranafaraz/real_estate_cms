@@ -14,6 +14,8 @@ use backend\models\CustomerType;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Update Customers';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="customer-form">
@@ -123,7 +125,7 @@ $script = <<< JS
     $('#customer-cnic_no').on('change',function()
     {
         var customer_cnic = $(this).val();
-          $.get("index.php?r=customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
+          $.get("./customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
                 {
                     data = JSON.parse(data);
                     if(data == "empty")

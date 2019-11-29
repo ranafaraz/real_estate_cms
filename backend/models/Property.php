@@ -59,7 +59,7 @@ class Property extends \yii\db\ActiveRecord
         return [
             'property_id' => 'Property ID',
             'property_name' => 'Property Name',
-            'area' => 'Area',
+            'area' => 'Area (Marla\'s)',
             'property_price' => 'Property Price',
             'location' => 'Address',
             'city' => 'City',
