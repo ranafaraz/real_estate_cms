@@ -29,30 +29,36 @@ CrudAsset::register($this);
     <?php
         $org_id = \yii::$app->user->identity->organization_id;
         $propertymodel= new Property;
-     ?>
-
-
-     <?php $form = ActiveForm::begin(); ?>
-     <?php
-        echo $form->field($propertymodel, 'property_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(Property::find()->where(["organization_id"=>$org_id])->all(), 'property_id', 'property_name'),
-            'language' => 'en',
-            'options' => ['placeholder' => 'Select a state ...'],
-
-            'pluginOptions' => [
-            'allowClear' => true
-        ],])->label(false);
     ?>
 
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-md-3">
+            <?php
+                echo $form->field($propertymodel, 'property_id')->widget(Select2::classname(), [
+                    'data' => ArrayHelper::map(Property::find()->where(["organization_id"=>$org_id])->all(), 'property_id', 'property_name'),
+                    'language' => 'en',
+                    'options' => ['placeholder' => 'Select a state ...'],
+
+                    'pluginOptions' => [
+                    'allowClear' => true
+                ],])->label(false);
+            ?>
+        </div>
    
      <?php $form = ActiveForm::end(); ?>
-     <form method="post" >
-        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
-         <input type="hidden" name="selected_id" id="selected_id" />
-         <input type="hidden" name="no_plots" id="no_plots" />
-         <input type="submit" class="btn btn-success" name="search" value="Search Plots" />
-     </form>
-     <div class="row">
+        <div class="col-md-3">
+            <form method="post" >
+                <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+                 <input type="hidden" name="selected_id" id="selected_id" />
+                 <input type="hidden" name="no_plots" id="no_plots" />
+                 <input type="submit" class="btn btn-success" name="search" value="Search Plots" />
+             </form>
+        </div>
+    
+    </div>
+
+    <div class="row">
     <?php 
     $connection = \Yii::$app->db;
         if(isset($_POST['search'])){
