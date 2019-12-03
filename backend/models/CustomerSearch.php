@@ -18,8 +18,8 @@ class CustomerSearch extends Customer
     public function rules()
     {
         return [
-            [['customer_id', 'customer_type_id', 'user_id', 'organization_id'], 'integer'],
-            [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date'], 'safe'],
+            [['customer_id', 'user_id', 'organization_id'], 'integer'],
+            [['name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'created_date','customer_type_id'], 'safe'],
         ];
     }
 
@@ -54,10 +54,10 @@ class CustomerSearch extends Customer
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->joinWith('customerType');
         $query->andFilterWhere([
             'customer_id' => $this->customer_id,
-            'customer_type_id' => $this->customer_type_id,
+            // 'customer_type_id' => $this->customer_type_id,
             'user_id' => $this->user_id,
             'organization_id' => $this->organization_id,
             'created_date' => $this->created_date,
@@ -66,6 +66,7 @@ class CustomerSearch extends Customer
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'father_name', $this->father_name])
             ->andFilterWhere(['like', 'cnic_no', $this->cnic_no])
+            ->andFilterWhere(['like', 'customer_type.customer_type', $this->customer_type_id])
             ->andFilterWhere(['like', 'contact_no', $this->contact_no])
             ->andFilterWhere(['like', 'email_address', $this->email_address])
             ->andFilterWhere(['like', 'address', $this->address]);

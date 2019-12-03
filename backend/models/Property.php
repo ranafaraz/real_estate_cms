@@ -41,7 +41,8 @@ class Property extends \yii\db\ActiveRecord
     {
         return [
             [['property_name', 'area', 'property_price', 'location', 'city', 'district', 'province', 'created_by', 'created_at', 'organization_id'], 'required'],
-            [['property_price', 'organization_id','no_of_plots'], 'integer'],
+            [[ 'organization_id','no_of_plots'], 'integer'],
+            [['property_price'],'number'],
             [['created_at'], 'safe'],
             [['property_name', 'location'], 'string', 'max' => 250],
             [['area'], 'string', 'max' => 50],
@@ -49,7 +50,7 @@ class Property extends \yii\db\ActiveRecord
             [['created_by'], 'string', 'max' => 150],
             [['organization_id'], 'exist', 'skipOnError' => true, 'targetClass' => Organization::className(), 'targetAttribute' => ['organization_id' => 'id']],
         ];
-    }
+    } 
 
     /**
      * {@inheritdoc}

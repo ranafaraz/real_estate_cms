@@ -36,6 +36,7 @@ class Customer extends \yii\db\ActiveRecord
     public $narration;
     public $status;
     public $only_create_customer;
+    public $file;
     /**
      * {@inheritdoc}
      */
@@ -50,12 +51,14 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+    
             [['customer_type_id', 'name', 'father_name', 'cnic_no', 'contact_no', 'email_address', 'address', 'user_id', 'organization_id', 'created_date'], 'required'],
             [['customer_type_id', 'user_id', 'organization_id'], 'integer'],
             [['created_date','checkifexist','customerid','no_of_installment','narration','status','only_create_customer'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['father_name', 'cnic_no', 'contact_no', 'email_address'], 'string', 'max' => 150],
             [['address'], 'string', 'max' => 250],
+            [['image'], 'string', 'max' => 250],
             [['customer_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => CustomerType::className(), 'targetAttribute' => ['customer_type_id' => 'customer_type_id']],
         ];
     }
@@ -67,13 +70,14 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             'customer_id' => 'Customer ID',
-            'customer_type_id' => 'Customer Type ID',
+            'customer_type_id' => 'Customer Type',
             'name' => 'Name',
             'father_name' => 'Father Name',
             'cnic_no' => 'Cnic No',
             'contact_no' => 'Contact No',
             'email_address' => 'Email Address',
             'address' => 'Address',
+            'file' => 'Customer Picture',
             'user_id' => 'User ID',
             'organization_id' => 'Organization ID',
             'created_date' => 'Created Date',

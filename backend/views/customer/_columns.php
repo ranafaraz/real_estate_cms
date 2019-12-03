@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 
 return [
-    [
+    [ 
         'class' => 'kartik\grid\CheckboxColumn',
         'width' => '20px',
     ],
@@ -10,13 +10,15 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'customer_id',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'customer_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'customer_type_id',
+        'value'  => 'customerType.customer_type',
+
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

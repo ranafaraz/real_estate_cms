@@ -88,6 +88,7 @@ return [
                 'property'      =>  'property/index',
                 //plot
                 'plot'      =>  'plot/index',
+                'search-plot' => 'plot/list',
                 'update-plot'      =>  'plot/load',
                 //buy plot
                 'buy-plot'      =>  'buy-plot/index',
@@ -110,6 +111,8 @@ return [
                 'account-recievable'      =>  'account-recievable/index',
                 'payment'      =>  'payment/index',
                 'receipt'      =>  'receipt/index',
+
+                'cust' => 'customer/check-customer',
             ],
         ],
         

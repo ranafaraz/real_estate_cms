@@ -8,10 +8,13 @@ use backend\models\BuyPlotSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
 use backend\models\Transactions;
 use backend\models\Customer;
 use backend\models\AccountHead;
 use backend\models\AccountPayable;
+use yii\web\ArrayHelper;
 /**
  * BuyPlotController implements the CRUD actions for BuyPlot model.
  */
@@ -66,7 +69,7 @@ class BuyPlotController extends Controller
      * @return mixed
      */
     public function actionCreate()
-    {
+    { 
         $model = new BuyPlot();
         $customer_model = new Customer();
         $transaction_model = new Transactions();

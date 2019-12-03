@@ -17,9 +17,9 @@ $this->title = 'Create Customers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="customer-form">
+<div class="customer-form"> 
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $form->field($model,'checkifexist')->hiddenInput()->label(false)?>
         <?= $form->field($model,'customerid')->hiddenInput()->label(false)?>
     <div class="row">
@@ -49,6 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 <div class="property_installment">
     <div class="row">
         <div class="col-md-12"><h3 style="font-size: 25px;margin-bottom: 20px;" class="text-danger ">Property/Plot Info</h3></div>
@@ -60,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ArrayHelper::map(Property::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->all(),'property_id','property_name'),
                     [
                         'prompt' => 'Select Service Type',
-                        'onchange' => '$.post("./plot/list&id='.'"+$(this).val(),function(data){
+                        'onchange' => '$.post("plot/list?id='.'"+$(this).val(),function(data){
                             $("#plotownerinfo-plot_no").html(data);
 
                         });'
@@ -80,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
                             var property_id = $("#plotownerinfo-property_id").val();
-                            $.get("./plot/plot&plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
+                            $.get("plot/plot?plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
                                  $("#installment-total_amount").attr("value",data);
                             });
                              }',
@@ -234,7 +239,7 @@ $script = <<< JS
     $('#customer-cnic_no').on('change',function()
     {
         var customer_cnic = $(this).val();
-          $.get("./customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
+          $.get("customer/check-customer",{customer_cnic:customer_cnic,customer_type:'Buyer'},function(data)
                 {
                     data = JSON.parse(data);
                     if(data == "empty")

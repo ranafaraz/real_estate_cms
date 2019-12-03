@@ -20,6 +20,8 @@ use backend\models\Transactions;
 use backend\models\AccountHead;
 use backend\models\ReceiverPayerInfo;
 use backend\models\AccountRecievable;
+use yii\web\ForbiddenHttpException;
+use yii\web\UploadedFile;
 /**
  * CustomerController implements the CRUD actions for Customer model.
  */
@@ -112,6 +114,19 @@ class CustomerController extends Controller
             $no_of_installment = $model->no_of_installment;
             $connection = Yii::$app->db;
             if ($model->load($request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
+
+                ////////////////storing image in db
+               $model->image = UploadedFile::getInstance($model,'image');
+                    if(!empty($model->image)){
+                        $imageName = $model->cnic_no; 
+                        $model->image->saveAs('uploads/'.$imageName.'.'.$model->image->extension);
+                        //save the path in the db column
+                        $model->image = 'uploads/'.$imageName.'.'.$model->image->extension;
+                    } else {
+                       $model->image = '0'; 
+                    }
+
+                /////////////////////////////////////////
                 if($model->checkifexist == '1')
             {
                 $customerid = $model->customerid;
@@ -127,6 +142,7 @@ class CustomerController extends Controller
                         'contact_no' => $model->contact_no,
                         'email_address' => $model->email_address,
                         'address' => $model->address,
+                        'image' => $model->image,
                         'user_id' => \Yii::$app->user->identity->id,
                         'organization_id' => \Yii::$app->user->identity->organization_id,
                         'created_date' => date('Y-m-d'),
@@ -279,7 +295,7 @@ class CustomerController extends Controller
                     ]
                 )->execute();
             }
-                return $this->redirect(['view', 'id' => $model->customer_id]);
+                return $this->redirect('customer');
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -425,5 +441,30 @@ class CustomerController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionCheckCustomer($customer_cnic,$customer_type)
+    {
+        $customer_type = CustomerType::find()->where(['customer_type' => $customer_type])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id ])->One();
+        if(isset($customer_type))
+        {
+            $model  = Customer::find()->where(['cnic_no' => $customer_cnic , 'customer_type_id' => $customer_type->customer_type_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+
+            if(empty($model))
+            {
+                $val = "empty";
+                echo Json::encode($val);
+            }
+            else
+            {
+                echo Json::encode($model);
+            }
+        }
+        else
+        {
+             echo  "Empty";
+        }
+
+
     }
 }
