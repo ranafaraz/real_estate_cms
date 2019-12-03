@@ -37,7 +37,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                   <i class="fa fa-users"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=user" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a  class="small-box-footer"><br><!-- More info <i class="fa fa-arrow-circle-right"></i> --></a>
             </div>
 
         </div>
@@ -53,7 +53,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                   <i class="fa fa-product-hunt"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=property" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="property" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -67,7 +67,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-product-hunt"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=plot" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="plot" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
 
         </div>
@@ -82,7 +82,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-briefcase"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=customer" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="customer" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -106,7 +106,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-money"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=installment-status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="installment-status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -129,7 +129,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-money"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=installment-status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="installment-status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -143,7 +143,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-hand-lizard-o"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=services-type" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="services-type" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -157,7 +157,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-user-o"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=services-details" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="services-details" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-md-4">
@@ -171,7 +171,7 @@ $this->title = 'Real Estate Management System';
                 <div class="icon">
                     <i class="fa fa-file-code-o"></i>
                 </div>
-                <a href="/rems/backend/web/index.php?r=provide-services" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="provide-services" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>

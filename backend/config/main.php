@@ -83,7 +83,7 @@ return [
                 // organiozation
                 'organization'   => 'organization/index',
                 // user
-                'user'         => 'user/index',
+                'users'         => 'user/index',
                 //property
                 'property'      =>  'property/index',
                 //plot

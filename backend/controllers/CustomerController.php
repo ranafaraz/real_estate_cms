@@ -285,7 +285,7 @@ class CustomerController extends Controller
                         'transaction_id' => $transaction_model->transaction_id,
                         'type' => 'cash Payment',
                         'narration' => $model->narration,
-                        'debit_account' => $Accounts_model->id,
+                         'debit_account' => $Accounts_model->id,
                         'debit_amount' => $installmentinfo->minus_amonut,
                         'credit_account' => $cash_model->id,
                         'credit_amount' => $installmentinfo->minus_amonut,
