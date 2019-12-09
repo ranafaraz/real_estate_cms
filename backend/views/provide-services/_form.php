@@ -30,7 +30,7 @@ use backend\models\ServicesType;
         ArrayHelper::map(ServicesType::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->all(),'services_type_id','services_type'),
         [
             'prompt' => 'Select Service Type',
-            'onchange' => '$.post("./services-details/list&id='.'"+$(this).val(),function(data){
+            'onchange' => '$.post("./services-details/list?id='.'"+$(this).val(),function(data){
                 $("#provideservices-services_id").html(data);
             });'
         ]

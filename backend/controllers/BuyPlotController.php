@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\controllers;
 
 use Yii;
@@ -85,7 +84,7 @@ class BuyPlotController extends Controller
      * @return mixed
      */
     public function actionCreate()
-    {
+    { 
         $request = Yii::$app->request;
         $model = new BuyPlot();  
         $customer_model = new Customer();
@@ -270,7 +269,7 @@ class BuyPlotController extends Controller
                     ]
                 )->execute();
         }
-                return $this->redirect(['view', 'id' => $model->buy_plot_id]);
+                 return $this->redirect('buy-plot');
             } else {
                 return $this->render('create', [
                     'model' => $model,

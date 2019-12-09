@@ -33,7 +33,7 @@ use yii\web\JsonParser;
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
                                 $("#installmentpayment-custm_id").attr("value",$(this).val());
-                             $.get("./installment-payment/property&customer_id='.'"+$(this).val(),function(data){
+                             $.get("installment-payment/property?customer_id='.'"+$(this).val(),function(data){
                                 console.log(data);
                                  $("#installmentpayment-property_id").html(data);
                             });
@@ -52,7 +52,7 @@ use yii\web\JsonParser;
                         ],
                         'pluginEvents' => [
                             "select2:select" => 'function() { 
-                                 $.get("./plot-owner-info/plots&customer_id='.'"+$("#installmentpayment-customer_id").val()+"&property_id='.'"+$(this).val(),function(data){
+                                 $.get("./plot-owner-info/plots?customer_id='.'"+$("#installmentpayment-customer_id").val()+"&property_id='.'"+$(this).val(),function(data){
                                     console.log(data);
                                  $("#installmentpayment-plot_no").html(data);
                             });

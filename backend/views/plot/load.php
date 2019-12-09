@@ -63,7 +63,7 @@ $property=Property::findone(["property_id"=>$property_id]);
 		    	<div class="col-md-4">
 		    	    <div class="form-group">
 			        	<label for="width">Plot Area</label>
-			        	<input type="text" name="area" readonly="readonly"  value="<?php echo $row->area; ?>" class="form-control" id="area" />
+			        	<input type="text" name="area" readonly="readonly"  value="<?php echo $row->area; ?>" class="form-control" id="area"  />
 			        	<div class="errorarea" style="margin:10px 0px;"></div>
 			        </div>
 		    	</div>
@@ -81,7 +81,7 @@ $property=Property::findone(["property_id"=>$property_id]);
 		    	<div class="col-md-4">
 		    		<div class="form-group">
 			        	<label for="permerla">Per Marla rate</label>
-			        	<input type="text" name="permerla"  value="<?php echo $row->per_merla_rate; ?>" class="form-control" id="permerla" />
+			        	<input type="text" name="permerla" readonly="readonly"  value="<?php echo $row->per_merla_rate; ?>" class="form-control" id="permerla" />
 			        	<div class="errorpermerla" style="margin:10px 0px;"></div>
 			        </div>
 		    	</div>
@@ -110,6 +110,14 @@ $property=Property::findone(["property_id"=>$property_id]);
 <?PHP
 
 $script = <<< JS
+	$("#price").on('input',function(){
+		var total_price = $("#price").val();
+		var merlas= $('#area').val();
+
+		var permerlarate= total_price/merlas;
+		permerlarate = permerlarate.toFixed(3);
+		$("#permerla").attr('value',permerlarate);
+	});
 	$('#width').on('blur' , function(){
 
 		var length = $('#length').val();
@@ -193,7 +201,9 @@ $script = <<< JS
 								$('.message_box').html(data);
 									}
 						});
-	}); 
+	});
+
+
 
 
 JS;

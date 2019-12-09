@@ -8,29 +8,33 @@ use Yii;
  * This is the model class for table "buy_plot".
  *
  * @property int $buy_plot_id
+ * @property int $customer_id
  * @property string $property_name
  * @property string $plot_no
  * @property string $plot_area
- * @property double $plot_price
+ * @property float $plot_price
+ * @property float $plot_paid_price
  * @property string $plot_location
- * @property string $seller_name
- * @property string $seller_cnic
- * @property string $seller_phno
- * @property string $seller_address
  * @property string $city
  * @property string $district
  * @property string $province
+ * @property string $buy_date
  * @property string $created_at
  * @property int $created_by
- * @property string $updated_at
- * @property int $updated_by
+ * @property string|null $updated_at
+ * @property int|null $updated_by
  * @property string $plot_status
+ * @property int $organization_id
+ *
+ * @property Organization $organization
+ * @property Customer $customer
  */
 class BuyPlot extends \yii\db\ActiveRecord
 {
     public $narration;
     public $remaning_price;
     public $due_date;
+    /**
     /**
      * {@inheritdoc}
      */
@@ -45,13 +49,15 @@ class BuyPlot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['property_name', 'plot_no', 'plot_area', 'plot_price', 'plot_location', 'city', 'district', 'province', 'created_at', 'created_by', 'plot_status','plot_paid_price','remaning_price','due_date'], 'required'],
-            [['plot_price','plot_paid_price'], 'number'],
-            [['plot_location','plot_status'], 'string'],
-            [['created_at', 'updated_at','narration','paid_price','remaning_price','due_date'], 'safe'],
-            [['created_by', 'updated_by'], 'integer'],
+            [['customer_id', 'property_name', 'plot_no', 'plot_area', 'plot_price', 'plot_paid_price', 'plot_location', 'city', 'district', 'province', 'buy_date', 'created_at', 'created_by', 'plot_status', 'organization_id'], 'required'],
+            [['customer_id', 'created_by', 'updated_by', 'organization_id'], 'integer'],
+            [['plot_price', 'plot_paid_price'], 'number'],
+            [['plot_location', 'plot_status'], 'string'],
+            [['buy_date', 'created_at', 'updated_at','narration','due_date','remaning_price'], 'safe'],
             [['property_name'], 'string', 'max' => 255],
-            [['plot_no', 'plot_area','city', 'district', 'province'], 'string', 'max' => 50],
+            [['plot_no', 'plot_area', 'city', 'district', 'province'], 'string', 'max' => 50],
+            [['organization_id'], 'exist', 'skipOnError' => true, 'targetClass' => Organization::className(), 'targetAttribute' => ['organization_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
         ];
     }
 
@@ -61,30 +67,40 @@ class BuyPlot extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            // 'buy_plot_id' => 'Buy Plot ID',
-            'customerId.name' => 'Customer Name',
+            'buy_plot_id' => 'Buy Plot ID',
+            'customer_id' => 'Customer Name',
             'property_name' => 'Property Name',
             'plot_no' => 'Plot No',
             'plot_area' => 'Plot Area',
             'plot_price' => 'Plot Price',
+            'plot_paid_price' => 'Plot Paid Price',
             'plot_location' => 'Plot Location',
             'city' => 'City',
             'district' => 'District',
             'province' => 'Province',
+            'buy_date' => 'Buy Date',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
             'plot_status' => 'Plot Status',
+            'organization_id' => 'Organization ID',
         ];
     }
 
-    public function getCustomerId()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrganization()
     {
-        return $this->hasMany(Customer::className(), ['customer_id' => 'customer_id']);
+        return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
     }
-    public function getOrganizationId()
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomer()
     {
-        return $this->hasMany(Organization::className(), ['id' => 'organization_id']);
+        return $this->hasOne(Customer::className(), ['customer_id' => 'customer_id']);
     }
 }

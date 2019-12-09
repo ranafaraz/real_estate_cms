@@ -40,7 +40,8 @@ class Installment extends \yii\db\ActiveRecord
         return [
             [['installment_type', 'advance_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','plot_no','minus_amonut'], 'required'],
             [[ 'customer_id', 'property_id', 'organization_id','plot_no'], 'integer'],
-            [['installment_type', 'advance_amount', 'total_amount'], 'string', 'max' => 250],
+            [['installment_type'], 'string', 'max' => 250],
+            [[ 'advance_amount', 'total_amount'],'number'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => Property::className(), 'targetAttribute' => ['property_id' => 'property_id']],
             [['organization_id'], 'exist', 'skipOnError' => true, 'targetClass' => Organization::className(), 'targetAttribute' => ['organization_id' => 'id']],
