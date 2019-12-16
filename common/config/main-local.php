@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=rems',
-            'username' => 'root',
-            'password' => '',
+            'dsn' => 'mysql:host=localhost;dbname=dexdmvtx_rems_db',
+            'username' => 'dexdmvtx_admin_rems',
+            'password' => 'admin_rems',
             'charset' => 'utf8',
         ],
         'mailer' => [

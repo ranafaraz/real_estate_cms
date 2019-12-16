@@ -1154,3 +1154,139 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1575099865.351
     'REQUEST_TIME' => 1575099865
 ]
+2019-12-06 01:29:31 [196.62.198.6][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 196.62.198.6
+    in /home/dexdmvtx/public_html/rems/frontend/views/layouts/main.php:80
+    in /home/dexdmvtx/public_html/rems/frontend/controllers/SiteController.php:77
+2019-12-06 01:29:31 [196.62.198.6][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 196.62.198.6
+2019-12-06 01:29:31 [196.62.198.6][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'LSPHP_ENABLE_USER_INI' => 'on'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'TEMP' => '/tmp'
+    'TMP' => '/tmp'
+    'TMPDIR' => '/tmp'
+    'PWD' => '/'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'CONTENT_LENGTH' => '0'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D'
+    'HTTP_HOST' => 'dexdevs.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    'HTTP_X_FORWARDED_FOR' => '196.62.198.6'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'REDIRECT_HTTPS' => 'off'
+    'REDIRECT_SERVER_PORT' => '80'
+    'REDIRECT_UNIQUE_ID' => 'Xen1S7o2S6AJJVEEJsQvhwAAAFg'
+    'REDIRECT_STATUS' => '200'
+    'HTTPS' => 'off'
+    'SERVER_PORT' => '80'
+    'UNIQUE_ID' => 'Xen1S7o2S6AJJVEEJsQvhwAAAFg'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'dexdevs.com'
+    'SERVER_ADDR' => '198.54.121.145'
+    'REMOTE_ADDR' => '196.62.198.6'
+    'DOCUMENT_ROOT' => '/home/dexdmvtx/public_html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/dexdmvtx/public_html'
+    'SERVER_ADMIN' => 'webmaster@dexdevs.com'
+    'SCRIPT_FILENAME' => '/home/dexdmvtx/public_html/rems/frontend/web/index.php'
+    'REMOTE_PORT' => '54546'
+    'REDIRECT_URL' => '/rems/'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/rems/'
+    'SCRIPT_NAME' => '/rems/frontend/web/index.php'
+    'PHP_SELF' => '/rems/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1575613771.2908
+    'REQUEST_TIME' => 1575613771
+]
+2019-12-06 01:29:31 [196.62.198.6][-][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: PHP Notice 'yii\base\ErrorException' with message 'unserialize(): Error at offset 0 of 16315 bytes' 
+
+in /home/dexdmvtx/public_html/rems/vendor/opis/closure/functions.php:34
+
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(8, 'unserialize(): ...', '/home/dexdmvtx/...', 34, Array)
+#1 /home/dexdmvtx/public_html/rems/vendor/opis/closure/functions.php(34): unserialize('<<<<<<< HEAD\na:...')
+#2 /home/dexdmvtx/public_html/rems/vendor/yiisoft/yii2-debug/src/LogTarget.php(105): Opis\Closure\unserialize('<<<<<<< HEAD\na:...')
+#3 /home/dexdmvtx/public_html/rems/vendor/yiisoft/yii2-debug/src/LogTarget.php(80): yii\debug\LogTarget->updateIndexFile('/home/dexdmvtx/...', Array)
+#4 /home/dexdmvtx/public_html/rems/vendor/yiisoft/yii2-debug/src/LogTarget.php(136): yii\debug\LogTarget->export()
+#5 /home/dexdmvtx/public_html/rems/vendor/yiisoft/yii2/log/Dispatcher.php(189): yii\debug\LogTarget->collect(Array, true)
+#6 /home/dexdmvtx/public_html/rems/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#7 [internal function]: yii\log\Logger->flush(true)
+#8 {main}
+2019-12-06 01:29:31 [196.62.198.6][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-backend' => '2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa:2:{i:0;s:17:\"_identity-backend\";i:1;s:47:\"[74,\"iFISDX0OMTSGTWyko_rObETNJMeJivkr\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'LSPHP_ENABLE_USER_INI' => 'on'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'TEMP' => '/tmp'
+    'TMP' => '/tmp'
+    'TMPDIR' => '/tmp'
+    'PWD' => '/'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9,ur;q=0.8'
+    'CONTENT_LENGTH' => '0'
+    'HTTP_COOKIE' => '_identity-backend=2ad419244364f02923bfb8af361f94cbfc3f6177d41357f3299abe3a0305ae3aa%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A47%3A%22%5B74%2C%22iFISDX0OMTSGTWyko_rObETNJMeJivkr%22%2C2592000%5D%22%3B%7D'
+    'HTTP_HOST' => 'dexdevs.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    'HTTP_X_FORWARDED_FOR' => '196.62.198.6'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'REDIRECT_HTTPS' => 'off'
+    'REDIRECT_SERVER_PORT' => '80'
+    'REDIRECT_UNIQUE_ID' => 'Xen1S7o2S6AJJVEEJsQvhwAAAFg'
+    'REDIRECT_STATUS' => '200'
+    'HTTPS' => 'off'
+    'SERVER_PORT' => '80'
+    'UNIQUE_ID' => 'Xen1S7o2S6AJJVEEJsQvhwAAAFg'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'dexdevs.com'
+    'SERVER_ADDR' => '198.54.121.145'
+    'REMOTE_ADDR' => '196.62.198.6'
+    'DOCUMENT_ROOT' => '/home/dexdmvtx/public_html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/dexdmvtx/public_html'
+    'SERVER_ADMIN' => 'webmaster@dexdevs.com'
+    'SCRIPT_FILENAME' => '/home/dexdmvtx/public_html/rems/frontend/web/index.php'
+    'REMOTE_PORT' => '54546'
+    'REDIRECT_URL' => '/rems/'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/rems/'
+    'SCRIPT_NAME' => '/rems/frontend/web/index.php'
+    'PHP_SELF' => '/rems/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1575613771.2908
+    'REQUEST_TIME' => 1575613771
+]
