@@ -3,3 +3,4 @@
 # local uploads directory
 /common/config/
 common/config
+/.phpintel
