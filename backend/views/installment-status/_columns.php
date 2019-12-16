@@ -14,10 +14,10 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'id',
     // ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'installment_id',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'installment_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'installment_no',
@@ -30,14 +30,14 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'status',
     ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'date',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'date',
+        'attribute'=>'paid_date',
     ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'paid_date',
-    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'created_by',

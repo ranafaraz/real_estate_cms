@@ -58,7 +58,7 @@ class InstallmentStatus extends \yii\db\ActiveRecord
             'installment_amount' => 'Installment Amount',
             'status' => 'Status',
             'date' => 'Date',
-            'paid_date' => 'Paid Date',
+            'paid_date' => 'Due Date',
             'created_by' => 'Created By',
         ];
     }

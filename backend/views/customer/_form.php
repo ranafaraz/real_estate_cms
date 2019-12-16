@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model,'customerid')->hiddenInput()->label(false)?>
     <div class="row">
         <div class="col-md-3">
-            <?= $form->field($model, 'cnic_no')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'cnic_no')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '99999-9999999-9']) ?>
         </div>
         <div class="col-md-3">
              <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -87,6 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             var property_id = $("#plotownerinfo-property_id").val();
                             $.get("plot/plot?plot_no='.'"+$(this).val()+"&property_id='.'"+property_id,function(data){
                                  $("#installment-total_amount").attr("value",data);
+                                 $("#installment-advance_amount").attr("value",data*.25);
                             });
                              }',
                         ]
@@ -125,39 +126,53 @@ $this->params['breadcrumbs'][] = $this->title;
                 ])
             ?>
         </div>
-    
-        <div class="col-md-4">
-            <?= $form->field($installmentinfo, 'advance_amount')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-2">
+            <label for="advancepercent">Advance Percent</label>
+            <select name="select" id="advancepercent" class="form-control">
+                <?php 
+                    for ($i = 5; $i <= 75 ; $i=$i+5) {
+                    ?>
+                        <option value="<?php echo $i/100; ?>" <?php if($i==25){echo "selected";} ?> > <?php echo $i; ?></option>
+                    <?php
+                    }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($installmentinfo, 'advance_amount')->textInput(['maxlength' => true,'readonly'=>true]) ?>
         </div>  
         <div class="col-md-4">
-            <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true,'readonly'=>true]) ?>
 
 
 
             
         </div>  
             <?= $form->field($installmentinfo, 'minus_amonut')->hiddenInput(['maxlength' => true])->label(false) ?>
+        
+    </div>
+    <div class="row">
         <div class="col-md-4">
-            <?PHP $data = ['1' => '1 Year', '1.5' => '1.5 Year','2'=>'2 Year','2.5'=>'2.5 Year', '3' => '3 Year' ,'3.5' => '3.5 Year' , '4' => '4 Year','4.5' => '4.5 Year','5'=>'5 Year'];?>
-                <?= $form->field($installmentinfo, 'no_of_installments')->widget(Select2::classname(), [
-                'data' => $data,
-                'language' => 'en',
-                'options' => ['placeholder' => 'Select a state ...'],
-                'pluginOptions' => [
-                    'allowClear' => true
-                    ],
-                ])
-            ?>
-        </div> 
+                <?PHP $data = ['1' => '1 Year', '1.5' => '1.5 Year','2'=>'2 Year','2.5'=>'2.5 Year', '3' => '3 Year' ,'3.5' => '3.5 Year' , '4' => '4 Year','4.5' => '4.5 Year','5'=>'5 Year'];?>
+                    <?= $form->field($installmentinfo, 'no_of_installments')->widget(Select2::classname(), [
+                    'data' => $data,
+                    'language' => 'en',
+                    'options' => ['placeholder' => 'Select a state ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                        ],
+                    ])
+                ?>
+            </div> 
 
-       <!--  -->
-    <div class="col-md-4">
-        <?= $form->field($installmentstatus, 'installment_amount')->textInput() ?>
-    </div>
+           <!--  -->
         <div class="col-md-4">
-        <?= $form->field($model, 'narration')->textInput() ?>
+            <?= $form->field($installmentstatus, 'installment_amount')->textInput() ?>
+        </div>
+            <div class="col-md-4">
+            <?= $form->field($model, 'narration')->textInput() ?>
+        </div>
     </div>
-</div>
 
 
     </div>
@@ -171,6 +186,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <?PHP
 
 $script = <<< JS
+    $("#advancepercent").on('change',function(){
+        var total = $("#installment-total_amount").val();
+        var percent = $("#advancepercent").val();
+        $("#installment-advance_amount").attr('value',total*percent);
+        });
         $('#installment-installment_type').on('change',function()
     {
         var installment_type = $(this).val();
@@ -215,6 +235,7 @@ $script = <<< JS
     {   
         if($('#installment-installment_type').val() == 'Monthly')
             {
+
                 var pro_amount = $('#installment-no_of_installments').val() * 12;
                 var remaning_money = $('#installment-minus_amonut').val();
                 var rem = remaning_money/pro_amount;

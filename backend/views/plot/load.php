@@ -73,18 +73,19 @@ $property=Property::findone(["property_id"=>$property_id]);
 		    <div class="row">
 		    	<div class="col-md-4">
 		    		<div class="form-group">
-			        	<label for="price">Plot Price</label>
-			        	<input type="text" name="price"  value="<?php echo $row->plot_price; ?>" class="form-control" id="price" />
-			        	<div class="errorprice" style="margin:10px 0px;"></div>
+			        	<label for="permerla">Per Marla rate</label>
+			        	<input type="text" name="permerla"   value="<?php echo $row->per_merla_rate; ?>" class="form-control" id="permerla" />
+			        	<div class="errorpermerla" style="margin:10px 0px;"></div>
 			        </div>
 		    	</div>
 		    	<div class="col-md-4">
 		    		<div class="form-group">
-			        	<label for="permerla">Per Marla rate</label>
-			        	<input type="text" name="permerla" readonly="readonly"  value="<?php echo $row->per_merla_rate; ?>" class="form-control" id="permerla" />
-			        	<div class="errorpermerla" style="margin:10px 0px;"></div>
+			        	<label for="price">Plot Price</label>
+			        	<input type="text" name="price"  readonly="readonly" value="<?php echo $row->plot_price; ?>" class="form-control" id="price" />
+			        	<div class="errorprice" style="margin:10px 0px;"></div>
 			        </div>
 		    	</div>
+		    	
 		    	<div class="col-md-4">
 		    		<div class="form-group">
 			        	<label for="status">Plot Status</label>
@@ -110,13 +111,13 @@ $property=Property::findone(["property_id"=>$property_id]);
 <?PHP
 
 $script = <<< JS
-	$("#price").on('input',function(){
-		var total_price = $("#price").val();
+	$("#permerla").on('input',function(){
+		var total_price = $("#permerla").val();
 		var merlas= $('#area').val();
 
-		var permerlarate= total_price/merlas;
+		var permerlarate= total_price*merlas;
 		permerlarate = permerlarate.toFixed(3);
-		$("#permerla").attr('value',permerlarate);
+		$("#price").attr('value',permerlarate);
 	});
 	$('#width').on('blur' , function(){
 
