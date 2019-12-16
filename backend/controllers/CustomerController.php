@@ -133,6 +133,11 @@ class CustomerController extends Controller
             }
             else
             {
+                if(empty($model->image)){
+                    $cimage= "uploads/usr-default.png";
+                }else{
+                    $cimage=$model->image;
+                }
                 $connection->createCommand()->insert('customer',
                     [
                         'customer_type_id' => $model->customer_type_id,
@@ -142,7 +147,7 @@ class CustomerController extends Controller
                         'contact_no' => $model->contact_no,
                         'email_address' => $model->email_address,
                         'address' => $model->address,
-                        'image' => $model->image,
+                        'image' => $cimage,
                         'user_id' => \Yii::$app->user->identity->id,
                         'organization_id' => \Yii::$app->user->identity->organization_id,
                         'created_date' => date('Y-m-d'),

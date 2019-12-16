@@ -224,17 +224,15 @@ $script = <<< JS
             
         }
     })
-    $('#installment-advance_amount').on('change',function()
-    {
-        var advance = $('#installment-advance_amount').val();
-        var total = $('#installment-total_amount').val();
-        var remaning_installmented_amount = total - advance;
-        $('#installment-minus_amonut').attr('value',remaning_installmented_amount);
-    })
+   
     $('#installment-no_of_installments').on('change',function()
     {   
         if($('#installment-installment_type').val() == 'Monthly')
             {
+                var advance = $('#installment-advance_amount').val();
+                var total = $('#installment-total_amount').val();
+                var remaning_installmented_amount = total - advance;
+                $('#installment-minus_amonut').attr('value',remaning_installmented_amount);
 
                 var pro_amount = $('#installment-no_of_installments').val() * 12;
                 var remaning_money = $('#installment-minus_amonut').val();
