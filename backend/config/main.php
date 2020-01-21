@@ -113,6 +113,8 @@ return [
                 'receipt'      =>  'receipt/index',
 
                 'cust' => 'customer/check-customer',
+                 'pay-purchase-invoice' => 'pay-purchase-invoice/index',
+                'purchase-invoice-detail' => 'pay-purchase-invoice/view'
             ],
         ],
         
