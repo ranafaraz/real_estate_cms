@@ -71,7 +71,7 @@ class Plot extends \yii\db\ActiveRecord
             'status' => 'Status',
             'area' => 'Area (Marla)',
             'created_by' => 'Created By',
-            'created_at' => 'Created At',
+            'created_at' => 'Sold Date',
             'updated_by' => 'Updated By',
             'updated_at' => 'Updated At',
             'organization_id' => 'Organization ID',

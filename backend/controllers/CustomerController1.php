@@ -271,6 +271,11 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function actionCustomerInfo()
+    {
+        return $this->render('customer-info');
+    }
+
     /**
      * Updates an existing Customer model.
      * If update is successful, the browser will be redirected to the 'view' page.

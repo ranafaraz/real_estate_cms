@@ -102,6 +102,7 @@ return [
                 'customer'      =>  'customer/index',
                 'create-customer' => 'customer/create',
                 'update-customer' => 'customer/update',
+                'customer-info' => 'customer/view',
                 'installment-payment'      =>  'installment-payment/index',
                 'installment-status'      =>  'installment-status/index',
                 // accounts
