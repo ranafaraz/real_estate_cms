@@ -24,6 +24,8 @@ use Yii;
 class Installment extends \yii\db\ActiveRecord
 {
     public $minus_amonut;
+    public $distype;
+    public $disper;
     /**
      * {@inheritdoc}
      */
@@ -40,6 +42,7 @@ class Installment extends \yii\db\ActiveRecord
         return [
             [['installment_type', 'advance_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','plot_no','minus_amonut'], 'required'],
             [[ 'customer_id', 'property_id', 'organization_id','plot_no'], 'integer'],
+            [['distype','disper','discount_amount'],'safe'],
             [['installment_type'], 'string', 'max' => 250],
             [[ 'advance_amount', 'total_amount'],'number'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
@@ -59,6 +62,9 @@ class Installment extends \yii\db\ActiveRecord
             'installment_type' => 'Installment Type',
             'advance_amount' => 'Advance Amount',
             'total_amount' => 'Total Amount',
+            'disper' => 'Discount Percent',
+            'distype' => 'Discount Type',
+            'discount_amount'=>'Discount Amount',
             'no_of_installments' => 'No Of Installments',
             'customer_id' => 'Customer ID',
             'property_id' => 'Property ID',

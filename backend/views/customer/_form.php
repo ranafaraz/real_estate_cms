@@ -126,7 +126,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 ])
             ?>
         </div>
+         
+        <div class="col-md-4">
+            <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true,'readonly'=>true]) ?> 
+        </div>  
         <div class="col-md-2">
+             <?= $form->field($installmentinfo,'distype')->dropDownList(
+                        ['amount'=>'Amount','percent'=>'Percent'],
+                    ) ?>
+            
+        </div>
+        <div class="col-md-2" id="discount_percent_div" style="display: none;" >
+            <label for="disper">Discount Percent</label>
+            <select name="select" id="disper" class="form-control">
+                <option value="-1">Not Set</option>
+                <?php 
+                    for ($j = 1; $j <= 50 ; $j=$j+1) {
+                    ?>
+                        <option value="<?php echo $j/100; ?>" > <?php echo $j; ?></option>
+                    <?php
+                    }
+                ?>
+            </select>
+        </div>
+            <?= $form->field($installmentinfo, 'minus_amonut')->hiddenInput(['maxlength' => true])->label(false) ?>
+        
+        
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($installmentinfo, 'discount_amount')->textInput() ?>
+        </div>
+        <div class="col-md-4">
             <label for="advancepercent">Advance Percent</label>
             <select name="select" id="advancepercent" class="form-control">
                 <?php 
@@ -138,18 +169,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </select>
         </div>
-        <div class="col-md-2">
-            <?= $form->field($installmentinfo, 'advance_amount')->textInput(['maxlength' => true,'readonly'=>true]) ?>
-        </div>  
         <div class="col-md-4">
-            <?= $form->field($installmentinfo, 'total_amount')->textInput(['maxlength' => true,'readonly'=>true]) ?>
-
-
-
-            
-        </div>  
-            <?= $form->field($installmentinfo, 'minus_amonut')->hiddenInput(['maxlength' => true])->label(false) ?>
-        
+            <?= $form->field($installmentinfo, 'advance_amount')->textInput(['maxlength' => true,'readonly'=>true]) ?>
+        </div> 
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -186,6 +208,28 @@ $this->params['breadcrumbs'][] = $this->title;
 <?PHP
 
 $script = <<< JS
+    $('#installment-distype').on('change',function(){
+        var valuedis=$('#installment-distype').val();
+        if(valuedis=='amount'){
+            $('#discount_percent_div').css('display','none');
+        }
+         if(valuedis=='percent'){
+            $('#discount_percent_div').css('display','block');
+        }
+    });
+
+    $('#disper').on('input',function(){
+        var discount_percent=$('#disper').val();
+        var total_amount=$('#installment-total_amount').val();
+        if(discount_percent == -1){
+            var disam=0;
+        }else{
+            var disam=total_amount*discount_percent;    
+        }
+        
+        $('#installment-discount_amount').attr('value',disam);
+    });
+
     $("#advancepercent").on('change',function(){
         var total = $("#installment-total_amount").val();
         var percent = $("#advancepercent").val();
@@ -231,7 +275,9 @@ $script = <<< JS
             {
                 var advance = $('#installment-advance_amount').val();
                 var total = $('#installment-total_amount').val();
+                var discount_amount = $('#installment-discount_amount').val();
                 var remaning_installmented_amount = total - advance;
+                remaning_installmented_amount = remaning_installmented_amount - discount_amount;
                 $('#installment-minus_amonut').attr('value',remaning_installmented_amount);
 
                 var pro_amount = $('#installment-no_of_installments').val() * 12;

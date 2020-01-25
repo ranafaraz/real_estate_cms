@@ -37,6 +37,7 @@ class Customer extends \yii\db\ActiveRecord
     public $status;
     public $only_create_customer;
     public $file;
+    
     /**
      * {@inheritdoc}
      */
