@@ -211,14 +211,16 @@ $script = <<< JS
     $('#installment-distype').on('change',function(){
         var valuedis=$('#installment-distype').val();
         if(valuedis=='amount'){
+            $("#installment-discount_amount").prop("readonly",false);
             $('#discount_percent_div').css('display','none');
         }
          if(valuedis=='percent'){
+            $("#installment-discount_amount").prop("readonly",true);
             $('#discount_percent_div').css('display','block');
         }
     });
 
-    $('#disper').on('input',function(){
+    $('#disper').on('change',function(){
         var discount_percent=$('#disper').val();
         var total_amount=$('#installment-total_amount').val();
         if(discount_percent == -1){

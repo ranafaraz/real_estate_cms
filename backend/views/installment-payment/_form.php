@@ -138,7 +138,7 @@ $script = <<< JS
                     $('#installmentpayment-installment_amount').attr('value',data.installment_amount);
                     
                     $('#installmentpayment-date_to_pay').attr('value',data.paid_date);
-                    $('#installmentpayment-paid').attr('value',"");
+                    $('#installmentpayment-paid').attr('value',data.installment_amount);
 
                     $.get("./installment-payment/advance",{property_id:property_id,plot_no:plot_no},function(data2)
                     {

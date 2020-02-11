@@ -32,10 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			    <?PHP
 			    foreach ($prop as  $value) {
 			    	$prop_name = Property::find()->where(['property_id' => $value->property_id])->One();
-			    	$plot = Plot::find()->where(['plot_no' => $value->plot_no])->One();
+			    	$plot = Plot::find()->where(['plot_no' => $value->plot_no])->andwhere(['property_id'=>$value->property_id])->One();
 			    	?>
 
-			    	 <li><a data-toggle="tab" href="#<?PHP echo $value->property_id;?>"><?PHP echo ucwords($prop_name->property_name) . ' ' . $plot->plot_no?></a></li>
+			    	 <li><a data-toggle="tab" href="#<?PHP echo $value->property_id.$plot->plot_no;?>"><?PHP echo ucwords($prop_name->property_name) . ' ' . $plot->plot_no?></a></li>
 			    	<?PHP
 			    }
 			    ?>
@@ -66,26 +66,52 @@ $this->params['breadcrumbs'][] = $this->title;
 	    			    <?PHP
 			    foreach ($prop as  $value) {
 			    	$prop_name = Property::find()->where(['property_id' => $value->property_id])->One();
-			    	$plot = Plot::find()->where(['plot_no' => $value->plot_no])->One();
+			    	$plot = Plot::find()->where(['plot_no' => $value->plot_no])->andwhere(['property_id'=>$value->property_id])->One();
 			    	$installment = Installment::find()->where(['customer_id' => $id])->andwhere(['property_id' => $value->property_id])->andwhere(['plot_no' => $value->plot_no])->One();
 			    	$ins_sta = InstallmentStatus::find()->where(['installment_id' => $installment->installment_id])->All();
 			    	?>
-			<div id="<?PHP echo $value->property_id?>" class="tab-pane fade">
-	      		<h3>Detail Of Property <span class="text-danger"><?PHP echo ucwords($prop_name->property_name)?></span></h3>
-	      		<h4 class="text-info text-left">Plot Detail</h4>
-			      <p><?= DetailView::widget([
-        'model' => $plot,
-        'attributes' => [
-            'plot_no',
-            'plot_length',
-            'plot_width',
-            'plot_type',
-            'plot_price',
-            'per_merla_rate',
-            'status',
-            'created_at',
-        ],
-    ]) ?>
+			<div id="<?PHP echo $value->property_id.$plot->plot_no;?>" class="tab-pane fade">
+	      		<h3>Detail Of Property <span class="text-danger"><?PHP echo ucwords($prop_name->property_name)?> plot # <?= $plot->plot_no ?></span></h3>
+	      		
+                <div class="row">
+
+                    <div class="col-md-7">
+                        <h4 class="text-info text-left">Plot Detail</h4>
+                        <?= DetailView::widget([
+                            'model' => $plot,
+                            'attributes' => [
+                                'plot_no',
+                                'plot_length',
+                                'plot_width',
+                                'plot_type',
+                                'plot_price',
+                                'per_merla_rate',
+                                // 'status',
+                                'created_at',
+                            ],
+                        ]) ?>
+                    </div>
+                    <?php 
+                        $installments = Installment::find()->where(['plot_no'=>$value->plot_no])->andwhere(['property_id'=>$value->property_id])->andwhere(['customer_id'=>$id])->one();
+                    ?>
+                    <div class="col-md-5">
+                        <h4 class="text-info text-left">Installment Detail</h4>
+                        <div class="table-responsive">
+                             <table class="table table-striped">
+                                    <tr>
+                                        <th>Installment Type</th>
+                                        <td><?= $installments->installment_type ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>No of Installments</th>
+                                        <td><?= $installments->no_of_installments ?></td>
+                                    </tr>
+                            </table>
+                        </div>
+                       
+                    </div>
+                </div>
+			    
     	<h4 class="text-left text-info">Payment Transactions</h4>
     	<p class="table-responsive">
 
@@ -131,6 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 			    	<?PHP
 			    }
+                //end of for each
 			    ?>
 
 	    <div id="menu2" class="tab-pane fade">

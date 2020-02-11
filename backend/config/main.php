@@ -102,6 +102,7 @@ return [
                 'customer'      =>  'customer/index',
                 'create-customer' => 'customer/create',
                 'update-customer' => 'customer/update',
+                'customer-info' => 'customer/view',
                 'installment-payment'      =>  'installment-payment/index',
                 'installment-status'      =>  'installment-status/index',
                 // accounts
@@ -113,12 +114,10 @@ return [
                 'receipt'      =>  'receipt/index',
 
                 'cust' => 'customer/check-customer',
-                 'pay-purchase-invoice' => 'pay-purchase-invoice/index',
-                'purchase-invoice-detail' => 'pay-purchase-invoice/view'
             ],
         ],
         
     ],
     'params' => $params,
 ];
->>>>>>> 3626a29b040f80302618210d43d07f66d4076c76
+
