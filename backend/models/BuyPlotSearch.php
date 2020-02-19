@@ -19,7 +19,7 @@ class BuyPlotSearch extends BuyPlot
     {
         return [
             [['buy_plot_id', 'created_by', 'updated_by', 'organization_id'], 'integer'],
-            [['property_name', 'plot_no', 'plot_area', 'plot_location', 'city', 'district', 'province', 'buy_date', 'created_at', 'updated_at', 'plot_status','customer_id'], 'safe'],
+            [['property_name', 'plot_no', 'plot_area', 'plot_location', 'city', 'district', 'province', 'buy_date', 'created_at', 'updated_at', 'plot_status','customer_id','status'], 'safe'],
             [['plot_price', 'plot_paid_price'], 'number'],
         ];
     }
@@ -58,6 +58,7 @@ class BuyPlotSearch extends BuyPlot
         $query->joinWith('customer');
         $query->andFilterWhere([
             'buy_plot_id' => $this->buy_plot_id,
+
             // 'customer_id' => $this->customer_id,
             'plot_price' => $this->plot_price,
             'plot_paid_price' => $this->plot_paid_price,
@@ -77,6 +78,7 @@ class BuyPlotSearch extends BuyPlot
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'district', $this->district])
             ->andFilterWhere(['like', 'province', $this->province])
+            ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'plot_status', $this->plot_status]);
 
         return $dataProvider;

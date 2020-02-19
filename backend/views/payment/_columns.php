@@ -16,10 +16,6 @@ return [
     // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'receiver_payer_id',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'transaction_id',
     ],
     [
@@ -33,6 +29,10 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'debit_account',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'transaction_date',
     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',

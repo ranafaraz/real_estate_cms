@@ -36,6 +36,7 @@ class BuyPlotController extends Controller
         ];
     }
 
+
     /**
      * Lists all BuyPlot models.
      * @return mixed
@@ -57,6 +58,10 @@ class BuyPlotController extends Controller
      * @param integer $id
      * @return mixed
      */
+    public function actionSubmitData()
+    {
+        return $this->renderAjax('submit-data.php');
+    }
     public function actionView($id)
     {   
         $request = Yii::$app->request;
@@ -75,6 +80,11 @@ class BuyPlotController extends Controller
                 'model' => $this->findModel($id),
             ]);
         }
+    }
+
+    public function actionUpdateData()
+    {   
+        return $this->renderajax('update-data');
     }
 
     /**
@@ -99,8 +109,8 @@ class BuyPlotController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $customer_model->load(Yii::$app->request->post()) ) {
-                if($model->remaning_price == 0)
+        if ($model->load($request->post()) && $customer_model->load(Yii::$app->request->post()) ) {
+        if($model->remaning_price == 0)
         {
             if($customer_model->checkifexist == '1')
             {
@@ -156,6 +166,7 @@ class BuyPlotController extends Controller
                         'debit_amount' => $model->plot_price,
                         'credit_account' => $cash_model->id,
                         'credit_amount' => $model->plot_price,
+                        'transaction_date' => $model->transaction_date,
                         'date' => date('Y-m-d'),
                         'created_by' => \Yii::$app->user->identity->id,
                         'organization_id' => \Yii::$app->user->identity->organization_id,
@@ -167,6 +178,14 @@ class BuyPlotController extends Controller
             if($customer_model->checkifexist == '1')
             {
                 $model->customer_id = $customer_model->customerid;
+                if($model->plot_price == $model->plot_paid_price)
+                {
+                    $model->status = 'Paid';
+                }
+                else if($model->plot_paid_price < $model->plot_price && $model->plot_paid_price > 0)
+                {
+                    $model->status = 'Partially Paid';
+                }
                 $model->save();
             }
             else
@@ -208,61 +227,17 @@ class BuyPlotController extends Controller
                     echo "Sorry No Account Head Found Name 'Cash'";
                     die();
                 }
-                $account_payable_id = AccountHead::find()->where(['account_name' => 'Plot'])->One();
-                $acc_trans_model = AccountPayable::find()->orderBy(['transaction_id' => SORT_DESC])->andwhere(['organization_id' =>  \Yii::$app->user->identity->organization_id])->One();
-                if(empty($account_payable_id))
-                {
-                    die();
-                }
-                if($acc_trans_model == "")
-                {
-                    $acc_pay->transaction_id = '1';
-                }
-                else
-                {
-                    $acc_pay->transaction_id = (int)$acc_trans_model->transaction_id + 1;
-                }
-                $connection->createCommand()->insert('account_payable',
-                    [
-                        'transaction_id' => $acc_pay->transaction_id,
-                        'recipient_id' => $customer_model->customerid,
-                        'amount' => $model->remaning_price,
-                        'account_payable' => $account_payable_id->id,
-                        'property_name' => $model->property_name,
-                        'plot_no' => $model->plot_no,
-                        'due_date' => $model->due_date,
-                        'identifier' => 'Customer',
-                        'created_at' => date('Y-m-d'),
-                        'updated_at' => '',
-                        'updated_by' => '',
-                        'status' => 'Active',
-                        'organization_id' => \Yii::$app->user->identity->organization_id,
-                    ]
-                )->execute();
-                $account_payable_id = AccountHead::find()->where(['account_name' => 'Account Payable'])->One();
-                $connection->createCommand()->insert('transactions',
-                    [
-                        'transaction_id' => $transaction_model->transaction_id,
-                        'type' => 'cash Payment',
-                        'narration' => $model->narration,
-                        'debit_account' => $plot_model->id,
-                        'debit_amount' => $model->remaning_price,
-                        'credit_account' => $account_payable_id->id,
-                        'credit_amount' => $model->remaning_price,
-                        'date' => date('Y-m-d'),
-                        'created_by' => \Yii::$app->user->identity->id,
-                        'organization_id' => \Yii::$app->user->identity->organization_id,
-                    ]
-                )->execute();
                 $connection->createCommand()->insert('transactions',
                     [
                         'transaction_id' => $transaction_model->transaction_id + 1,
                         'type' => 'cash Payment',
+                        'account_payable_id' => $acc_pay->id,
                         'narration' => $model->narration,
                         'debit_account' => $plot_model->id,
-                        'debit_amount' => $model->plot_price,
+                        'debit_amount' => $model->plot_paid_price,
                         'credit_account' => $cash_model->id,
                         'credit_amount' => $model->plot_paid_price,
+                        'transaction_date' => $model->transaction_date,
                         'date' => date('Y-m-d'),
                         'created_by' => \Yii::$app->user->identity->id,
                         'organization_id' => \Yii::$app->user->identity->organization_id,
@@ -287,6 +262,14 @@ class BuyPlotController extends Controller
      * @param integer $id
      * @return mixed
      */
+     public function actionBuyPlotPayment($id)
+    {
+        return $this->render('buy-plot-payment',['id' => $id]);
+    }
+    public function actionPlotTransactions($id)
+    {
+        return $this->render('Plot-transactions',['id' => $id]);
+    }
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
@@ -335,6 +318,7 @@ class BuyPlotController extends Controller
 
 
     }
+
 
      /**
      * Delete multiple existing BuyPlot model.

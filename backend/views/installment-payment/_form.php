@@ -76,24 +76,40 @@ use yii\web\JsonParser;
             ?>
         </div>
        
-        <div class="col-md-6">
+        <div class="col-md-3">
             <?= $form->field($model, 'installment_no')->textInput(['readonly'=> true]) ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <?= $form->field($model, 'installment_amount')->textInput(['readonly'=> true]) ?>
         </div>
-        <div class="col-md-6"> 
+        <div class="col-md-3"> 
             <?= $form->field($model,'remaning_amount')->textInput(['readonly'=> true]) ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <?= $form->field($model, 'previous_pay_amount')->textInput(['readonly'=> true]) ?>
         </div>
 
-         <div class="col-md-6">
-            <?= $form->field($model, 'date_to_pay')->textInput() ?>
+         <div class="col-md-3">
+            <?= $form->field($model, 'date_to_pay')->textInput(['readOnly' => true]) ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <?= $form->field($model, 'paid')->textInput() ?>
+        </div>
+        <div class="col-md-3">
+            <?PHP $model->transaction_date = date('Y-m-d');?>
+            <?= $form->field($model, 'transaction_date')->widget(
+                    DatePicker::className(), [
+                         'inline' => false, 
+                         // modify template for custom rendering
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-m-dd',
+                            'todayHighlight' => true,
+                        ],
+                ]); ?>
+        </div>
+        <div class="col-md-12">
+            <?= $form->field($model, 'narration')->textInput() ?>
         </div>
          
         

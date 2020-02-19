@@ -79,6 +79,22 @@
                             ['label' => 'Receive', 'icon' => 'hand-o-right', 'url' => ['/receipt'],],
                           
                     ],
+
+                ],
+                [
+                        'label' => 'Reports',
+                        'icon' => 'share',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Cashbook', 'icon' => 'hand-o-right', 'url' => ['/cashbook'],],
+                            ['label' => 'Income Statement', 'icon' => 'hand-o-right', 'url' => ['/income-statement'],],
+                            ['label' => 'Payable Reports', 'icon' => 'hand-o-right', 'url' => ['/payable-report'],],
+                            ['label' => 'Receivable Reports', 'icon' => 'hand-o-right', 'url' => ['/recievable-report'],],
+                            ['label' => 'Payment', 'icon' => 'hand-o-right', 'url' => ['/payment'],],
+                            ['label' => 'Receive', 'icon' => 'hand-o-right', 'url' => ['/receipt'],],
+                          
+                    ],
+                    
                 ],
                 ],
             ]

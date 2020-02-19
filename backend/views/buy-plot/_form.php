@@ -42,12 +42,26 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-3">
             <?= $form->field($customer_model, 'customer_type_id')->dropDownList(ArrayHelper::map(CustomerType::find()->where(['customer_type' => 'Seller'])->all(),'customer_type_id','customer_type'), ['prompt' => 'Select Customer Type']) ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <?= $form->field($customer_model, 'email_address')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-3">
             <?= $form->field($customer_model, 'address')->textInput(['maxlength' => true]) ?>
         </div>
+        <div class="col-md-3">
+            <?PHP $model->transaction_date = date('Y-m-d');?>
+            <?= $form->field($model, 'transaction_date')->widget(
+                    DatePicker::className(), [
+                         'inline' => false, 
+                         // modify template for custom rendering
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-m-dd',
+                            'todayHighlight' => true,
+                        ],
+                ]); ?>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">

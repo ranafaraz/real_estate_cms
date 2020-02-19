@@ -12,7 +12,6 @@ use yii\widgets\DetailView;
         'attributes' => [
             'id',
             'transaction_id',
-            'recipient.name',
             'amount',
             'accountPayable.account_name',
             'due_date',

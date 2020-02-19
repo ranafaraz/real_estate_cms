@@ -21,11 +21,6 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'recipient_id',
-        'value' => 'recipient.choice',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'amount',
     ],
     [

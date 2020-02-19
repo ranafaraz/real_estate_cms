@@ -5,7 +5,6 @@ use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use backend\models\AccountHead;
 use backend\models\AccountNature;
-use backend\models\PayerReceiverInfo;
 use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
@@ -18,18 +17,6 @@ use dosamigos\datepicker\DatePicker;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'transaction_id')->textInput() ?>
-
- <!--    <?= $form->field($model, 'recipient_id')->textInput() ?> -->
-    <?= $form->field($model, 'recipient_id')->widget(Select2::classname(), [
-                'data' =>ArrayHelper::map(PayerReceiverInfo::find()->all(),'id','choice'),
-                'language' => 'en',
-                'options' => ['placeholder' => 'Select a state ...'],
-        
-                'pluginOptions' => [
-                'allowClear' => true
-            ],
-        ]);
-        ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>
 

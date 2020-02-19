@@ -82,6 +82,27 @@ class TransactionsController extends Controller
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+
+    public function actionIncomeStatement(){
+        return $this->render('income-statement');
+    }
+    public function actionRecievableReport(){
+        return $this->render('recievable-report');
+    }
+    public function actionAccountRecievableData(){
+        return $this->render('recievable-data');
+    }
+    public function actionAccountPayableData(){
+        return $this->renderAjax('account-payable-data');
+    }
+   
+    public function actionPayableReport(){
+        return $this->render('payable-report');
+    }
+        public function actionIncomeStatementData(){
+        
+        return $this->renderajax('income-statement-data');
+    }
     public function actionCreate()
     {
         $request = Yii::$app->request;
@@ -135,6 +156,20 @@ class TransactionsController extends Controller
             }
         }
        
+    }
+
+
+    public function actionDailyCashbook()
+    {   
+        return $this->render('daily-cashbook');
+    }
+    public function actionDailyCashbookData()
+    {   
+        return $this->renderajax('daily-cashbook-data');
+    }
+    public function actionDailyCashbookDataReceipt()
+    {   
+        return $this->renderajax('daily-cashbook-data-receipt');
     }
 
     /**

@@ -76,17 +76,23 @@ class AccountPayableController extends Controller
     }
 
 
-        public function actionGetReceiverId($rec_id,$deb_id) {
-     
-        $heads = AccountPayable::find()->where(['recipient_id'=>$rec_id])->andwhere(['account_payable'=>$deb_id])->One();
-        if (!empty($heads)) {
-            echo Json::encode($heads);
-        }else{
-            $heads=["value"=>"empty"];
-            echo Json::encode($heads);
+    public function actionGetPrevious($id)
+    {
+        $payable_model = AccountPayable::find()->where(['account_payable' => $id ])->all();
+        $payable_count = AccountPayable::find()->where(['account_payable'=>$id])->count();
+        if($payable_count > 0)
+        {
+            $sum=0;
+            foreach ($payable_model as $value) {
+                 $sum = $sum + $value->amount; 
+            }
+            $val = ['sum' => $sum,'id' => $value->id];
+            echo Json::encode($val);
         }
-        
-
+        else
+        {
+            echo "empty";
+        }
     }
 
 
@@ -225,24 +231,7 @@ class AccountPayableController extends Controller
             }
         }
     }
-    public function actionGetPrevious($type,$id)
-    {
-        $payable_model = AccountPayable::find()->where(['recipient_id' => $id ])->andwhere(['identifier' => $type])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
-        $payable_count = AccountPayable::find()->where(['recipient_id'=>$id,'identifier'=>$type])->count();
-        if($payable_count > 0)
-        {
-            $sum=0;
-            foreach ($payable_model as $value) {
-                 $sum = $sum + $value->amount; 
-            }
-            $val = ['sum' => $sum,'id' => $value->id];
-            echo Json::encode($val);
-        }
-        else
-        {
-            echo "empty";
-        }
-    }
+   
 
     /**
      * Delete an existing AccountPayable model.

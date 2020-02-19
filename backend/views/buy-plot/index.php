@@ -26,6 +26,8 @@ CrudAsset::register($this);
             'columns' => require(__DIR__.'/_columns.php'),
             'toolbar'=> [
                 ['content'=>
+                    Html::a('<i class="fa fa-money"></i>', ['./plot-payment'],
+                    ['role'=>'','title'=> 'Plots Payment','class'=>'btn btn-danger']).
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['./create-buy-plot'],
                     ['role'=>'','title'=> 'Create new Buy Plots','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],

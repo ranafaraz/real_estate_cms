@@ -19,7 +19,7 @@ class PaymentSearch extends Payment
     {
         return [
             [['id', 'transaction_id', 'debit_account', 'credit_account'], 'integer'],
-            [['type', 'narration', 'date', 'ref_no', 'created_by',], 'safe'],
+            [['type', 'narration', 'date', 'ref_no', 'created_by','transaction_date'], 'safe'],
             [['debit_amount', 'credit_amount'], 'number'],
         ];
     }
@@ -42,6 +42,11 @@ class PaymentSearch extends Payment
      */
     public function search($params)
     {
+        $nature = AccountNature::find()->where(['name' => 'Income'])->One();
+        $head = AccountHead::find()->select('id')->where(['nature_id' => $nature->id])->all();
+        foreach ($head as  $value) {
+            $query = Receipt::find()->where(['credit_account' => $value->id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id]);
+        }
         $query = Payment::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -66,9 +71,11 @@ class PaymentSearch extends Payment
             'date' => $this->date,
         ]);
 
+
         $query->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'narration', $this->narration])
             ->andFilterWhere(['like', 'ref_no', $this->ref_no])
+            ->andFilterWhere(['like', 'transaction_date', $this->transaction_date])
             ->andFilterWhere(['like', 'created_by', $this->created_by]);
 
         return $dataProvider;

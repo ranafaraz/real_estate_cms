@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Receipt;
+use backend\models\AccountNature;
+use backend\models\AccountHead;
 
 /**
  * ReceiptSearch represents the model behind the search form about `backend\models\Receipt`.
@@ -43,7 +45,13 @@ class ReceiptSearch extends Receipt
      */
     public function search($params)
     {
-        $query = Receipt::find();
+        $nature = AccountNature::find()->where(['name' => 'Current Assets'])->One();
+        var_dump($nature);
+        $head = AccountHead::find()->where(['nature_id' => $nature->id])->all();
+        foreach ($head as  $value) {
+                    $query = Receipt::find()->where(['debit_account' => $value->id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id]);
+        }
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -34,6 +34,8 @@ class InstallmentPayment extends \yii\db\ActiveRecord
     public $remaning_amount;
     public $previous_pay_amount;
     public $get_amount =0;
+    public $transaction_date;
+    public $narration;
 
     /**
      * {@inheritdoc}
@@ -49,8 +51,8 @@ class InstallmentPayment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['installment_type', 'advance_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','paid','date_to_pay','installment_amount','plot_no','installment_no'], 'required'],
-            [['date_to_pay','remaning_amount','previous_pay_amount'],'safe'],
+            [['installment_type', 'advance_amount', 'total_amount', 'no_of_installments', 'customer_id', 'property_id', 'organization_id','paid','date_to_pay','installment_amount','plot_no','installment_no','transaction_date','narration'], 'required'],
+            [['date_to_pay','remaning_amount','previous_pay_amount','transaction_date','narration'],'safe'],
             [['no_of_installments', 'customer_id', 'property_id', 'organization_id'], 'integer'],
             [['installment_type', 'advance_amount', 'total_amount','paid'], 'string', 'max' => 250],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],

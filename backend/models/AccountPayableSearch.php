@@ -20,7 +20,7 @@ class AccountPayableSearch extends AccountPayable
         return [
             [['id', 'transaction_id'], 'integer'],
             [['amount'], 'number'],
-            [['due_date' , 'recipient_id', 'account_payable'],'string'],
+            [['due_date' , 'account_payable'],'string'],
             [['updated_at', 'updated_by','due_date'], 'safe'],
         ];
     }
@@ -56,8 +56,7 @@ class AccountPayableSearch extends AccountPayable
             // $query->where('0=1');
             return $dataProvider;
         }
-        // $query->joinWith('');
-        $query->joinWith('recipient');
+        // $query->joinWith('')
         $query->joinWith('accountPayable');
         $query->andFilterWhere([
             'id' => $this->id,
@@ -66,7 +65,6 @@ class AccountPayableSearch extends AccountPayable
             'updated_at' => $this->updated_at,
         ]);
         $query->andFilterWhere(['like', 'account_payable.updated_by', $this->updated_by])
-            ->andFilterWhere(['like', 'choice', $this->recipient_id])
             ->andFilterWhere(['like', 'due_date', $this->due_date])
             ->andFilterWhere(['like', 'account_name', $this->account_payable]);
 

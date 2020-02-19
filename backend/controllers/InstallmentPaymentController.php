@@ -175,6 +175,8 @@ class InstallmentPaymentController extends Controller
                         'debit_amount' => $model->paid,
                         'credit_account' => $head_model->id,
                         'credit_amount' => $model->paid,
+                        'transaction_date' => $model->transaction_date,
+                        'narration' => $model->narration,
                         'date' => date('Y-m-d'),
                         'created_by' => \Yii::$app->user->identity->id,
                         'organization_id' => \Yii::$app->user->identity->organization_id,
