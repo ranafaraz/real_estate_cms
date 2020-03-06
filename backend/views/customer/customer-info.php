@@ -11,6 +11,7 @@ use dosamigos\datepicker\DatePicker;
 use backend\models\InstallmentStatus;
 use backend\models\PlotOwnerInfo;
 use backend\models\Customer;
+use backend\models\Organization;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -23,9 +24,21 @@ $this->params['breadcrumbs'][] = $this->title;
 <?PHP 
 	$customer = Customer::find()->where(['customer_id' => $id])->One();
 	$prop = PlotOwnerInfo::find()->where(['customer_id' => $id])->All();
+    $header = Organization::find()->where(['id' => \Yii::$app->user->identity->organization_id])->One();
 ?>
-<div class="row" style="margin: auto">
-	<div class="col-md-12" style="text-align:center;background: white !important;margin: 0px;">
+<div class="row">
+                            <div class="col-md-12"> <tr id="printrow"><td colspan="4" ><button style="float: right;" onclick="printContent('show-record1')" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-print"></i> Print
+                                </button></td></tr> </div>
+                        </div>
+                        <div class="row" id="show-record1" style="text-align:center;background: white !important;padding: 10px;">
+                                <div class="col-md-2" style="margin-left:15px;">
+                                    <img src="<?PHP echo $header->logo ?>" class="img img-fluid img-circle" height="90px" width="90px" style="margin-left:5px;">
+                                </div>
+                                <div class="col-md-8 text-center">
+                                    <h2 style="text-align:center;" class="float-left"><b style="color:#00A00A"><?PHP echo $header->name?></b></h2><h6 style="text-align:center;" class="float-left"><?PHP echo $header->organization_address . ' | ' . $header->contact?></h6>
+                                </div>
+<div class="row" style="margin: 15px;">
+	<div class="col-md-12" style="margin-top: 10px;" >
 		<div class="container-fluid">
 			<ul class="nav nav-tabs">
 			    <li class="active"><a data-toggle="tab" href="#home">Customer</a></li>
@@ -74,9 +87,24 @@ $this->params['breadcrumbs'][] = $this->title;
 	      		<h3>Detail Of Property <span class="text-danger"><?PHP echo ucwords($prop_name->property_name)?> plot # <?= $plot->plot_no ?></span></h3>
 	      		
                 <div class="row">
-
-                    <div class="col-md-7">
-                        <h4 class="text-info text-left">Plot Detail</h4>
+                     <div class="col-md-6">
+                        <h4 class="text-info text-center">Customer Detail</h4>
+                         <?= DetailView::widget([
+                                'model' => $customer,
+                                'attributes' => [
+                                    'customerType.customer_type',
+                                    'name',
+                                    'father_name',
+                                    'cnic_no',
+                                    'contact_no',
+                                    'email_address',
+                                    'address',
+                                    
+                                ],
+                            ]) ?>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-info text-center">Plot Detail</h4>
                         <?= DetailView::widget([
                             'model' => $plot,
                             'attributes' => [
@@ -94,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php 
                         $installments = Installment::find()->where(['plot_no'=>$value->plot_no])->andwhere(['property_id'=>$value->property_id])->andwhere(['customer_id'=>$id])->one();
                     ?>
-                    <div class="col-md-5">
+                    <div class="col-md-12">
                         <h4 class="text-info text-left">Installment Detail</h4>
                         <div class="table-responsive">
                              <table class="table table-striped">
@@ -159,16 +187,21 @@ $this->params['breadcrumbs'][] = $this->title;
 			    }
                 //end of for each
 			    ?>
-
-	    <div id="menu2" class="tab-pane fade">
-	      <h3>Menu 2</h3>
-	      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-	    </div>
-	    <div id="menu3" class="tab-pane fade">
-	      <h3>Menu 3</h3>
-	      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-	    </div>
 	  </div>
 	</div>
 
 </div>
+</div>
+
+
+
+<script>
+function printContent(el){
+    var restorepage = document.body.innerHTML;
+    var printcontent = document.getElementById(el).innerHTML;
+    document.body.innerHTML = printcontent;
+    window.print();
+    document.body.innerHTML = restorepage;
+    window.location.reload();
+}
+</script>

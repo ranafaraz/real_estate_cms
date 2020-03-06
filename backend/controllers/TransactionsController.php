@@ -90,7 +90,7 @@ class TransactionsController extends Controller
         return $this->render('recievable-report');
     }
     public function actionAccountRecievableData(){
-        return $this->render('recievable-data');
+        return $this->renderAjax('account-recievable-data');
     }
     public function actionAccountPayableData(){
         return $this->renderAjax('account-payable-data');

@@ -2,11 +2,13 @@
 
 use yii\widgets\DetailView;
 use yii\helpers\Html;
+use backend\models\Organization;
 use backend\models\Customer;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
 
-$image = Customer::find()->where(['customer_id'=>$model->customer_id])->one();
+$image = Customer::find()->where(['customer_id'=>$model->customer_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->one();
+
 ?>
 
 <div class="customer-view">

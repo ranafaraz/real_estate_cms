@@ -181,10 +181,30 @@ class BuyPlotController extends Controller
                 }else{
                     $transaction->rollback();
                 }
-            }catch(Exception $e){
-                $transaction->rollback();
-            }
-            #end try block 1st if
+
+                if(empty($cash_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Cash'";
+                    die();
+                }
+                $buy_plot = BuyPlot::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->orderBy(['buy_plot_id' => SORT_DESC])->One();
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'buy_plot_id' => $buy_plot->buy_plot_id,
+                        'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'narration' => $model->narration,
+                        'debit_account' => $plot_model->id,
+                        'debit_amount' => $model->plot_price,
+                        'credit_account' => $cash_model->id,
+                        'credit_amount' => $model->plot_price,
+                        'transaction_date' => $model->transaction_date,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+
         }
         else
         {
@@ -192,16 +212,36 @@ class BuyPlotController extends Controller
             try {   
                 if($customer_model->checkifexist == '1')
                 {
-                    $model->customer_id = $customer_model->customerid;
-                    if($model->plot_price == $model->plot_paid_price)
-                    {
-                        $model->status = 'Paid';
-                    }
-                    else if($model->plot_paid_price < $model->plot_price && $model->plot_paid_price > 0)
-                    {
-                        $model->status = 'Partially Paid';
-                    }
-                    $query1=$model->save();
+
+                    $model->status = 'Partially Paid';
+                }
+                $model->save();
+            }
+            else
+            {
+                $connection->createCommand()->insert('customer',
+                    [
+                        'customer_type_id' => $customer_model->customer_type_id,
+                        'name' => $customer_model->name,
+                        'father_name' => $customer_model->father_name,
+                        'cnic_no' => $customer_model->cnic_no,
+                        'contact_no' => $customer_model->contact_no,
+                        'email_address' => $customer_model->email_address,
+                        'address' => $customer_model->address,
+                        'user_id' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                        'created_date' => date('Y-m-d'),
+                    ]
+                )->execute();
+            }
+                $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
+                $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                $buy_plot = BuyPlot::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->orderBy(['buy_plot_id' => SORT_DESC])->One();
+                if($trans_model == "")
+                {
+                    $transaction_model->transaction_id = '1'; 
+
                 }
                 else
                 {
@@ -267,7 +307,24 @@ class BuyPlotController extends Controller
                 }catch(Exception $e){
                     $transaction->rollback();
                 }
-                #end try block 1st if
+
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id + 1,
+                        'type' => 'cash Payment',
+                        'buy_plot_id' => $buy_plot->buy_plot_id,
+                        'narration' => $model->narration,
+                        'debit_account' => $plot_model->id,
+                        'debit_amount' => $model->plot_paid_price,
+                        'credit_account' => $cash_model->id,
+                        'credit_amount' => $model->plot_paid_price,
+                        'transaction_date' => $model->transaction_date,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+
         }
                  
             } else {

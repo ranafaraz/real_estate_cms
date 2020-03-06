@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use backend\models\Model;
 use yii\web\UploadedFile;
 /**
  * UserController implements the CRUD actions for User model.
@@ -147,30 +148,39 @@ class UserController extends Controller
                 $model->generateEmailVerificationToken();            
                 $model->created_at = date('Y-m-d h:m:s');
                 $model->updated_at = date('Y-m-d h:m:s');
-                $model->organization_id = $user->organization_id;
                 $model->image_name = UploadedFile::GetInstance($model, 'image_name');   
+                if(\Yii::$app->user->identity->organization_id != 0)
+                {
+                    $model->organization_id = \Yii::$app->user->identity->organization_id;
+                }
                 if (!empty($model->image_name)) {
 
                 $im_name = $model->username;
                 
                 $model->image_name->SaveAs('uploads/' . $im_name . '.' . $model->image_name->extension);
                 $model->image_name = 'uploads/' . $im_name . '.' . $model->image_name->extension;
-                 $model->save();
+                $model->save();
             }else{
                  $model->image_name = 'uploads/usr.png';
-                  $model->save();
+                $model->save();
             }
                
-               
-
-                $userid = $model->getPrimaryKey();
+               $user = $model->getPrimaryKey();
                 $authID = AuthAssignment::find()->orderBy(['id'=>SORT_DESC])->One();
-                $authid = ($authID->id)+1;
-                
-                    Yii::$app->db->createCommand()->insert('auth_assignment', ['id' => $authid, 'user_id' => $userid,
-                        'item_name' => $auth_model->item_name,
+                $count = count($auth_model->item_name);
+                $authid = $authID->id + 1;
+                for($i=0;$i<$count;$i++)
+                {
+                    
+                    Yii::$app->db->createCommand()->insert('auth_assignment', 
+                    [
+                        'id' => $authid, 
+                        'user_id' => $user,
+                        'item_name' => $auth_model->item_name[$i],
                         'created_at' => date('Y-m-d h:m:s'),
                     ])->execute();
+                    $authid = $authid + 1;
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new User",

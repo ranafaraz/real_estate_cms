@@ -6,13 +6,13 @@ use backend\models\AccountHead;
 use backend\models\Transactions;
 use yii\helpers\Json;
 use backend\models\AccountRecievable;
-use backend\models\Header;
+use backend\models\Organization;
 use backend\models\Customer;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use backend\models\AccountNature;
 use common\models\AccountTitle;
-$this->title = 'Recievable Report';
+$this->title = 'Miscellaneous Report';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<select id="select" class="form-control">
 				<option value="0">Select an Option</option>
 		<?PHP 
-		$nature = AccountNature::find()->where(['name' => 'Expense'])->One();
+		$nature = AccountNature::find()->where(['name' => 'Income'])->One();
 		$ap = AccountHead::find()->where(['nature_id' => $nature->id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->all();
 		foreach ($ap as $value) { 
 			?>	
@@ -105,8 +105,8 @@ $script = <<< JS
 			$.ajax(
 			{
 				method : 'POST',
-				url  : 'account-payable-data',
-				data : {account_payable_id:val,s_date:s_date,e_date:e_date},
+				url  : 'account-recievable-data',
+				data : {account_recievable_id:val,s_date:s_date,e_date:e_date},
 				success:function(data)
 				{
 					$('#showrecord').html(data);

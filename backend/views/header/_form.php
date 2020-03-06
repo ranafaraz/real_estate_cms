@@ -19,7 +19,7 @@ use backend\models\Organization;
             <?= $form->field($model, 'organization_name')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'organization_address')->textInput(['maxlength' => true]) ?>
+            
         </div>
     </div>
     <div class="row">

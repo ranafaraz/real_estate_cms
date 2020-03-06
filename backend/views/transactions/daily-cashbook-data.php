@@ -4,7 +4,7 @@
 	use backend\models\AccountNature;
 	use yii\helpers\Json;
 	use backend\models\AccountHead;
-	use backend\models\Header;
+	use backend\models\Organization;
 ?>
 <?PHP
 $returndata = "";
@@ -19,9 +19,9 @@ if(isset($_POST['sdate']) && isset($_POST['edate']))
 		$head_query = AccountHead::find()->where(['nature_id'=>$nature->id])->all();
 		if(isset($head_query))
 		{
-			// header dynamic
+			// Organization dynamic
 
-			$header = Header::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+			$Organization = Organization::find()->where(['id' => \Yii::$app->user->identity->organization_id])->One();
 			$returndata.='
 						<div class="row">
 							<div class="col-md-12"> <tr id="printrow"><td colspan="4" ><button style="float: right;" onclick="printContent(\'show-record1\')" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-print"></i> Print
@@ -30,10 +30,10 @@ if(isset($_POST['sdate']) && isset($_POST['edate']))
 						<div class="row" id="show-record1">
 							<div class="row">
 								<div class="col-md-2" style="margin-left:15px;">
-									<img src="'. $header->logo .'" class="img img-fluid img-circle" height="90px" width="90px">
+									<img src="'. $Organization->logo .'" class="img img-fluid img-circle" height="90px" width="90px">
 								</div>
 								<div class="col-md-7 text-center">
-									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$header->organization_name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$header->organization_address.' | '.$header->contact.'</h6>
+									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$Organization->name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$Organization->organization_address.' | '.$Organization->contact.'</h6>
 								</div>
 							</div>
 							<div class="row">

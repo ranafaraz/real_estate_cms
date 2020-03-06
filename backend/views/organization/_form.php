@@ -9,13 +9,17 @@ use yii\widgets\ActiveForm;
 
 <div class="organization-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
- <!--    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'organization_address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?> -->
+    <?= $form->field($model, 'contact')->textInput() ?>
+
+    <?= $form->field($model, 'image_name')->textInput() ?>
+
+    <?= $form->field($model, 'logo')->fileInput()?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

@@ -4,7 +4,7 @@
 	use backend\models\AccountTitle;
 	use yii\helpers\Json;
 	use backend\models\AccountHead;
-	use backend\models\Header;
+	use backend\models\Organization;
 
 ?>
 <?PHP
@@ -23,7 +23,7 @@ if(isset($_POST['end_date']))
 	$nature = AccountNature::find()->where(['name' => 'Current Assets'])->One();
 	$account_head_earning_query = AccountHead::find()->where(['nature_id'=>$nature->id])->all();
 	$sum1=0;
-	$header = Header::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+	$Organization = Organization::find()->where(['id' => \Yii::$app->user->identity->organization_id])->One();
 			$retundata.='
 						<div class="row">
 							<div class="col-md-12"> <tr id="printrow"><td colspan="4" ><button style="float: right;" onclick="printContent(\'show-record1\')" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-print"></i> Print
@@ -32,10 +32,10 @@ if(isset($_POST['end_date']))
 						<div class="row" id="show-record1">
 							<div class="row">
 								<div class="col-md-2" style="margin-left:15px;">
-									<img src="'. $header->logo .'" class="img img-fluid img-circle" height="90px" width="90px">
+									<img src="'. $Organization->logo .'" class="img img-fluid img-circle" height="90px" width="90px">
 								</div>
 								<div class="col-md-7 text-center">
-									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$header->organization_name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$header->organization_address.' | '.$header->contact.'</h6>
+									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$Organization->name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$Organization->organization_address.' | '.$Organization->contact.'</h6>
 								</div>
 							</div>';
 	$retundata.='<div class="row text-center" style="margin-top:5px !important;margin-bottom:5px !important;"><div class="col-md-12 bg-success"><h4 class="text-info font-wight-bold;margin-top:20px;">Income Statement (6 Months Report)   '.$start_date.' -- '.$end_date.'</h4></div></div>';
@@ -152,7 +152,7 @@ if(isset($_POST['end_date']))
 		$nature = AccountNature::find()->where(['name' => 'Current Assets'])->One();
 		$account_head_earning_query = AccountHead::find()->where(['nature_id'=>$nature->id])->all();
 	$sum1=0;
-	$header = Header::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+	$Organization = Organization::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
 			$retundata.='
 						<div class="row">
 							<div class="col-md-12"> <tr id="printrow"><td colspan="4" ><button style="float: right;" onclick="printContent(\'show-record1\')" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-print"></i> Print
@@ -161,10 +161,10 @@ if(isset($_POST['end_date']))
 						<div class="row" id="show-record1">
 							<div class="row">
 								<div class="col-md-2" style="margin-left:15px;">
-									<img src="'. $header->logo .'" class="img img-fluid img-circle" height="90px" width="90px">
+									<img src="'. $Organization->logo .'" class="img img-fluid img-circle" height="90px" width="90px">
 								</div>
 								<div class="col-md-7 text-center">
-									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$header->organization_name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$header->organization_address.' | '.$header->contact.'</h6>
+									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$Organization->organization_name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$Organization->organization_address.' | '.$Organization->contact.'</h6>
 								</div>
 							</div>';
 

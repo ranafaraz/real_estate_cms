@@ -45,12 +45,7 @@ class ReceiptSearch extends Receipt
      */
     public function search($params)
     {
-        $nature = AccountNature::find()->where(['name' => 'Current Assets'])->One();
-        var_dump($nature);
-        $head = AccountHead::find()->where(['nature_id' => $nature->id])->all();
-        foreach ($head as  $value) {
-                    $query = Receipt::find()->where(['debit_account' => $value->id])->andWhere(['organization_id' => \Yii::$app->user->identity->organization_id]);
-        }
+        $query = Receipt::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id]);
 
 
         $dataProvider = new ActiveDataProvider([
