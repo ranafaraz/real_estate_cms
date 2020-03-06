@@ -181,6 +181,10 @@ class BuyPlotController extends Controller
                 }else{
                     $transaction->rollback();
                 }
+            }
+                catch(Exception $e){
+                    $transaction->rollback();
+                }
 
                 if(empty($cash_model))
                 {
@@ -214,7 +218,7 @@ class BuyPlotController extends Controller
                 {
 
                     $model->status = 'Partially Paid';
-                }
+                
                 $model->save();
             }
             else

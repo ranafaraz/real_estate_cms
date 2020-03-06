@@ -168,7 +168,7 @@ class InstallmentPaymentController extends Controller
                         {
                             $head_model->id = $rec_model->id;
                         }
-                        $query2$connection->createCommand()->insert('transactions',
+                        $query2=$connection->createCommand()->insert('transactions',
                         [
                             'transaction_id' => $transaction_model->transaction_id,
                             'type' => 'cash Payment',

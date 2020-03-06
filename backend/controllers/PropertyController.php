@@ -186,7 +186,7 @@ class PropertyController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->validate()){
-                && $model->validate()) ){
+                
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     if ($model->save()) {
