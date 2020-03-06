@@ -127,81 +127,108 @@ class InstallmentPaymentController extends Controller
         
                 ];         
             }else if($model->load($request->post())){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                        Yii::$app->MyComponent->installmentstatusupdate($model->installment_no,$model->property_id,$model->customer_id,$model->plot_no,$model->paid,$model->remaning_amount,$model->previous_pay_amount,$model->installment_amount);
+                        $condition = ['payer_id' => $model->customer_id , 'property_id' => $model->property_id,'plot_no' => $model->plot_no];
+                        $installmentinfo  = AccountRecievable::find()->where($condition)->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+                        if($installmentinfo == "")
+                        {
 
-                    Yii::$app->MyComponent->installmentstatusupdate($model->installment_no,$model->property_id,$model->customer_id,$model->plot_no,$model->paid,$model->remaning_amount,$model->previous_pay_amount,$model->installment_amount);
-                    $condition = ['payer_id' => $model->customer_id , 'property_id' => $model->property_id,'plot_no' => $model->plot_no];
-                    $installmentinfo  = AccountRecievable::find()->where($condition)->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
-                    if($installmentinfo == "")
-                    {
+                        }
+                        else
+                        {
+                            $accounts->amount = $installmentinfo->amount - $model->paid;
+                        }
+                        $query1=$connection->createCommand()->update('account_recievable',
+                            [
+                                'amount' => $accounts->amount,
+                                'updated_by' => \Yii::$app->user->identity->id,
+                                'updated_at' => date('Y-m-d'),
+                                'organization_id' => \Yii::$app->user->identity->organization_id,
+                            ],$condition
+                        )->execute();
 
-                    }
-                    else
-                    {
-                        $accounts->amount = $installmentinfo->amount - $model->paid;
-                    }
-                    $connection->createCommand()->update('account_recievable',
+                        $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                        $rec_model = AccountHead::find()->where(['account_name' => 'Account Receivable'])->One();
+                        $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                        if($trans_model == "")
+                        {
+                            $transaction_model->transaction_id = '1'; 
+                        }
+                        else
+                        {
+                              $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                        }
+                        if($rec_model == "")
+                        {
+                            die();
+                        }
+                        else
+                        {
+                            $head_model->id = $rec_model->id;
+                        }
+                        $query2$connection->createCommand()->insert('transactions',
                         [
-                            'amount' => $accounts->amount,
-                            'updated_by' => \Yii::$app->user->identity->id,
-                            'updated_at' => date('Y-m-d'),
+                            'transaction_id' => $transaction_model->transaction_id,
+                            'type' => 'cash Payment',
+                            'debit_account' => $cash_model->id,
+                            'debit_amount' => $model->paid,
+                            'credit_account' => $head_model->id,
+                            'credit_amount' => $model->paid,
+                            'transaction_date' => $model->transaction_date,
+                            'narration' => $model->narration,
+                            'date' => date('Y-m-d'),
+                            'created_by' => \Yii::$app->user->identity->id,
                             'organization_id' => \Yii::$app->user->identity->organization_id,
-                        ],$condition
-                    )->execute();
+                        ]
+                        )->execute();
+                    if ($query1 && $query2) {
+                        $transaction->commit();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new InstallmentPayment",
+                            'content'=>'<span class="text-success">Create InstallmentPayment success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];
+                    }else{
+                        $transaction->rollback();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new InstallmentPayment",
+                            'content'=>'<span class="text-success">Create InstallmentPayment Failed! Please Try Again Later.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new InstallmentPayment",
+                        'content'=>'<span class="text-success">Create InstallmentPayment Failed! Please Try Again Later.</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ];
+                }
 
-                    $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
-                    $rec_model = AccountHead::find()->where(['account_name' => 'Account Receivable'])->One();
-                    $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
-                    if($trans_model == "")
-                    {
-                        $transaction_model->transaction_id = '1'; 
-                    }
-                    else
-                    {
-                          $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
-                    }
-                    if($rec_model == "")
-                    {
-                        die();
-                    }
-                    else
-                    {
-                        $head_model->id = $rec_model->id;
-                    }
-                    $connection->createCommand()->insert('transactions',
-                    [
-                        'transaction_id' => $transaction_model->transaction_id,
-                        'type' => 'cash Payment',
-                        'debit_account' => $cash_model->id,
-                        'debit_amount' => $model->paid,
-                        'credit_account' => $head_model->id,
-                        'credit_amount' => $model->paid,
-                        'transaction_date' => $model->transaction_date,
-                        'narration' => $model->narration,
-                        'date' => date('Y-m-d'),
-                        'created_by' => \Yii::$app->user->identity->id,
-                        'organization_id' => \Yii::$app->user->identity->organization_id,
-                    ]
-                )->execute();
-                 
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new InstallmentPayment",
-                    'content'=>'<span class="text-success">Create InstallmentPayment success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new InstallmentPayment",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
+                     
+                             
+                }else{           
+                    return [
+                        'title'=> "Create new InstallmentPayment",
+                        'content'=>$this->renderAjax('create', [
+                            'model' => $model,
+                        ]),
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+            
+                    ];         
+                }
         }else{
             /*
             *   Process for non-ajax request
@@ -244,7 +271,17 @@ class InstallmentPaymentController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "InstallmentPayment #".$id,

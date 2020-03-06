@@ -100,6 +100,7 @@ class AccountHeadController extends Controller
         $model->updated_at = date("Y-m-d h:m:s");
         $model->updated_by = \Yii::$app->user->identity->username;
         if($request->isAjax){
+
             /*
             *   Process for ajax request
             */
@@ -114,15 +115,48 @@ class AccountHeadController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new AccountHead",
-                    'content'=>'<span class="text-success">Create AccountHead success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+            }else if($model->load($request->post() && $model->validate()) ){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountHead",
+                            'content'=>'<span class="text-success">Create AccountHead success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];      
+                           
+                    }else{
+                        $transaction->rollback();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountHead",
+                            'content'=>'<span class="text-success">Create AccountHead Failed Please Check the fields any try again</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new AccountHead",
+                        'content'=>'<span class="text-success">Create AccountHead Failed Please Check the fields any try again</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ];
+                } // closing of catch block
+                // closing of transaction handling
+                // 
+                
+                
             }else{           
                 return [
                     'title'=> "Create new AccountHead",
@@ -138,8 +172,19 @@ class AccountHeadController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($request->post()) && $model->validate()) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
+                
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -175,7 +220,17 @@ class AccountHeadController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "AccountHead #".$id,

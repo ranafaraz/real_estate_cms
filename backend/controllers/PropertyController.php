@@ -186,16 +186,50 @@ class PropertyController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->validate()){
-                $model->save();
-                Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "",
-                    'content'=>'<span class="text-success">Create Property success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+                && $model->validate()) ){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        Yii::$app->InsertPlots->insertplots($model->property_id,$model->no_of_plots);
+                        $transaction->commit();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "",
+                            'content'=>'<span class="text-success">Create Property success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];     
+                           
+                    }else{
+                        $transaction->rollback();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "",
+                            'content'=>'<span class="text-success">Create Property Failed! Please Try Again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ]; 
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                    return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "",
+                            'content'=>'<span class="text-success">Create Property Failed! Please Try Again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ]; 
+                } // closing of catch block
+                // closing of transaction handling
+                // 
+               
+                
+                        
             }else{           
                 return [
                     'title'=> "",

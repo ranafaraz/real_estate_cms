@@ -131,15 +131,49 @@ class AccountNatureController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
+            }else if($model->load($request->post()) && $model->validate()){
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                         return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountNature",
+                            'content'=>'<span class="text-success">Create AccountNature success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];    
+                           
+                    }else{
+                        $transaction->rollback();
+                         return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountNature",
+                            'content'=>'<span class="text-success">Create AccountNature Failed! Please Try Again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];   
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                     return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new AccountNature",
-                    'content'=>'<span class="text-success">Create AccountNature success</span>',
+                    'content'=>'<span class="text-success">Create AccountNature Failed ! Please try again.</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
-                ];         
+                ];   
+                } // closing of catch block
+                // closing of transaction handling
+                //
+
+                     
             }else{           
                 return [
                     'title'=> "Create new AccountNature",
@@ -192,7 +226,17 @@ class AccountNatureController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "AccountNature #".$id,

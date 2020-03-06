@@ -37,7 +37,7 @@ class CustomerTypeController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {    
+    {
         $searchModel = new CustomerTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -54,7 +54,7 @@ class CustomerTypeController extends Controller
      * @return mixed
      */
     public function actionView($id)
-    {   
+    {
         $request = Yii::$app->request;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -65,7 +65,7 @@ class CustomerTypeController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+                ];
         }else{
             return $this->render('view', [
                 'model' => $this->findModel($id),
@@ -82,7 +82,7 @@ class CustomerTypeController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new CustomerType();  
+        $model = new CustomerType();
         $model->created_at = date('Y-m-d');
         $model->created_by = \Yii::$app->user->identity->id;
         $model->organization_id = \Yii::$app->user->identity->organization_id;
@@ -100,18 +100,50 @@ class CustomerTypeController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new CustomerType",
-                    'content'=>'<span class="text-success">Create CustomerType success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
+
+                ];
+            }else if($model->load($request->post()) && $model->validate()) ){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new CustomerType",
+                            'content'=>'<span class="text-success">Create CustomerType success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+
+                        ];
+
+                    }else{
+                        $transaction->rollback();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new CustomerType",
+                            'content'=>'<span class="text-success">Create CustomerType Failed! Please Try Again</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+
+                        ];
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                    return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new CustomerType",
+                            'content'=>'<span class="text-success">Create CustomerType Failed! Please Try Again</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+
+                        ];
+                } // closing of catch block
+                // closing of transaction handling
+                //
+
+            }else{
                 return [
                     'title'=> "Create new CustomerType",
                     'content'=>$this->renderAjax('create', [
@@ -119,8 +151,8 @@ class CustomerTypeController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
+
+                ];
             }
         }else{
             /*
@@ -134,7 +166,7 @@ class CustomerTypeController extends Controller
                 ]);
             }
         }
-       
+
     }
 
     /**
@@ -147,7 +179,7 @@ class CustomerTypeController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);
 
         if($request->isAjax){
             /*
@@ -162,8 +194,18 @@ class CustomerTypeController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
+                ];
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "CustomerType #".$id,
@@ -172,7 +214,7 @@ class CustomerTypeController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+                ];
             }else{
                  return [
                     'title'=> "Update CustomerType #".$id,
@@ -181,7 +223,7 @@ class CustomerTypeController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
+                ];
             }
         }else{
             /*
@@ -233,7 +275,7 @@ class CustomerTypeController extends Controller
      * @return mixed
      */
     public function actionBulkDelete()
-    {        
+    {
         $request = Yii::$app->request;
         $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
         foreach ( $pks as $pk ) {
@@ -253,7 +295,7 @@ class CustomerTypeController extends Controller
             */
             return $this->redirect(['index']);
         }
-       
+
     }
 
     /**

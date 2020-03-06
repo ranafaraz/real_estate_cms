@@ -39,7 +39,7 @@ class AccountPayableController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {    
+    {
         $searchModel = new AccountPayableSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -56,7 +56,7 @@ class AccountPayableController extends Controller
      * @return mixed
      */
     public function actionView($id)
-    {   
+    {
         $request = Yii::$app->request;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -67,7 +67,7 @@ class AccountPayableController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+                ];
         }else{
             return $this->render('view', [
                 'model' => $this->findModel($id),
@@ -84,7 +84,7 @@ class AccountPayableController extends Controller
         {
             $sum=0;
             foreach ($payable_model as $value) {
-                 $sum = $sum + $value->amount; 
+                 $sum = $sum + $value->amount;
             }
             $val = ['sum' => $sum,'id' => $value->id];
             echo Json::encode($val);
@@ -106,8 +106,8 @@ class AccountPayableController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new AccountPayable();  
-        
+        $model = new AccountPayable();
+
         $model1 = AccountPayable::find('transaction_id')->orderBy(['id' => SORT_DESC])->One();
         if($model1 == "")
         {
@@ -117,10 +117,10 @@ class AccountPayableController extends Controller
         {
             (int)$trans = (int)$model1->transaction_id;
             $model->transaction_id = $trans + 1;
-        } 
+        }
 
         $model->updated_at = date('Y-m-d h:m:s');
-        $model->updated_by = \Yii::$app->user->identity->username; 
+        $model->updated_by = \Yii::$app->user->identity->username;
         $model->status=1;
         if($request->isAjax){
             /*
@@ -135,18 +135,49 @@ class AccountPayableController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new AccountPayable",
-                    'content'=>'<span class="text-success">Create AccountPayable success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
+
+                ];
+            }else if($model->load($request->post()) && $model->validate()){
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                         return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountPayable",
+                            'content'=>'<span class="text-success">Create AccountPayable success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                        ];
+
+                    }else{
+                        $transaction->rollback();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountPayable",
+                            'content'=>'<span class="text-success">Create AccountPayable Failed ! Please Try Again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                        ];
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                     return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new AccountPayable",
+                            'content'=>'<span class="text-success">Create AccountPayable Failed ! Please Try Again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+
+                        ];
+                } // closing of catch block
+                // closing of transaction handling
+                //
+
+            }else{
                 return [
                     'title'=> "Create new AccountPayable",
                     'content'=>$this->renderAjax('create', [
@@ -154,8 +185,8 @@ class AccountPayableController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
+
+                ];
             }
         }else{
             /*
@@ -169,7 +200,7 @@ class AccountPayableController extends Controller
                 ]);
             }
         }
-       
+
     }
 
     /**
@@ -182,7 +213,7 @@ class AccountPayableController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);
 
         if($request->isAjax){
             /*
@@ -197,8 +228,18 @@ class AccountPayableController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
+                ];
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "AccountPayable #".$id,
@@ -207,7 +248,7 @@ class AccountPayableController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+                ];
             }else{
                  return [
                     'title'=> "Update AccountPayable #".$id,
@@ -216,7 +257,7 @@ class AccountPayableController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
+                ];
             }
         }else{
             /*
@@ -231,7 +272,7 @@ class AccountPayableController extends Controller
             }
         }
     }
-   
+
 
     /**
      * Delete an existing AccountPayable model.
@@ -269,7 +310,7 @@ class AccountPayableController extends Controller
      * @return mixed
      */
     public function actionBulkDelete()
-    {        
+    {
         $request = Yii::$app->request;
         $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
         foreach ( $pks as $pk ) {
@@ -289,7 +330,7 @@ class AccountPayableController extends Controller
             */
             return $this->redirect(['index']);
         }
-       
+
     }
 
     /**

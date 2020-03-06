@@ -103,15 +103,47 @@ class ProvideServicesController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new ProvideServices",
-                    'content'=>'<span class="text-success">Create ProvideServices success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+            }else if($model->load($request->post()) && $model->validate()) ){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new ProvideServices",
+                            'content'=>'<span class="text-success">Create ProvideServices success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];         
+                           
+                    }else{
+                        $transaction->rollback();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new ProvideServices",
+                            'content'=>'<span class="text-success">Create ProvideServices Failed! Please try again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];   
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                    return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new ProvideServices",
+                            'content'=>'<span class="text-success">Create ProvideServices Failed! Please try again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];   
+                } // closing of catch block
+                // closing of transaction handling
+                // 
+                      
             }else{           
                 return [
                     'title'=> "Create new ProvideServices",
@@ -164,7 +196,17 @@ class ProvideServicesController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "ProvideServices #".$id,

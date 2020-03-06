@@ -104,24 +104,34 @@ class OrganizationController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
-                $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
-                $connection=yii::$app->db;
-                $condition = ['id'=>\Yii::$app->user->identity->id];
-                $connection->createCommand()->Update('user',
-                    [
-                        'organization_id'=>$orgid->id,
-                    ],
-                    $condition
-                )->execute();
-                
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Organization",
-                    'content'=>'<span class="text-success">Create Organization success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
+                    $connection=yii::$app->db;
+                    $condition = ['id'=>\Yii::$app->user->identity->id];
+                    $query=$connection->createCommand()->Update('user',
+                        [
+                            'organization_id'=>$orgid->id,
+                        ],
+                        $condition
+                    )->execute();
+                    if ($query && $model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new Organization",
+                        'content'=>'<span class="text-success">Create Organization success</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ];         
+                }catch(Exception $e){
+                    $transaction->rollback():
+
+                }
             }else{           
                 return [
                     'title'=> "Create new Organization",
@@ -183,7 +193,17 @@ class OrganizationController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Organization #".$id,

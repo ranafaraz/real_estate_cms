@@ -116,7 +116,8 @@ class PaymentController extends Controller
         }
         $model->organization_id = \Yii::$app->user->identity->organization_id;
         ////////////////////////////////////////////////////////////
-
+        $transaction = \Yii::$app->db->beginTransaction();
+        try {
 
             /*
             *   Process for non-ajax request
@@ -433,8 +434,11 @@ class PaymentController extends Controller
                         }
                 }
                 
-                
+                $transaction->commit();
                 return $this->redirect(['./payment']);
+            }catch(Exception $e){
+                $transaction->rollback();
+            }
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -484,7 +488,17 @@ class PaymentController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Payment #".$id,

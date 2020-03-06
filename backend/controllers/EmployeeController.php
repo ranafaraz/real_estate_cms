@@ -120,38 +120,63 @@ class EmployeeController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post())){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                     $model->emp_photo = UploadedFile::getInstance($model,'emp_photo');
 
-                 $model->emp_photo = UploadedFile::getInstance($model,'emp_photo');
+                        // checking the field
+                        if(!empty($model->emp_photo)){
+                            // making the name of the image file
+                            $imageName = $model->emp_name.'_photo';
+                            // getting extension of the image file
+                            $imageExtension = $model->emp_photo->extension;
+                            // save the path of the image in backend/web/uploads 
+                            $model->emp_photo->saveAs('uploads/'.$imageName.'.'.$model->emp_photo->extension);
+                            //save the path in the db column
+                            $model->emp_photo = 'uploads/'.$imageName.'.'.$model->emp_photo->extension;
+                        } // closing of if
+                        else {
+                           $model->emp_photo = 'uploads/'.'default.png'; 
+                        } // closing of else
+                        $model->created_by = Yii::$app->user->identity->id; 
+                        $model->created_at = new \yii\db\Expression('NOW()');
+                        $model->updated_by = '0';
+                        $model->updated_at = '0'; 
+                        if ($model->save()) {
+                            return [
+                                'forceReload'=>'#crud-datatable-pjax',
+                                'title'=> "Create new Employee",
+                                'content'=>'<span class="text-success">Create Employee success</span>',
+                                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                        Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    
+                            ];
+                        }else{
+                            return [
+                                'forceReload'=>'#crud-datatable-pjax',
+                                'title'=> "Create new Employee",
+                                'content'=>'<span class="text-success">Create Employee Failed! Please Try Again.</span>',
+                                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                        Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    
+                            ];
+                        }
+                        
 
-                    // checking the field
-                    if(!empty($model->emp_photo)){
-                        // making the name of the image file
-                        $imageName = $model->emp_name.'_photo';
-                        // getting extension of the image file
-                        $imageExtension = $model->emp_photo->extension;
-                        // save the path of the image in backend/web/uploads 
-                        $model->emp_photo->saveAs('uploads/'.$imageName.'.'.$model->emp_photo->extension);
-                        //save the path in the db column
-                        $model->emp_photo = 'uploads/'.$imageName.'.'.$model->emp_photo->extension;
-                    } // closing of if
-                    else {
-                       $model->emp_photo = 'uploads/'.'default.png'; 
-                    } // closing of else
-                    $model->created_by = Yii::$app->user->identity->id; 
-                    $model->created_at = new \yii\db\Expression('NOW()');
-                    $model->updated_by = '0';
-                    $model->updated_at = '0'; 
-                    $model->save();
+                       
+                }catch(Expression $e){
+                    $transaction->rollback();
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new Employee",
+                        'content'=>'<span class="text-success">Create Employee Failed! Please Try Again.</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ];
 
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Employee",
-                    'content'=>'<span class="text-success">Create Employee success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+                }      
             }else{           
                 return [
                     'title'=> "Create new Employee",
@@ -204,7 +229,17 @@ class EmployeeController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Employee #".$id,

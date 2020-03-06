@@ -102,7 +102,46 @@ class ServicesTypeController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()) ){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                        return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new ServicesType",
+                            'content'=>'<span class="text-success">Create ServicesType success</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];        
+                           
+                    }else{
+                        $transaction->rollback();
+                       return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new ServicesType",
+                            'content'=>'<span class="text-success">Create ServicesType Failed! Please try again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];    
+                    }
+                }
+                catch (Exception $e) {
+                    // transaction rollback
+                    $transaction->rollback();
+                    return [
+                            'forceReload'=>'#crud-datatable-pjax',
+                            'title'=> "Create new ServicesType",
+                            'content'=>'<span class="text-success">Create ServicesType Failed! Please try again.</span>',
+                            'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                    Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                
+                        ];    
+                } // closing of catch block
+                // closing of transaction handling
+                // 
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new ServicesType",

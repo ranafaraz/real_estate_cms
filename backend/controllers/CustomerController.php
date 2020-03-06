@@ -99,165 +99,79 @@ class CustomerController extends Controller
             $no_of_installment = $model->no_of_installment;
             $connection = Yii::$app->db;
             if ($model->load($request->post()) && $plotinfo->load(Yii::$app->request->post()) && $installmentinfo->load(Yii::$app->request->post())  && $installmentstatus->load(Yii::$app->request->post())) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
 
-                ////////////////storing image in db
-               $model->image = UploadedFile::getInstance($model,'image');
-                    if(!empty($model->image)){
-                        $imageName = $model->cnic_no; 
-                        $model->image->saveAs('uploads/'.$imageName.'.'.$model->image->extension);
-                        //save the path in the db column
-                        $model->image = 'uploads/'.$imageName.'.'.$model->image->extension;
-                    } else {
-                       $model->image = '0'; 
-                    }
+                    ////////////////storing image in db
+                   $model->image = UploadedFile::getInstance($model,'image');
+                        if(!empty($model->image)){
+                            $imageName = $model->cnic_no; 
+                            $model->image->saveAs('uploads/'.$imageName.'.'.$model->image->extension);
+                            //save the path in the db column
+                            $model->image = 'uploads/'.$imageName.'.'.$model->image->extension;
+                        } else {
+                           $model->image = '0'; 
+                        }
 
-                /////////////////////////////////////////
-                if($model->checkifexist == '1')
-            {
-                $customerid = $model->customerid;
-            }
-            else
-            {
-                if(empty($model->image)){
-                    $cimage= "uploads/usr-default.png";
-                }else{
-                    $cimage=$model->image;
-                }
-                $connection->createCommand()->insert('customer',
-                    [
-                        'customer_type_id' => $model->customer_type_id,
-                        'name' => $model->name,
-                        'father_name' => $model->father_name,
-                        'cnic_no' => $model->cnic_no,
-                        'contact_no' => $model->contact_no,
-                        'email_address' => $model->email_address,
-                        'address' => $model->address,
-                        'image' => $cimage,
-                        'user_id' => \Yii::$app->user->identity->id,
-                        'organization_id' => \Yii::$app->user->identity->organization_id,
-                        'created_date' => date('Y-m-d'),
-                    ]
-                )->execute(); 
-                if($model->only_create_customer == '1')
+                    /////////////////////////////////////////
+                    if($model->checkifexist == '1')
                 {
-                    return $this->redirect(['index']);
-                }
-                $model_id = Customer::find()->orderBy(['customer_id' => SORT_DESC])->One();
-                $customerid=$model_id->customer_id;
-            }
-            Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$customerid);
-            if($installmentinfo->installment_type == 'Monthly')
-            {
-                $installmentinfo->no_of_installments = $installmentinfo->no_of_installments * 12;
-            }else if($installmentinfo->installment_type == '6 Months'){
-                $installmentinfo->no_of_installments = ($installmentinfo->no_of_installments / 6) * 12;
-            }
-            else if($installmentinfo->installment_type == 'Yearly')
-            {
-                $installmentinfo->no_of_installments = ceil(($installmentinfo->no_of_installments * 12)/12);
-            }
-            Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->advance_amount,$installmentinfo->total_amount,$customerid,$installmentinfo->no_of_installments,$plotinfo->plot_no);
-           
-            Yii::$app->MyComponent->sold($plotinfo->property_id,$plotinfo->plot_no);
-
-             $installment_id = Installment::find('installment_id')->orderBy(['installment_id' => SORT_DESC])->One();
-
-             
-
-            Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
-
-            $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
-
-            $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
-            $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
-            if($trans_model == "")
-            {
-                $transaction_model->transaction_id = '1'; 
-            }
-            else
-            {
-                  $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
-            }
-
-
-            if(empty($plot_model))
-            {
-                echo "Sorry No Account Head Found Name 'Plot'";
-                die();
-            }
-            if(empty($cash_model))
-            {
-                echo "Sorry No Account Head Found Name 'Cash'";
-                die();
-            }
-            $connection->createCommand()->insert('transactions',
-                [
-                    'transaction_id' => $transaction_model->transaction_id,
-                    'type' => 'cash Payment',
-                    'narration' => $model->narration,
-                    'debit_account' => $cash_model->id,
-                    'debit_amount' => $installmentinfo->advance_amount,
-                    'credit_account' => $plot_model->id,
-                    'credit_amount' => $installmentinfo->advance_amount,
-                    'date' => date('Y-m-d'),
-                    'created_by' => \Yii::$app->user->identity->id,
-                    'organization_id' => \Yii::$app->user->identity->organization_id,
-                ]
-            )->execute();
-
-            $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
-            if($trans_model == "")
-            {
-                $transaction_model->transaction_id = '1'; 
-            }
-            else
-            {
-                  $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
-            }
-            
-            $connection->createCommand()->insert('transactions',
-                [
-                    'transaction_id' => $transaction_model->transaction_id,
-                    'type' => 'cash Payment',
-                    'narration' => $model->narration,
-                    'debit_account' => $cash_model->id,
-                    'debit_amount' => $installmentinfo->advance_amount,
-                    'credit_account' => $plot_model->id,
-                    'credit_amount' => $installmentinfo->advance_amount,
-                    'date' => date('Y-m-d'),
-                    'created_by' => \Yii::$app->user->identity->id,
-                    'organization_id' => \Yii::$app->user->identity->organization_id,
-                ]
-            )->execute();
-
-            if($installmentinfo->advance_amount < $installmentinfo->total_amount)
-            {   
-                $accounts->is_installment = '1';
-                $Account_model= AccountRecievable::find()->orderBy(['transaction_id' => SORT_DESC])->One();
-                if($Account_model == "")
-                {
-                    $accounts->transaction_id = '1'; 
+                    $customerid = $model->customerid;
                 }
                 else
                 {
-                      $accounts->transaction_id = $Account_model->transaction_id + 1;  
+                    if(empty($model->image)){
+                        $cimage= "uploads/usr-default.png";
+                    }else{
+                        $cimage=$model->image;
+                    }
+                    $connection->createCommand()->insert('customer',
+                        [
+                            'customer_type_id' => $model->customer_type_id,
+                            'name' => $model->name,
+                            'father_name' => $model->father_name,
+                            'cnic_no' => $model->cnic_no,
+                            'contact_no' => $model->contact_no,
+                            'email_address' => $model->email_address,
+                            'address' => $model->address,
+                            'image' => $cimage,
+                            'user_id' => \Yii::$app->user->identity->id,
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                            'created_date' => date('Y-m-d'),
+                        ]
+                    )->execute(); 
+                    if($model->only_create_customer == '1')
+                    {
+                        return $this->redirect(['index']);
+                    }
+                    $model_id = Customer::find()->orderBy(['customer_id' => SORT_DESC])->One();
+                    $customerid=$model_id->customer_id;
                 }
-                $connection->createCommand()->insert('account_recievable',
-                    [
-                        'transaction_id' => $accounts->transaction_id,
-                        'payer_id' => $customerid,
-                        'amount' => $installmentinfo->minus_amonut,
-                        'property_id' => $plotinfo->property_id,
-                        'plot_no' => $plotinfo->plot_no,
-                        'is_installment' => $accounts->is_installment,
-                        'due_date' => '0000-00-00',
-                        'updated_by' => '0',
-                        'updated_at' => '0',
-                        'organization_id' => \Yii::$app->user->identity->organization_id,
-                    ]
-                )->execute();
+                Yii::$app->MyComponent->getinfo($plotinfo->property_id,$plotinfo->plot_no,$plotinfo->start_date,$customerid);
+                if($installmentinfo->installment_type == 'Monthly')
+                {
+                    $installmentinfo->no_of_installments = $installmentinfo->no_of_installments * 12;
+                }else if($installmentinfo->installment_type == '6 Months'){
+                    $installmentinfo->no_of_installments = ($installmentinfo->no_of_installments / 6) * 12;
+                }
+                else if($installmentinfo->installment_type == 'Yearly')
+                {
+                    $installmentinfo->no_of_installments = ceil(($installmentinfo->no_of_installments * 12)/12);
+                }
+                Yii::$app->MyComponent->installment($plotinfo->property_id,$installmentinfo->installment_type,$installmentinfo->advance_amount,$installmentinfo->total_amount,$customerid,$installmentinfo->no_of_installments,$plotinfo->plot_no);
+               
+                Yii::$app->MyComponent->sold($plotinfo->property_id,$plotinfo->plot_no);
+
+                 $installment_id = Installment::find('installment_id')->orderBy(['installment_id' => SORT_DESC])->One();
+
+                 
+
+                Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
+
                 $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
-                $Accounts_model= AccountHead::find()->where(['account_name' =>'Account Receivable'])->One();
+
+                $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
+                $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
                 if($trans_model == "")
                 {
                     $transaction_model->transaction_id = '1'; 
@@ -266,26 +180,118 @@ class CustomerController extends Controller
                 {
                       $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
                 }
-                if($Accounts_model == "")
+
+
+                if(empty($plot_model))
                 {
-                    die(); 
+                    echo "Sorry No Account Head Found Name 'Plot'";
+                    die();
+                }
+                if(empty($cash_model))
+                {
+                    echo "Sorry No Account Head Found Name 'Cash'";
+                    die();
                 }
                 $connection->createCommand()->insert('transactions',
                     [
                         'transaction_id' => $transaction_model->transaction_id,
                         'type' => 'cash Payment',
                         'narration' => $model->narration,
-                         'debit_account' => $Accounts_model->id,
-                        'debit_amount' => $installmentinfo->minus_amonut,
-                        'credit_account' => $cash_model->id,
-                        'credit_amount' => $installmentinfo->minus_amonut,
+                        'debit_account' => $cash_model->id,
+                        'debit_amount' => $installmentinfo->advance_amount,
+                        'credit_account' => $plot_model->id,
+                        'credit_amount' => $installmentinfo->advance_amount,
                         'date' => date('Y-m-d'),
                         'created_by' => \Yii::$app->user->identity->id,
                         'organization_id' => \Yii::$app->user->identity->organization_id,
                     ]
                 )->execute();
-            }
+
+                $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                if($trans_model == "")
+                {
+                    $transaction_model->transaction_id = '1'; 
+                }
+                else
+                {
+                      $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                }
+                
+                $connection->createCommand()->insert('transactions',
+                    [
+                        'transaction_id' => $transaction_model->transaction_id,
+                        'type' => 'cash Payment',
+                        'narration' => $model->narration,
+                        'debit_account' => $cash_model->id,
+                        'debit_amount' => $installmentinfo->advance_amount,
+                        'credit_account' => $plot_model->id,
+                        'credit_amount' => $installmentinfo->advance_amount,
+                        'date' => date('Y-m-d'),
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ]
+                )->execute();
+
+                if($installmentinfo->advance_amount < $installmentinfo->total_amount)
+                {   
+                    $accounts->is_installment = '1';
+                    $Account_model= AccountRecievable::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    if($Account_model == "")
+                    {
+                        $accounts->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $accounts->transaction_id = $Account_model->transaction_id + 1;  
+                    }
+                    $connection->createCommand()->insert('account_recievable',
+                        [
+                            'transaction_id' => $accounts->transaction_id,
+                            'payer_id' => $customerid,
+                            'amount' => $installmentinfo->minus_amonut,
+                            'property_id' => $plotinfo->property_id,
+                            'plot_no' => $plotinfo->plot_no,
+                            'is_installment' => $accounts->is_installment,
+                            'due_date' => '0000-00-00',
+                            'updated_by' => '0',
+                            'updated_at' => '0',
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ]
+                    )->execute();
+                    $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
+                    $Accounts_model= AccountHead::find()->where(['account_name' =>'Account Receivable'])->One();
+                    if($trans_model == "")
+                    {
+                        $transaction_model->transaction_id = '1'; 
+                    }
+                    else
+                    {
+                          $transaction_model->transaction_id = $trans_model->transaction_id + 1;  
+                    }
+                    if($Accounts_model == "")
+                    {
+                        die(); 
+                    }
+                    $connection->createCommand()->insert('transactions',
+                        [
+                            'transaction_id' => $transaction_model->transaction_id,
+                            'type' => 'cash Payment',
+                            'narration' => $model->narration,
+                             'debit_account' => $Accounts_model->id,
+                            'debit_amount' => $installmentinfo->minus_amonut,
+                            'credit_account' => $cash_model->id,
+                            'credit_amount' => $installmentinfo->minus_amonut,
+                            'date' => date('Y-m-d'),
+                            'created_by' => \Yii::$app->user->identity->id,
+                            'organization_id' => \Yii::$app->user->identity->organization_id,
+                        ]
+                    )->execute();
+                }
+                $transaction->commit();
                 return $this->redirect('customer');
+            }catch(Exception $e){
+                $transaction->rollback();
+            }
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -325,7 +331,17 @@ class CustomerController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
+            }else if($model->load($request->post()) && $model->validate()){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $transaction->commit();
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(Exception $e){
+                    $transaction->rollback();
+                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Customer #".$id,
