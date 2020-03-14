@@ -116,14 +116,15 @@ class PaymentController extends Controller
         }
         $model->organization_id = \Yii::$app->user->identity->organization_id;
         ////////////////////////////////////////////////////////////
-        $transaction = \Yii::$app->db->beginTransaction();
-        try {
+        
 
             /*
             *   Process for non-ajax request
             */
 
             if ($model->load($request->post()) && $accountpayable->load($request->post())) {
+                $transaction = \Yii::$app->db->beginTransaction();
+             try {
                $connection=yii::$app->db;
                 $model_head = AccountHead::find()->where(['account_name' => 'Account Payable'])->One();
                 if(isset($model->account_title_id))
@@ -439,6 +440,7 @@ class PaymentController extends Controller
             }catch(Exception $e){
                 $transaction->rollback();
             }
+
             } else {
                 return $this->render('create', [
                     'model' => $model,

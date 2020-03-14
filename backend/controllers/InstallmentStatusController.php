@@ -99,7 +99,7 @@ class InstallmentStatusController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->validate()) ){
+            }else if($model->load($request->post()) && $model->validate() ){
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     if ($model->save()) {

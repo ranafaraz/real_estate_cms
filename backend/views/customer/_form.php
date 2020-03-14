@@ -132,8 +132,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>  
         <div class="col-md-2">
              <?= $form->field($installmentinfo,'distype')->dropDownList(
-                        ['amount'=>'Amount','percent'=>'Percent'],
-                    ) ?>
+                        ['amount'=>'Amount','percent'=>'Percent']
+                    )    ?>
             
         </div>
         <div class="col-md-2" id="discount_percent_div" style="display: none;" >

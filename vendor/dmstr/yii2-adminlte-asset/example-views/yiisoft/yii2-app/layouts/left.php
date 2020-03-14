@@ -21,9 +21,10 @@
     <section class="sidebar">
 
         <!-- Sidebar user panel -->
+        
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= yii::$app->user->identity->image_name ?>" class="img-circle" alt="User Image"/>
+                <img src="<?= yii::$app->user->identity->image_name ?>" style="height:45px !important" class="img-circle img-fluid" alt="User Image"/>
             </div>
             <div class="pull-left info">
                 <p><?= yii::$app->user->identity->username; ?></p>

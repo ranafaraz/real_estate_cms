@@ -26,14 +26,14 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'contact',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'logo',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'user_id',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'logo',
+    // ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'user_id',
+    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'created_at',
