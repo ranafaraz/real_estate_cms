@@ -118,7 +118,7 @@ class CustomerController extends Controller
                 {
                     $customerid = $model->customerid;
                 }
-                else
+                else 
                 {
                     if(empty($model->image)){
                         $cimage= "uploads/usr-default.png";
@@ -166,7 +166,7 @@ class CustomerController extends Controller
 
                  
 
-                Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type);
+                Yii::$app->MyComponent->status($installment_id->installment_id,$installmentinfo->no_of_installments,$installmentstatus->installment_amount,$installmentinfo->total_amount,$installmentinfo->advance_amount,$installmentinfo->installment_type,$plotinfo->start_date);
 
                 $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
 

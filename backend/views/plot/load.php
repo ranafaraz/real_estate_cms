@@ -116,7 +116,7 @@ $script = <<< JS
 		var merlas= $('#area').val();
 
 		var permerlarate= total_price*merlas;
-		permerlarate = permerlarate.toFixed(3);
+		permerlarate = permerlarate.toFixed(2);
 		$("#price").attr('value',permerlarate);
 	});
 	$('#width').on('blur' , function(){
@@ -124,7 +124,7 @@ $script = <<< JS
 		var length = $('#length').val();
 		var width = $('#width').val(); 
 		var area = (length * width)/272;
-		area=area.toFixed(3);
+		area=area.toFixed(2);
 		$("#area").attr('value',area);
 	});
 	$('#updaterecord').click(function(e){  

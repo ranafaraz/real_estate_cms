@@ -287,6 +287,12 @@ $script = <<< JS
                 var rem = remaning_money/pro_amount;
                 $('#installmentstatus-installment_amount').attr('value',Math.ceil(rem)); 
             }else if($('#installment-installment_type').val() == '6 Months'){
+                var advance = $('#installment-advance_amount').val();
+                var total = $('#installment-total_amount').val();
+                var discount_amount = $('#installment-discount_amount').val();
+                var remaning_installmented_amount = total - advance;
+                remaning_installmented_amount = remaning_installmented_amount - discount_amount;
+                $('#installment-minus_amonut').attr('value',remaning_installmented_amount);
                 var pro_amount = ($('#installment-no_of_installments').val() / 6) * 12;
                 var remaning_money = $('#installment-minus_amonut').val();
                 var rem = remaning_money/pro_amount;
@@ -294,9 +300,14 @@ $script = <<< JS
             }
             else if($('#installment-installment_type').val() == 'Yearly')
             {
+                var advance = $('#installment-advance_amount').val();
+                var total = $('#installment-total_amount').val();
+                var discount_amount = $('#installment-discount_amount').val();
+                var remaning_installmented_amount = total - advance;
+                remaning_installmented_amount = remaning_installmented_amount - discount_amount;
+                $('#installment-minus_amonut').attr('value',remaning_installmented_amount);
                 var pro_amount = (($('#installment-no_of_installments').val() / 12)*12);
                 var remaning_money = $('#installment-minus_amonut').val();
-                alert(pro_amount);
                 var rem = remaning_money/pro_amount;
                 $('#installmentstatus-installment_amount').attr('value',Math.ceil(rem)); 
             }

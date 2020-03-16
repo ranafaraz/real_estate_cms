@@ -31,10 +31,10 @@ class AccountRecievable extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules() 
     {
         return [
-            [['transaction_id', 'payer_id', 'amount', 'account_receivable','due_date' ,'updated_by', 'updated_at'], 'required'],
+            [['transaction_id', 'payer_id', 'amount','due_date' ,'updated_by', 'updated_at'], 'required'],
             [['transaction_id', 'payer_id'], 'integer'],
             [['amount'], 'number'],
             [['updated_at'], 'safe'],

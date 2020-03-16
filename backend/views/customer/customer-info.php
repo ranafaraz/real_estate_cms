@@ -119,10 +119,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]) ?>
                     </div>
+                </div>
                     <?php 
                         $installments = Installment::find()->where(['plot_no'=>$value->plot_no])->andwhere(['property_id'=>$value->property_id])->andwhere(['customer_id'=>$id])->one();
+                        $installment_amount_paid=InstallmentStatus::find()->where(['installment_id'=>$installments->installment_id])->andwhere(['status'=>'0'])->sum('installment_amount');
+                        $installment_amount_pending=InstallmentStatus::find()->where(['installment_id'=>$installments->installment_id])->andwhere(['status'=>'1'])->sum('installment_amount');
+                        
                     ?>
-                    <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
                         <h4 class="text-info text-left">Installment Detail</h4>
                         <div class="table-responsive">
                              <table class="table table-striped">
@@ -138,7 +143,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                        
                     </div>
+                    <div class="col-md-6">
+                        <h4 class="text-info text-left">Payment Detail</h4>
+                        <div class="table-responsive">
+                             <table class="table table-striped">
+                                    <tr>
+                                        <th>Payment Cleared</th>
+                                        <td><?= $installment_amount_paid ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Payment Pending</th>
+                                        <td><?= $installment_amount_pending ?></td>
+                                    </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+            </div>
 			    
     	<h4 class="text-left text-info">Payment Transactions</h4>
     	<p class="table-responsive">
