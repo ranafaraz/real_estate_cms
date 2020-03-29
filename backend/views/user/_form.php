@@ -5,6 +5,7 @@ use backend\models\AuthItem;
 use backend\models\AuthAssignment;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use backend\models\Organization;
 
 
 /* @var $this yii\web\View */
@@ -26,13 +27,25 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 
+    <?PHP if(\Yii::$app->user->identity->organization_id == 0)
+    {
+        echo $form->field($model, 'organization_id')->widget(Select2::classname(), [
+    'data' => ArrayHelper::map(Organization::find()->all(), 'id', 'name'),
+    'language' => 'en',
+    'options' => ['placeholder' => '<--- Select Organization --->'],
+    'pluginOptions' => [
+        'allowClear' => true,
+        ],
+        ]);
+    }?>
+
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?=$form->field($auth_model, 'item_name')->widget(Select2::classname(), [
     'data' => ArrayHelper::map(AuthItem::find()->all(), 'name', 'name'),
     'language' => 'en',
-    'options' => ['placeholder' => '<--- Select Role --->'],
+    'options' => ['placeholder' => '<--- Select Role --->','multiple' => TRUE],
     'pluginOptions' => [
         'allowClear' => true,
     ],

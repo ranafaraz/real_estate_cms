@@ -66,7 +66,7 @@ use dosamigos\datepicker\DatePicker;
         </div>
         <div class="col-md-4">
             <?php 
-                $nature=AccountNature::find()->where(['name'=>'Earning'])->One();
+                $nature=AccountNature::find()->where(['name'=>'Income'])->One();
             ?>
             <?= $form->field($model, 'credit_account')->widget(Select2::classname(), [
                 'data' =>ArrayHelper::map(AccountHead::find()->where(['nature_id'=>$nature->id])->all(),'id', 'account_name'),

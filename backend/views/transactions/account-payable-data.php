@@ -1,5 +1,5 @@
 <?PHP
-use backend\models\Header;
+use backend\models\Organization;
 use backend\models\AccountHead;
 use backend\models\Transactions;
 use backend\models\AccountPayable;
@@ -10,7 +10,7 @@ if(isset($_POST['account_payable_id']) && isset($_POST['s_date']) && isset($_POS
 	$end_date = date('Y-m-d',strtotime($_POST['e_date']));
 	$returndata = '';
 	$mod = AccountHead::find()->where(['id' => $account_payable_id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->One(); 
-	$header = Header::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+	$header = Organization::find()->where(['id' => \Yii::$app->user->identity->organization_id])->One();
 			$returndata.='
 						<div class="row">
 							<div class="col-md-12"> <tr id="printrow"><td colspan="4" ><button style="float: right;" onclick="printContent(\'show-record1\')" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-print"></i> Print
@@ -22,7 +22,7 @@ if(isset($_POST['account_payable_id']) && isset($_POST['s_date']) && isset($_POS
 									<img src="'. $header->logo .'" class="img img-fluid img-circle" height="90px" width="90px" style="margin-left:5px;">
 								</div>
 								<div class="col-md-8 text-center">
-									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$header->organization_name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$header->organization_address.' | '.$header->contact.'</h6>
+									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A">'.$header->name.'</b></h2><h6 style="text-align:center;" class="float-left">'.$header->organization_address.' | '.$header->contact.'</h6>
 								</div>
 							</div>
 							<div class="row">

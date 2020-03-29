@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-use backend\models\User;
+use yii\web\UploadedFile;
 
 /**
  * OrganizationController implements the CRUD actions for Organization model.
@@ -84,10 +84,9 @@ class OrganizationController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Organization();  
-         $user=new User();
-        $model->created_at = date("Y-m-d");
-        $model->user_id = yii:: $app->user->identity->id;
-        
+        $model->user_id = \Yii::$app->user->identity->id;
+        $model->created_at = date('Y-m-d');
+
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -103,17 +102,22 @@ class OrganizationController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
-                $connection=yii::$app->db;
-                $condition = ['id'=>\Yii::$app->user->identity->id];
-                $connection->createCommand()->Update('user',
-                    [
-                        'organization_id'=>$orgid->id,
-                    ],
-                    $condition
-                )->execute();
+            }else if($model->load($request->post())){
+                 $im_name = $model->image_name;
+                $model->logo = UploadedFile::getInstance($model,'logo');
                 
+                $model->logo->SaveAs('reportsimages/'.$im_name.'.'.$model->logo->extension);
+                $model->logo = 'reportsimages/' . $im_name . '.' . $model->logo->extension;
+                 $connection = Yii::$app->db;
+                $connection->createCommand()->insert('organization',
+                    [
+                        'name' => $model->name,
+                        'organization_address' => $model->organization_address,
+                        'contact' => $model->contact,
+                        'logo' => $model->logo,
+                        'created_at' => date('Y-m-d'),
+                        'user_id' => $model->user_id,
+                    ])->execute();
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Organization",
@@ -137,8 +141,24 @@ class OrganizationController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                 $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
+            if ($model->load($request->post())) {
+                 $im_name = $model->image_name;
+                $model->logo = UploadedFile::getInstance($model,'logo');
+                
+                $model->logo->SaveAs('reportsimages/'.$im_name.'.'.$model->logo->extension);
+                $model->logo = 'reportsimages/' . $im_name . '.' . $model->logo->extension;
+                 $connection = Yii::$app->db;
+                $connection->createCommand()->insert('organization',
+                    [
+                        'name' => $model->name,
+                        'organization_address' => $model->organization_address,
+                        'contact' => $model->contact,
+                        'logo' => $model->logo,
+                        'created_by' => \Yii::$app->user->identity->id,
+                        'created_at' => date('Y-m-d'),
+                        'organization_id' => \Yii::$app->user->identity->organization_id,
+                    ])->execute();
+                $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
                 $connection=yii::$app->db;
                 $condition = ['id'=>\Yii::$app->user->identity->id];
                 $connection->createCommand()->Update('user',
@@ -167,7 +187,7 @@ class OrganizationController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);   
+        $model = $this->findModel($id);       
 
         if($request->isAjax){
             /*

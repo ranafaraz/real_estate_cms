@@ -119,7 +119,15 @@ class HeaderController extends Controller
                         'created_at' => date('Y-m-d'),
                         'organization_id' => \Yii::$app->user->identity->organization_id,
                     ])->execute();
-               
+                $orgid=Organization::find()->orderBy(['id'=>SORT_DESC])->One();
+                $connection=yii::$app->db;
+                $condition = ['id'=>\Yii::$app->user->identity->id];
+                $connection->createCommand()->Update('user',
+                    [
+                        'organization_id'=>$orgid->id,
+                    ],
+                    $condition
+                )->execute();
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Header",

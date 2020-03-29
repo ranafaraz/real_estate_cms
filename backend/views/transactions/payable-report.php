@@ -6,7 +6,7 @@ use backend\models\AccountHead;
 use backend\models\Transactions;
 use yii\helpers\Json;
 use backend\models\AccountPayable;
-use backend\models\Header;
+use backend\models\Organization;
 use backend\models\Customer;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;

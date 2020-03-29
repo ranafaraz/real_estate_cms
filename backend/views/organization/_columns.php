@@ -20,8 +20,19 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'organization_address',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'contact',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'logo',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'user_id',
-        'value' => 'user.username',
     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
