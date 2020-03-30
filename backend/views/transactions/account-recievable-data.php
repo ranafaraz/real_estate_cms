@@ -28,7 +28,7 @@ if(isset($_POST['account_recievable_id']) && isset($_POST['s_date']) && isset($_
 							<div class="row">
 							<div class="col-md-12">
 								<div class="row text-center" style="background:dodgerblue;margin-top:5px !important;margin-bottom:5px !important;"><div class="col-md-12"><h4 class="text-info font-wight-bold">Showing Report Against: <b class="text-danger" id="si_date1">'.$mod->account_name.'</b></h4>
-												<b>Payable Report</b></div></div>
+												<b>Recievable Report</b></div></div>
 							</div>
 						</div>';
 					$returndata.='<div class="row" style="margin:0px;"><div class="col-md-12"><h4 style="margin-left:10px;">Transactions Info</h4></div></div><table style="margin-top:10px !important" class="table  table-responsive tbale-bordered table-striped">
