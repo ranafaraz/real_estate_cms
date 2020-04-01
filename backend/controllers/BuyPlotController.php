@@ -157,8 +157,10 @@ class BuyPlotController extends Controller
                     echo "Sorry No Account Head Found Name 'Cash'";
                     die();
                 }
+                $buy_plot = BuyPlot::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->orderBy(['buy_plot_id' => SORT_DESC])->One();
                 $connection->createCommand()->insert('transactions',
                     [
+                        'buy_plot_id' => $buy_plot->buy_plot_id,
                         'transaction_id' => $transaction_model->transaction_id,
                         'type' => 'cash Payment',
                         'narration' => $model->narration,
@@ -208,6 +210,7 @@ class BuyPlotController extends Controller
                 $trans_model= Transactions::find()->orderBy(['transaction_id' => SORT_DESC])->One();
                 $plot_model = AccountHead::find()->where(['account_name' => 'Plot'])->One();
                 $cash_model = AccountHead::find()->where(['account_name' => 'Cash'])->One();
+                $buy_plot = BuyPlot::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->orderBy(['buy_plot_id' => SORT_DESC])->One();
                 if($trans_model == "")
                 {
                     $transaction_model->transaction_id = '1'; 
@@ -231,7 +234,7 @@ class BuyPlotController extends Controller
                     [
                         'transaction_id' => $transaction_model->transaction_id + 1,
                         'type' => 'cash Payment',
-                        'account_payable_id' => $acc_pay->id,
+                        'buy_plot_id' => $buy_plot->buy_plot_id,
                         'narration' => $model->narration,
                         'debit_account' => $plot_model->id,
                         'debit_amount' => $model->plot_paid_price,

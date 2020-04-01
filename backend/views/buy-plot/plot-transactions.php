@@ -6,8 +6,8 @@ use backend\models\Customer;
 use yii\helpers\ArrayHelper;
 use backend\models\CustomerType;
 use backend\models\BuyPlot;
+use backend\models\Organization;
 use backend\models\Transactions;
-use backend\models\Header;
 
 $this->title = 'Buy Plot Transactions';
 $this->params['breadcrumbs'][] = $this->title;
@@ -41,7 +41,7 @@ $type = CustomerType::find()->where(['customer_type_id' => $customer->customer_t
 // transactions 
 
 $transaction = Transactions::find()->where(['buy_plot_id' => $id])->andwhere(['organization_id' => \Yii::$app->user->identity->organization_id])->All();
-$header = Header::find()->where(['organization_id' => \Yii::$app->user->identity->organization_id])->One();
+$header = Organization::find()->where(['id' => \Yii::$app->user->identity->organization_id])->One();
 ?>
 <div class="row">
 							<div class="col-md-12"> <tr id="printrow"><td colspan="4" ><button style="float: right;" onclick="printContent('show-record1')" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-print"></i> Print
@@ -53,7 +53,7 @@ $header = Header::find()->where(['organization_id' => \Yii::$app->user->identity
 									<img src="<?PHP echo  $header->logo;?>" class="img img-fluid img-circle" height="90px" width="90px">
 								</div>
 								<div class="col-md-7 text-center">
-									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A"><?PHP echo $header->organization_name;?></b></h2><h6 style="text-align:center;" class="float-left"><?PHP echo $header->organization_address;?> | <?PHP echo $header->contact;?></h6>
+									<h2 style="text-align:center;" class="float-left"><b style="color:#00A00A"><?PHP echo $header->name;?></b></h2><h6 style="text-align:center;" class="float-left"><?PHP echo $header->organization_address;?> | <?PHP echo $header->contact;?></h6>
 									<h5 class="text-info font-wight-bold"><b style="color: grey"><?PHP echo date('Y-m-d');?></b></h5>
 								</div>
 							</div>
