@@ -161,7 +161,7 @@ $this->title = 'Real Estate Management System';
             </div>
         </div>
         <div class="col-md-4">
-            <?php $proser=ProvideServices::find(['organization_id'=>yii::$app->user->identity->organization_id])->count(); ?>
+            <?php $proser=ProvideServices::find()->where(['organization_id'=>$orgid])->count(); ?>
             <div class="small-box bg-orange">
                 <div class="inner">
                     <h3><?= $proser ?></h3>

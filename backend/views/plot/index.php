@@ -91,6 +91,9 @@ CrudAsset::register($this);
                     <td>Plot width</td><td><?php echo $plot->plot_width; ?></td>
                 </tr>
                 <tr>
+                    <td>Plot Area</td><td><?php echo $plot->area; ?></td>
+                </tr>
+                <tr>
                     <td>Plot Price</td><td><?php echo $plot->plot_price; ?></td>
                 </tr>
             </table>

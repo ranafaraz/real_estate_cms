@@ -54,25 +54,25 @@ use backend\models\InstallmentStatus;
 
  	}
 
- 	public function status($installment_id,$noinstallment,$amount,$totalamount,$advanceamount,$installment_type)
+ 	public function status($installment_id,$noinstallment,$amount,$totalamount,$advanceamount,$installment_type,$start_date)
  	{
  		$connection = Yii::$app->db;
  		
  		if($advanceamount == 0)
  		{
- 			$final_date = strtotime(date('Y-m-d'));
+ 			$final_date = strtotime($start_date);
 	 		for($i = 1; $i <= $noinstallment ; $i++)
 	 		{
 	 			if($installment_type == "Monthly")
 				 {
-				    $final_date = date("Y-m-d", strtotime("+1 month", $final_date));
+				    $final_date = date($start_date, strtotime("+1 month", $final_date));
 				 }else if($installment_type == "6 Months")
 				 {
-				    $final_date = date("Y-m-d", strtotime("+6 month", $final_date));
+				    $final_date = date($start_date, strtotime("+6 month", $final_date));
 
 				 }else if($installment_type == "Yearly")
 				 {
-				    $final_date = date("Y-m-d", strtotime("+12 month", $final_date));
+				    $final_date = date($start_date, strtotime("+12 month", $final_date));
 				 }
 	 			$connection->createCommand()->insert('installment_status',
 	                    [
@@ -92,14 +92,14 @@ use backend\models\InstallmentStatus;
 	 		$final_date = strtotime(date('Y-m-d'));
 	 		if($installment_type == "Monthly")
 			 {
-			    $final_date = date("Y-m-d", strtotime("+1 month", $final_date));
+			    $final_date = date($start_date, strtotime("+1 month", $final_date));
 			 }else if($installment_type == "6 Months")
 			 {
-			    $final_date = date("Y-m-d", strtotime("+6 month", $final_date));
+			    $final_date = date($start_date, strtotime("+6 month", $final_date));
 
 			 }else if($installment_type == "Yearly")
 			 {
-			    $final_date = date("Y-m-d", strtotime("+12 month", $final_date));
+			    $final_date = date($start_date, strtotime("+12 month", $final_date));
 			 }
 	 		$connection->createCommand()->insert('installment_status',
 	                    [
@@ -108,7 +108,7 @@ use backend\models\InstallmentStatus;
 	                        'installment_amount' => $advanceamount,
 	                        'status'=>'0',
 	                        'date' => date('Y-m-d'),
-	                        'paid_date' => date('Y-m-d'),
+	                        'paid_date' => $start_date,
 	                        'created_by'=>\Yii::$app->user->identity->id,
 	                        'organization_id' => \Yii::$app->user->identity->organization_id,
 	                    ])->execute();

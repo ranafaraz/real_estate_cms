@@ -70,6 +70,37 @@ $connection = Yii::$app->db;
        
 
     }
+
+public function updateplots($property_id,$no_of_plots,$plot_start)
+    {
+        $organization=\Yii::$app->user->identity->organization_id;
+        $property_id=$property_id;
+        (int)$no_of_plots=$no_of_plots;
+      
+$connection = Yii::$app->db;
+        for ($i = $plot_start; $i <= $no_of_plots; $i++) {
+
+            $connection->createCommand()->insert('plot',
+                    [
+                        'property_id' => $property_id,
+                        'plot_no' => $i,
+                        'plot_length'=>"",
+                        'plot_width'=>"",
+                        'plot_price'=>"",
+                        'per_merla_rate'=>"",
+                        'status'=>"Unsold",
+                        'created_by'=>\Yii::$app->user->identity->username,
+                        'created_at'=> date("Y-m-d"),
+                        'organization_id'=>$organization,
+                    ])
+                    ->execute();
+            
+                        
+        }
+       
+
+    }
+
 	}
 	
 	
