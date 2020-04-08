@@ -142,7 +142,7 @@ class UserController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $auth_model->load(Yii::$app->request->post())){
+            }else if($model->load($request->post())){
                 $model->setPassword($model->password_hash);
                 $model->generateAuthKey();
                 $model->generateEmailVerificationToken();            
@@ -164,23 +164,6 @@ class UserController extends Controller
                  $model->image_name = 'uploads/usr.png';
                 $model->save();
             }
-               
-               $user = $model->getPrimaryKey();
-                $authID = AuthAssignment::find()->orderBy(['id'=>SORT_DESC])->One();
-                $count = count($auth_model->item_name);
-                $authid = $authID->id + 1;
-                for($i=0;$i<$count;$i++)
-                {
-                    
-                    Yii::$app->db->createCommand()->insert('auth_assignment', 
-                    [
-                        'id' => $authid, 
-                        'user_id' => $user,
-                        'item_name' => $auth_model->item_name[$i],
-                        'created_at' => date('Y-m-d h:m:s'),
-                    ])->execute();
-                    $authid = $authid + 1;
-                }
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new User",

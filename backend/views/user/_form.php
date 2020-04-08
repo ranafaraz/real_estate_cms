@@ -42,14 +42,6 @@ use backend\models\Organization;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?=$form->field($auth_model, 'item_name')->widget(Select2::classname(), [
-    'data' => ArrayHelper::map(AuthItem::find()->all(), 'name', 'name'),
-    'language' => 'en',
-    'options' => ['placeholder' => '<--- Select Role --->','multiple' => TRUE],
-    'pluginOptions' => [
-        'allowClear' => true,
-    ],
-    ]);?>
 
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

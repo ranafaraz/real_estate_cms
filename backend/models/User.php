@@ -81,7 +81,6 @@ class User extends \yii\db\ActiveRecord
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'item_name' => 'Permission',
             //'verification_token' => 'Verification Token',
             'organization_id' => 'Organization ID',
         ];
